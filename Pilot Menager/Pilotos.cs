@@ -1,0 +1,536 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Pilot_Menager
+{
+    internal class Pilotos
+    {
+        // Métodos
+        private string nacionalidadePiloto = "";
+        private string nomePiloto = "";
+        private string sobrenomePiloto = "";
+        private string statusPiloto = "Disponivel";
+        private string contratoPiloto = "";
+        private string equipePiloto = "";
+        private string categoria = "";
+        private int idadePiloto;
+        private int augePiloto;
+        private int aposentadoriaPiloto;
+        private string cor1;
+        private string cor2;
+        private Random random = new Random();
+        private int largada;
+        private int concentracao;
+        private int ultrapassagem;
+        private int experiencia;
+        private int rapidez;
+        private int chuva;
+        private int acertoDoCarro;
+        private int fisico;
+        private int mediaPiloto;
+        private int pontosCampeonato;
+        private int primeiroColocado;
+        private int segundoColocado;
+        private int terceiroColocado;
+        private double RandomNacionalidade;
+        // Dados para treino e corrida.
+        private int tempoDeVoltaQualificacao;
+        private int tempoDeVoltaCorrida;
+        private int tempoDeVoltaMaisRapidaCorrida;
+        private int posicaoNaVoltaMaisRapida;
+        private int qualificacaoParaCorrida;
+        private int posicaoNaCorrida;
+        private int diferancaAnt;
+        private int tempoCorrida;
+        private int resultadoCorrida;
+        private int diferancaPri;
+
+        // --- para criar um novo piloto.
+        public void geraPiloto()
+        {
+            PaisPilotos paisPilotos = new PaisPilotos();
+            string nacionalidade;
+            string nomeArquivo;
+            string sobrenomeArquivo;
+            RandomNacionalidade = 7;
+            //RandomNacionalidade = random.Next(0,19);
+
+            // Seleciona uma nacionalidade aleatória
+            if (RandomNacionalidade <= 9)
+            {
+                nacionalidade = paisPilotos.NacionalidadesTop1[random.Next(paisPilotos.NacionalidadesTop1.Count)];
+                nacionalidadePiloto = nacionalidade;
+            }
+            else if (RandomNacionalidade <= 14)
+            {
+                nacionalidade = paisPilotos.NacionalidadesTop2[random.Next(paisPilotos.NacionalidadesTop2.Count)];
+                nacionalidadePiloto = nacionalidade;
+            }
+            else if (RandomNacionalidade <= 17)
+            {
+                nacionalidade = paisPilotos.NacionalidadesTop2[random.Next(paisPilotos.NacionalidadesTop2.Count)];
+                nacionalidadePiloto = nacionalidade;
+            }
+            else
+            {
+                nacionalidade = paisPilotos.NacionalidadesTop3[random.Next(paisPilotos.NacionalidadesTop3.Count)];
+                nacionalidadePiloto = nacionalidade;
+            }
+
+            // Construa o caminho completo para o arquivo de nomes do piloto
+            nomeArquivo = Path.Combine("NomesPilotos", "Piloto_" + nacionalidade + ".txt");
+            // Construa o caminho completo para o arquivo do sobrenome do piloto
+            sobrenomeArquivo = Path.Combine("SobrenomesPilotos", "Piloto_" + nacionalidade + ".txt");
+
+            // Verifique se o arquivo existe antes de lê-lo
+            if (File.Exists(nomeArquivo))
+            {
+                string[] nomes = File.ReadAllLines(nomeArquivo);
+
+                // Seleciona um nome aleatório a partir dos nomes lidos
+                string nomeAleatorio = nomes[random.Next(nomes.Length)];
+
+                // Configure os campos da classe com os valores selecionados
+                nomePiloto = nomeAleatorio;
+            }
+            else
+            {
+                // Lida com o caso em que o arquivo não foi encontrado
+                Console.WriteLine("Arquivo de nomes não encontrado para a nacionalidade: " + nacionalidade);
+            }
+            // Verifique se o arquivo existe antes de lê-lo
+            if (File.Exists(sobrenomeArquivo))
+            {
+                string[] ssnomes = File.ReadAllLines(sobrenomeArquivo);
+
+                // Seleciona um nome aleatório a partir dos nomes lidos
+                string sobrenomeAleatorio = ssnomes[random.Next(ssnomes.Length)];
+
+                // Configure os campos da classe com os valores selecionados
+                sobrenomePiloto = sobrenomeAleatorio;
+            }
+            else
+            {
+                // Lida com o caso em que o arquivo não foi encontrado
+                Console.WriteLine("Arquivo de nomes não encontrado para a nacionalidade: " + nacionalidade);
+            }
+
+            // Definir de forma aleatória a idade do piloto (18 até 21)
+            idadePiloto = random.Next(18, 22);
+
+            // Definir de forma aleatória o auge do piloto (30 até 36)
+            augePiloto = random.Next(30, 37);
+
+            // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
+            aposentadoriaPiloto = random.Next(36, 42);
+
+            // Atribuindo de formas aleatória, a qualidade de cada atributos (10 a 40)
+            largada = random.Next(10, 40);
+            concentracao = random.Next(10, 40);
+            ultrapassagem = random.Next(10, 40);
+            experiencia = random.Next(10, 40);
+            rapidez = random.Next(10, 40);
+            chuva = random.Next(10, 40);
+            acertoDoCarro = random.Next(10, 40);
+            fisico = random.Next(10, 40);
+
+            mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
+
+        }
+        // Criar o piloto do Jogador
+        public void geraPiloto(string nn, string sn, string nac)
+        {
+            PaisPilotos paisPilotos = new PaisPilotos();
+            string nacionalidade = nac;
+            //string nomeArquivo;
+            //string sobrenomeArquivo;
+
+            nacionalidadePiloto = nac;
+            nomePiloto = nn;
+            sobrenomePiloto = sn;
+
+            // Definir de forma aleatória a idade do piloto (18 até 21)
+            idadePiloto = random.Next(18, 21);
+
+            // Definir de forma aleatória o auge do piloto (30 até 36)
+            augePiloto = random.Next(30, 35);
+
+            // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
+            aposentadoriaPiloto = random.Next(37, 42);
+
+            // Atribuindo de formas aleatória, a qualidade de cada atributos (1 a 3)
+            largada = random.Next(10, 30);
+            concentracao = random.Next(10, 30);
+            ultrapassagem = random.Next(10, 30);
+            experiencia = random.Next(10, 30);
+            rapidez = random.Next(10, 30);
+            chuva = random.Next(10, 30);
+            acertoDoCarro = random.Next(10, 30);
+            fisico = random.Next(10, 30);
+
+            mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
+        }
+        // Get Set
+        public string NacionalidadePiloto
+        {
+            get { return nacionalidadePiloto; }
+            set { nacionalidadePiloto = value; }
+        }
+        public string NomePiloto
+        {
+            get { return nomePiloto; }
+            set { nomePiloto = value; }
+        }
+        public string SobrenomePiloto
+        {
+            get { return sobrenomePiloto; }
+            set { sobrenomePiloto = value; }
+        }
+        public string StatusPiloto
+        {
+            get { return statusPiloto; }
+            set { statusPiloto = value; }
+        }
+        public string ContratoPiloto
+        {
+            get { return contratoPiloto; }
+            set { contratoPiloto = value; }
+        }
+        public string EquipePiloto
+        {
+            get { return equipePiloto; }
+            set { equipePiloto = value; }
+        }
+        public string Categoria
+        {
+            get { return categoria; }
+            set { categoria = value; }
+        }
+        public int IdadePiloto
+        {
+            get { return idadePiloto; }
+            set { idadePiloto = value; }
+        }
+        public int AugePiloto
+        {
+            get { return augePiloto; }
+            set { augePiloto = value; }
+        }
+        public int AposentadoriaPiloto
+        {
+            get { return aposentadoriaPiloto; }
+            set { aposentadoriaPiloto = value; }
+        }
+        public string Cor1
+        {
+            get { return cor1; }
+            set { cor1 = value; }
+        }
+        public string Cor2
+        {
+            get { return cor2; }
+            set { cor2 = value; }
+        }
+        public int Largada
+        {
+            get { return largada; }
+            set { largada = value; }
+        }
+        public int Concentracao
+        {
+            get { return concentracao; }
+            set { concentracao = value; }
+        }
+        public int Ultrapassagem
+        {
+            get { return ultrapassagem; }
+            set { ultrapassagem = value; }
+        }
+        public int Experiencia
+        {
+            get { return experiencia; }
+            set { experiencia = value; }
+        }
+        public int Rapidez
+        {
+            get { return rapidez; }
+            set { rapidez = value; }
+        }
+        public int Chuva
+        {
+            get { return chuva; }
+            set { chuva = value; }
+        }
+        public int AcertoDoCarro
+        {
+            get { return acertoDoCarro; }
+            set { acertoDoCarro = value; }
+        }
+        public int Fisico
+        {
+            get { return fisico; }
+            set { fisico = value; }
+        }
+        public int MediaPiloto
+        {
+            get { return mediaPiloto; }
+            set { mediaPiloto = value; }
+        }
+        public int PontosCampeonato
+        {
+            get { return pontosCampeonato; }
+            set { pontosCampeonato = value; }
+        }
+        public int PrimeiroColocado
+        {
+            get { return primeiroColocado; }
+            set { primeiroColocado = value; }
+        }
+        public int SegundoColocado
+        {
+            get { return segundoColocado; }
+            set { segundoColocado = value; }
+        }
+        public int TerceiroColocado
+        {
+            get { return terceiroColocado; }
+            set { terceiroColocado = value; }
+        }
+        public int TempoDeVoltaQualificacao
+        {
+            get { return tempoDeVoltaQualificacao; }
+            set { tempoDeVoltaQualificacao = value; }
+        }
+        public int TempoDeVoltaCorrida
+        {
+            get { return tempoDeVoltaCorrida; }
+            set { tempoDeVoltaCorrida = value; }
+        }
+        public int TempoDeVoltaMaisRapidaCorrida
+        {
+            get { return tempoDeVoltaMaisRapidaCorrida; }
+            set { tempoDeVoltaMaisRapidaCorrida = value; }
+        }
+        public int PosicaoNaVoltaMaisRapida
+        {
+            get { return posicaoNaVoltaMaisRapida; }
+            set { posicaoNaVoltaMaisRapida = value; }
+        }
+        public int QualificacaoParaCorrida
+        {
+            get { return qualificacaoParaCorrida; }
+            set { qualificacaoParaCorrida = value; }
+        }
+        public int PosicaoNaCorrida
+        {
+            get { return posicaoNaCorrida; }
+            set { posicaoNaCorrida = value; }
+        }
+        public int TempoCorrida
+        {
+            get { return tempoCorrida; }
+            set { tempoCorrida = value; }
+        }
+        public int ResultadoCorrida
+        {
+            get { return resultadoCorrida; }
+            set { resultadoCorrida = value; }
+        }
+        public int DiferancaAnt
+        {
+            get { return diferancaAnt; }
+            set { diferancaAnt = value; }
+        }
+        public int DiferancaPri
+        {
+            get { return diferancaPri; }
+            set { diferancaPri = value; }
+        }
+    }
+    public class PaisPilotos
+    {
+        public List<string> NacionalidadesTop1 { get; } = new List<string>
+        {
+            "Brasil",
+            "Alemanha",
+            "Austrália",
+            "Bélgica",
+            "Canadá",
+            "Dinamarca",
+            "Espanha",
+            "Estados Unidos",
+            "França",
+            "Inglaterra",
+            "Itália",
+            "Japão",
+            "México",
+            "Noruega",
+            "Holanda",
+            // Adicione outras nacionalidades conforme necessário
+        };
+        public List<string> NacionalidadesTop2 { get; } = new List<string>
+        {
+            "Brasil",
+            "Alemanha",
+            "Austrália",
+            "Bélgica",
+            "Canadá",
+            "Dinamarca",
+            "Espanha",
+            "Estados Unidos",
+            "França",
+            "Inglaterra",
+            "Itália",
+            "Japão",
+            "México",
+            "Noruega",
+            "Holanda",
+            "Arábia Saudita",
+            "Argentina",
+            "Catar",
+            "China",
+            "Emirados Árabes Unidos",
+            "Africa do Sul",
+            "Israel",
+            "Mônaco",
+            "Nova Zelândia",
+            "Polônia",
+            "Portugal",
+            "Rússia",
+            "Suécia",
+            "Suíça",
+            "Austria",
+            // Adicione outras nacionalidades conforme necessário
+        };
+        public List<string> NacionalidadesTop3 { get; } = new List<string>
+        {
+            "Brasil",
+            "Alemanha",
+            "Austrália",
+            "Bélgica",
+            "Canadá",
+            "Dinamarca",
+            "Espanha",
+            "Estados Unidos",
+            "França",
+            "Inglaterra",
+            "Itália",
+            "Japão",
+            "México",
+            "Noruega",
+            "Holanda",
+            "Arábia Saudita",
+            "Argentina",
+            "Catar",
+            "China",
+            "Emirados Árabes Unidos",
+            "Africa do Sul",
+            "Israel",
+            "Mônaco",
+            "Nova Zelândia",
+            "Polônia",
+            "Portugal",
+            "Rússia",
+            "Suécia",
+            "Suíça",
+            "Austria",
+            "Albânia",
+            "Argélia",
+            "Armênia",
+            "Bahrein",
+            "Chile",
+            "Colômbia",
+            "Egito",
+            "Filândia",
+            "Grécia",
+            "Índia",
+            "Irlanda",
+            "Islândia",
+            "Marrocos",
+            "Turquia",
+            // Adicione outras nacionalidades conforme necessário
+        };
+        public List<string> NacionalidadesTop4 { get; } = new List<string>
+        {
+            "Brasil",
+            "Alemanha",
+            "Austrália",
+            "Bélgica",
+            "Canadá",
+            "Dinamarca",
+            "Espanha",
+            "Estados Unidos",
+            "França",
+            "Inglaterra",
+            "Itália",
+            "Japão",
+            "México",
+            "Noruega",
+            "Holanda",
+            "Arábia Saudita",
+            "Argentina",
+            "Catar",
+            "China",
+            "Emirados Árabes Unidos",
+            "Africa do Sul",
+            "Israel",
+            "Mônaco",
+            "Nova Zelândia",
+            "Polônia",
+            "Portugal",
+            "Rússia",
+            "Suécia",
+            "Suíça",
+            "Austria",
+            "Albânia",
+            "Argélia",
+            "Armênia",
+            "Bahrein",
+            "Chile",
+            "Colômbia",
+            "Egito",
+            "Filândia",
+            "Grécia",
+            "Índia",
+            "Irlanda",
+            "Islândia",
+            "Marrocos",
+            "Turquia",
+            "Afeganistão",
+            "Andorra",
+            "Angola",
+            "Azerbaijão",
+            "Bangladesh",
+            "Bósnia - Herzegovina",
+            "Camarões",
+            "Congo",
+            "Corei do Sul",
+            "Costa do Marfim",
+            "Equador",
+            "Eslováquia",
+            "Eslovênia",
+            "Estônia",
+            "Hungria",
+            "Nigéria",
+            "Paraguai",
+            "Peru",
+            "República Tcheca",
+            "Sérvia",
+            "Singapura",
+            "Tailândia",
+            "Tunísia",
+            "Ucrânia",
+            "Uruguai",
+            "Bahamas",
+            "Barbados",
+            "Bielorrússia",
+            "Bulgária",
+            "Costa Rica",
+            "Cuba",
+            // Adicione outras nacionalidades conforme necessário
+        };
+    }
+}

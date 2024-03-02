@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Pilot Menager/1.0.0": {
+        "runtime": {
+          "Pilot Menager.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Pilot Menager/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

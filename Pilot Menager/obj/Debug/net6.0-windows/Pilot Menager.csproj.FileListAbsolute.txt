@@ -1,0 +1,23 @@
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\bin\Debug\net6.0-windows\Pilot Menager.exe
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\bin\Debug\net6.0-windows\Pilot Menager.deps.json
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\bin\Debug\net6.0-windows\Pilot Menager.runtimeconfig.json
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\bin\Debug\net6.0-windows\Pilot Menager.dll
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\bin\Debug\net6.0-windows\Pilot Menager.pdb
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.csproj.GenerateResource.cache
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.AssemblyInfoInputs.cache
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.AssemblyInfo.cs
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.csproj.CoreCompileInputs.cache
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.dll
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\refint\Pilot Menager.dll
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.pdb
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot Menager.genruntimeconfig.cache
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\ref\Pilot Menager.dll
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaInicial.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaPrincipal.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaNewGame.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.Properties.Resources.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaQualificacao.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaClassificacao.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaEquipes.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaPilotos.resources
