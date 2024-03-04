@@ -53,6 +53,18 @@ namespace Pilot_Menager
             PreencherDataGridViewClassPilotos();
 
             AtualizarTabelas();
+
+            //Apenas para teste
+            // Adicionando pilotos campeões
+            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 348, "Mercedes");
+            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 347, "Mercedes");
+            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 346, "Mercedes");
+            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 345, "Mercedes");
+            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 344, "Mercedes");
+            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 343, "Mercedes");
+            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 342, "Mercedes");
+            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 341, "Mercedes");
+            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 340, "Mercedes");
         }
         public void IniciarNovoGame()
         {

@@ -30,7 +30,7 @@ namespace Pilot_Menager
             CriarDataGridViewClassPilotos(principal.Categoria, dvgTelaClassificacaoPiloto);
             CriarDataGridViewClassEquipes(principal.Categoria, dvgTelaClassificacaoEquipe);
             CriarDataGridViewCampeosPiloto(principal.Categoria, dvgTelaCampeosPiloto);
-            CriarDataGridViewCampeosEquipeF1(principal.Categoria, dvgTelaCampeosEquipes);
+            CriarDataGridViewCampeosEquipe(principal.Categoria, dvgTelaCampeosEquipes);
 
             List<Principal> nomeCategoria = Principal.ObterListaCategoria();
 
@@ -50,6 +50,7 @@ namespace Pilot_Menager
             {
                 PreencherDataGridViewClassPilotos(0, 10, dvgTelaClassificacaoPiloto);
                 PreencherDataGridViewClassEquipes(0, 10, dvgTelaClassificacaoEquipe);
+                PreencherDataGridViewCampeosPilotos(dvgTelaCampeosPiloto);
             }
             else if (principal.Categoria == "F2")
             {
@@ -97,7 +98,7 @@ namespace Pilot_Menager
             dataGridViewPilotos.Sort(dataGridViewPilotos.Columns[6], ListSortDirection.Descending);
 
             // Ordene automaticamente a coluna 6 do maior para o menor
-            dvgTelaCampeosPiloto.Sort(dvgTelaCampeosPiloto.Columns[0], ListSortDirection.Descending);
+            dvgTelaCampeosPiloto.Sort(dvgTelaCampeosPiloto.Columns["Ano"], ListSortDirection.Descending);
 
             // Ordene automaticamente a coluna 6 do maior para o menor
             dvgTelaCampeosEquipes.Sort(dvgTelaCampeosEquipes.Columns[0], ListSortDirection.Descending);
@@ -110,6 +111,8 @@ namespace Pilot_Menager
             {
                 dataGridViewPilotos.Rows[i].Cells["#"].Value = i + 1;
             }
+            dvgTelaCampeosPiloto.ClearSelection();
+            dvgTelaCampeosEquipes.ClearSelection();
             dataGridViewEquipes.ClearSelection();
             dataGridViewPilotos.ClearSelection();
         }
@@ -356,13 +359,13 @@ namespace Pilot_Menager
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
 
             classEquipes.Columns.Add("Ano", typeof(int));
-            classEquipes.Columns.Add(sedeColumn);
+            classEquipes.Columns.Add(sedeColumn);   // Sede vai ser reperesentada por uma imagem.
             classEquipes.Columns.Add("Nome", typeof(string));
-            classEquipes.Columns.Add("P", typeof(int));
+            classEquipes.Columns.Add("P", typeof(int)); // P significa pontos, porem deixa somente o P.
             classEquipes.Columns.Add("C1", typeof(string));
             classEquipes.Columns.Add("C2", typeof(string));
             classEquipes.Columns.Add("Equipe", typeof(string));
-            classEquipes.Columns.Add("Path", typeof(string));
+            classEquipes.Columns.Add("Path", typeof(string));   // Path e o caminho onde está a minha imagem
 
             // Crie uma nova coluna de imagem para exibir as imagens
             DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
@@ -383,7 +386,7 @@ namespace Pilot_Menager
             // Configurando Layout
             dgv.RowHeadersVisible = false;
             dgv.Enabled = false;
-            dgv.ScrollBars = ScrollBars.None;
+            dgv.ScrollBars = ScrollBars.Vertical;
             dgv.AllowUserToAddRows = false;
             dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
             dgv.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
@@ -394,12 +397,11 @@ namespace Pilot_Menager
             dgv.DataSource = classEquipes;
 
             // Altura das linhas
-            dgv.RowTemplate.Height = 20;
+            dgv.RowTemplate.Height = 26;
             // Define a altura do cabeçalho das colunas
-            dgv.ColumnHeadersHeight = 25;
+            dgv.ColumnHeadersHeight = 30;
 
-
-            // Defina a ordem de exibi��o das colunas com base nos �ndices
+            // Defina a ordem de exibiçao das colunas com base nos índices
             dgv.Columns["Ano"].DisplayIndex = 0;
             dgv.Columns["Sede"].DisplayIndex = 1;
             dgv.Columns["Nome"].DisplayIndex = 2;
@@ -420,9 +422,8 @@ namespace Pilot_Menager
             dgv.Columns[4].Width = 14;
             dgv.Columns[5].Width = 6;
             dgv.Columns[6].Width = 140;
-
         }
-        private void CriarDataGridViewCampeosEquipeF1(string categoria, DataGridView dgv)
+        private void CriarDataGridViewCampeosEquipe(string categoria, DataGridView dgv)
         {
             DataTable classEquipes = new DataTable(categoria);
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
@@ -454,7 +455,7 @@ namespace Pilot_Menager
             // Configurando Layout
             dgv.RowHeadersVisible = false;
             dgv.Enabled = false;
-            dgv.ScrollBars = ScrollBars.None;
+            dgv.ScrollBars = ScrollBars.Vertical;
             dgv.AllowUserToAddRows = false;
             dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
             dgv.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
@@ -479,6 +480,7 @@ namespace Pilot_Menager
             dgv.Columns["P"].DisplayIndex = 5;
             dgv.Columns["Path"].DisplayIndex = 6;
 
+            dgv.Columns["Nome"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.Columns["Path"].Visible = false;
             dgv.Columns["C1"].HeaderText = string.Empty;
             dgv.Columns["C2"].HeaderText = string.Empty;
@@ -491,7 +493,40 @@ namespace Pilot_Menager
             dgv.Columns[5].Width = 50;
 
         }
-        private void PreencherDataGridViewCampeosEquipeF1(DataGridView dgv, List<Principal> campeosEquipes)
+        private void PreencherDataGridViewCampeosPilotos(DataGridView dgv)
+        {
+            DataTable classEquipes = (DataTable)dgv.DataSource;
+
+            // Limpa as linhas do DataGridView
+            classEquipes.Rows.Clear();
+
+
+            // Adiciona cada piloto campeão como uma nova linha no DataGridView
+            foreach (var piloto in principal.pilotosCampeoes)
+            {
+                // Cria uma nova linha no DataTable
+                DataRow row = classEquipes.NewRow();
+
+                string path = Path.Combine("Paises", piloto.Sede + ".png");
+                // Carrega a imagem da sede do piloto
+                Image sedeImage = Image.FromFile(path);
+
+                // Adiciona os dados do piloto à linha do DataGridView
+                row["Ano"] = piloto.Ano;
+                row["Sede"] = sedeImage;
+                row["Nome"] = piloto.Nome;
+                row["P"] = piloto.Pontos;
+                row["Equipe"] = piloto.Equipe;
+                // Adiciona a linha ao DataTable
+                classEquipes.Rows.Add(row);
+
+                //classEquipes.Rows.Add(piloto.Ano, sedeImage, piloto.Nome, piloto.Pontos, piloto.Equipe);
+            }
+
+            // Define o DataTable como a fonte de dados do DataGridView
+            dgv.DataSource = classEquipes;
+        }
+        private void PreencherDataGridViewCampeosEquipe(DataGridView dgv, List<Principal> campeosEquipes)
         {
         }
         private void btnVolta_Click(object sender, EventArgs e)

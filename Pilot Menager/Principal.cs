@@ -8,6 +8,8 @@ namespace Pilot_Menager
 {
     public class Principal
     {
+        Historicos historico = new Historicos();
+
         private string nomeJogador = "";
         private string sobrenomeJogador = "";
         private int idadeJogador = 18;              
@@ -113,6 +115,15 @@ namespace Pilot_Menager
             };
             return listSerie;
         }
+
+        public List<Historicos.PilotoCampeao> pilotosCampeoes = new List<Historicos.PilotoCampeao>();
+
+        // Método para adicionar um piloto campeão à lista
+        public void AdicionarPilotoCampeao(int ano, string sede, string nome, int pontos, string equipe)
+        {
+            pilotosCampeoes.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+        }
+
         // Get e Set
         public string NomeJogador
         {
@@ -250,5 +261,16 @@ namespace Pilot_Menager
             set { pontoVoltaMaisRapida = value; }
         }
 
+    }
+    public class Historicos
+    {
+        public class PilotoCampeao
+        {
+            public int Ano { get; set; }
+            public string Sede { get; set; }
+            public string Nome { get; set; }
+            public int Pontos { get; set; }
+            public string Equipe { get; set; }
+        }
     }
 }
