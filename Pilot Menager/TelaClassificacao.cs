@@ -385,11 +385,19 @@ namespace Pilot_Menager
 
             // Configurando Layout
             dgv.RowHeadersVisible = false;
-            dgv.Enabled = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgv.ScrollBars = ScrollBars.Vertical;
             dgv.AllowUserToAddRows = false;
             dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
             dgv.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.GridColor = Color.FromArgb(220, 220, 220);
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -447,18 +455,26 @@ namespace Pilot_Menager
             // Adicione a coluna de imagem ao DataGridView
             dgv.Columns.Add(imageColumn);
 
-            // Defina um estilo padr�o com preenchimento para a coluna da imagem
+            // Defina um estilo padrão com preenchimento para a coluna da imagem
             DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
             cellStyle.Padding = new Padding(5, 5, 5, 5); // Define o preenchimento (margem) desejado
             imageColumn.DefaultCellStyle = cellStyle;
 
             // Configurando Layout
             dgv.RowHeadersVisible = false;
-            dgv.Enabled = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgv.ScrollBars = ScrollBars.Vertical;
             dgv.AllowUserToAddRows = false;
             dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
             dgv.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgv.GridColor = Color.FromArgb(220, 220, 220);
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;

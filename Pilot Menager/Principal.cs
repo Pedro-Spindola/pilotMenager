@@ -10,6 +10,9 @@ namespace Pilot_Menager
     {
         Historicos historico = new Historicos();
 
+        private string corPrincipal = "";
+        private string corSecundaria = "";
+
         private string nomeJogador = "";
         private string sobrenomeJogador = "";
         private int idadeJogador = 18;              
@@ -123,8 +126,22 @@ namespace Pilot_Menager
         {
             pilotosCampeoes.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
         }
-
+        public List<Historicos.EquipeCampeao> equipesCampeoes = new List<Historicos.EquipeCampeao>();
+        public void AdicionarEquipeCampeao(int ano, string sede, string nome, int pontos, string equipe)
+        {
+            equipesCampeoes.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+        }
         // Get e Set
+        public string CorPrincipal
+        {
+            get { return corPrincipal; }
+            set { corPrincipal = value; }
+        }
+        public string CorSecundaria
+        {
+            get { return corSecundaria; }
+            set { corSecundaria = value; }
+        }
         public string NomeJogador
         {
             get { return nomeJogador; }
@@ -270,7 +287,18 @@ namespace Pilot_Menager
             public string Sede { get; set; }
             public string Nome { get; set; }
             public int Pontos { get; set; }
+            //public string C1 { get; set; }
+            //public string C2 { get; set; }
             public string Equipe { get; set; }
+        }
+        public class EquipeCampeao
+        {
+            public int Ano { get; set; }
+            public string Sede { get; set; }
+            //public string C1 { get; set; }
+            //public string C2 { get; set; }
+            public string Nome { get; set; }
+            public int Pontos { get; set; }
         }
     }
 }

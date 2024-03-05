@@ -73,6 +73,26 @@ namespace Pilot_Menager.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fechar_b {
+            get {
+                object obj = ResourceManager.GetObject("fechar_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fechar_w {
+            get {
+                object obj = ResourceManager.GetObject("fechar_w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap main_classificacao_b {
             get {
                 object obj = ResourceManager.GetObject("main_classificacao_b", resourceCulture);
@@ -126,6 +146,56 @@ namespace Pilot_Menager.Properties {
         internal static System.Drawing.Bitmap menu_continuar_b {
             get {
                 object obj = ResourceManager.GetObject("menu_continuar_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_continuar_w {
+            get {
+                object obj = ResourceManager.GetObject("menu_continuar_w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap opcao_b {
+            get {
+                object obj = ResourceManager.GetObject("opcao_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap opcao_w {
+            get {
+                object obj = ResourceManager.GetObject("opcao_w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap salvar_b {
+            get {
+                object obj = ResourceManager.GetObject("salvar_b", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap salvar_w {
+            get {
+                object obj = ResourceManager.GetObject("salvar_w", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

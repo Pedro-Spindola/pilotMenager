@@ -32,9 +32,9 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            pictureBoxBtnFechar = new PictureBox();
+            pictureBoxBtnOpcao = new PictureBox();
+            pictureBoxBtnSalvar = new PictureBox();
             panel9 = new Panel();
             pictureBoxBtnContinuar = new PictureBox();
             panel8 = new Panel();
@@ -55,17 +55,25 @@
             panel2 = new Panel();
             panel3 = new Panel();
             panel10 = new Panel();
+            panelCorS1 = new Panel();
+            panelCorP1 = new Panel();
             label1 = new Label();
             pictureBoxEscritorio = new PictureBox();
             panel4 = new Panel();
+            panelCorS2 = new Panel();
+            panelCorP2 = new Panel();
             label2 = new Label();
             pictureBoxFinancias = new PictureBox();
             panel11 = new Panel();
+            panelCorS3 = new Panel();
+            panelCorP3 = new Panel();
             label3 = new Label();
             pictureBoxClassificacao = new PictureBox();
             panel12 = new Panel();
+            panelCorS4 = new Panel();
             label4 = new Label();
             pictureBoxPilotos = new PictureBox();
+            panelCorP4 = new Panel();
             panel13 = new Panel();
             panel14 = new Panel();
             dgvClassEquipes = new DataGridView();
@@ -75,12 +83,14 @@
             panel17 = new Panel();
             panel18 = new Panel();
             panel19 = new Panel();
+            panelCorS5 = new Panel();
+            panelCorP5 = new Panel();
             label5 = new Label();
             pictureBoxEquipes = new PictureBox();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnFechar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnOpcao).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnSalvar).BeginInit();
             panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBtnContinuar).BeginInit();
             panel8.SuspendLayout();
@@ -107,9 +117,9 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(pictureBox3);
-            panel1.Controls.Add(pictureBox2);
+            panel1.Controls.Add(pictureBoxBtnFechar);
+            panel1.Controls.Add(pictureBoxBtnOpcao);
+            panel1.Controls.Add(pictureBoxBtnSalvar);
             panel1.Controls.Add(panel9);
             panel1.Controls.Add(panel8);
             panel1.Controls.Add(panel7);
@@ -121,38 +131,44 @@
             panel1.Size = new Size(1340, 80);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pictureBoxBtnFechar
             // 
-            pictureBox1.BackColor = Color.FromArgb(128, 128, 255);
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(50, 30);
-            pictureBox1.TabIndex = 9;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pictureBoxBtnFechar.BackColor = Color.Transparent;
+            pictureBoxBtnFechar.Cursor = Cursors.Hand;
+            pictureBoxBtnFechar.Location = new Point(0, 3);
+            pictureBoxBtnFechar.Margin = new Padding(0);
+            pictureBoxBtnFechar.Name = "pictureBoxBtnFechar";
+            pictureBoxBtnFechar.Size = new Size(50, 20);
+            pictureBoxBtnFechar.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxBtnFechar.TabIndex = 9;
+            pictureBoxBtnFechar.TabStop = false;
+            pictureBoxBtnFechar.Click += pictureBox1_Click;
             // 
-            // pictureBox3
+            // pictureBoxBtnOpcao
             // 
-            pictureBox3.BackColor = Color.FromArgb(255, 128, 128);
-            pictureBox3.Location = new Point(0, 55);
-            pictureBox3.Margin = new Padding(0);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(50, 25);
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
+            pictureBoxBtnOpcao.BackColor = Color.Transparent;
+            pictureBoxBtnOpcao.Cursor = Cursors.Hand;
+            pictureBoxBtnOpcao.Location = new Point(0, 57);
+            pictureBoxBtnOpcao.Margin = new Padding(0);
+            pictureBoxBtnOpcao.Name = "pictureBoxBtnOpcao";
+            pictureBoxBtnOpcao.Size = new Size(50, 20);
+            pictureBoxBtnOpcao.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxBtnOpcao.TabIndex = 8;
+            pictureBoxBtnOpcao.TabStop = false;
+            pictureBoxBtnOpcao.Click += pictureBox3_Click;
             // 
-            // pictureBox2
+            // pictureBoxBtnSalvar
             // 
-            pictureBox2.BackColor = Color.FromArgb(128, 255, 128);
-            pictureBox2.Location = new Point(0, 30);
-            pictureBox2.Margin = new Padding(0);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(50, 25);
-            pictureBox2.TabIndex = 7;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            pictureBoxBtnSalvar.BackColor = Color.Transparent;
+            pictureBoxBtnSalvar.Cursor = Cursors.Hand;
+            pictureBoxBtnSalvar.Location = new Point(0, 30);
+            pictureBoxBtnSalvar.Margin = new Padding(0);
+            pictureBoxBtnSalvar.Name = "pictureBoxBtnSalvar";
+            pictureBoxBtnSalvar.Size = new Size(50, 20);
+            pictureBoxBtnSalvar.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxBtnSalvar.TabIndex = 7;
+            pictureBoxBtnSalvar.TabStop = false;
+            pictureBoxBtnSalvar.Click += pictureBox2_Click;
             // 
             // panel9
             // 
@@ -375,6 +391,8 @@
             // panel10
             // 
             panel10.BackColor = Color.FromArgb(230, 240, 240);
+            panel10.Controls.Add(panelCorS1);
+            panel10.Controls.Add(panelCorP1);
             panel10.Controls.Add(label1);
             panel10.Controls.Add(pictureBoxEscritorio);
             panel10.Location = new Point(20, 120);
@@ -383,14 +401,30 @@
             panel10.Size = new Size(320, 60);
             panel10.TabIndex = 1;
             // 
+            // panelCorS1
+            // 
+            panelCorS1.Location = new Point(14, 0);
+            panelCorS1.Margin = new Padding(0);
+            panelCorS1.Name = "panelCorS1";
+            panelCorS1.Size = new Size(6, 60);
+            panelCorS1.TabIndex = 3;
+            // 
+            // panelCorP1
+            // 
+            panelCorP1.Location = new Point(0, 0);
+            panelCorP1.Margin = new Padding(0);
+            panelCorP1.Name = "panelCorP1";
+            panelCorP1.Size = new Size(14, 60);
+            panelCorP1.TabIndex = 2;
+            // 
             // label1
             // 
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(70, 0);
+            label1.Location = new Point(80, 0);
             label1.Margin = new Padding(0);
             label1.Name = "label1";
             label1.Padding = new Padding(10, 0, 0, 0);
-            label1.Size = new Size(250, 60);
+            label1.Size = new Size(240, 60);
             label1.TabIndex = 1;
             label1.Text = "Escritório";
             label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -399,7 +433,7 @@
             // 
             pictureBoxEscritorio.Cursor = Cursors.Hand;
             pictureBoxEscritorio.Image = Properties.Resources.main_escritorio_b;
-            pictureBoxEscritorio.Location = new Point(10, 0);
+            pictureBoxEscritorio.Location = new Point(20, 0);
             pictureBoxEscritorio.Margin = new Padding(0);
             pictureBoxEscritorio.Name = "pictureBoxEscritorio";
             pictureBoxEscritorio.Size = new Size(60, 60);
@@ -410,6 +444,8 @@
             // panel4
             // 
             panel4.BackColor = Color.FromArgb(230, 240, 240);
+            panel4.Controls.Add(panelCorS2);
+            panel4.Controls.Add(panelCorP2);
             panel4.Controls.Add(label2);
             panel4.Controls.Add(pictureBoxFinancias);
             panel4.Location = new Point(20, 190);
@@ -418,14 +454,30 @@
             panel4.Size = new Size(320, 60);
             panel4.TabIndex = 2;
             // 
+            // panelCorS2
+            // 
+            panelCorS2.Location = new Point(14, 0);
+            panelCorS2.Margin = new Padding(0);
+            panelCorS2.Name = "panelCorS2";
+            panelCorS2.Size = new Size(6, 60);
+            panelCorS2.TabIndex = 5;
+            // 
+            // panelCorP2
+            // 
+            panelCorP2.Location = new Point(0, 0);
+            panelCorP2.Margin = new Padding(0);
+            panelCorP2.Name = "panelCorP2";
+            panelCorP2.Size = new Size(14, 60);
+            panelCorP2.TabIndex = 4;
+            // 
             // label2
             // 
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(70, 0);
+            label2.Location = new Point(80, 0);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
             label2.Padding = new Padding(10, 0, 0, 0);
-            label2.Size = new Size(250, 60);
+            label2.Size = new Size(240, 60);
             label2.TabIndex = 2;
             label2.Text = "Financias";
             label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -434,7 +486,7 @@
             // 
             pictureBoxFinancias.Cursor = Cursors.Hand;
             pictureBoxFinancias.Image = Properties.Resources.main_financias_b;
-            pictureBoxFinancias.Location = new Point(10, 0);
+            pictureBoxFinancias.Location = new Point(20, 0);
             pictureBoxFinancias.Margin = new Padding(0);
             pictureBoxFinancias.Name = "pictureBoxFinancias";
             pictureBoxFinancias.Size = new Size(60, 60);
@@ -445,6 +497,8 @@
             // panel11
             // 
             panel11.BackColor = Color.FromArgb(230, 240, 240);
+            panel11.Controls.Add(panelCorS3);
+            panel11.Controls.Add(panelCorP3);
             panel11.Controls.Add(label3);
             panel11.Controls.Add(pictureBoxClassificacao);
             panel11.Location = new Point(20, 260);
@@ -453,14 +507,30 @@
             panel11.Size = new Size(320, 60);
             panel11.TabIndex = 3;
             // 
+            // panelCorS3
+            // 
+            panelCorS3.Location = new Point(14, 0);
+            panelCorS3.Margin = new Padding(0);
+            panelCorS3.Name = "panelCorS3";
+            panelCorS3.Size = new Size(6, 60);
+            panelCorS3.TabIndex = 5;
+            // 
+            // panelCorP3
+            // 
+            panelCorP3.Location = new Point(0, 0);
+            panelCorP3.Margin = new Padding(0);
+            panelCorP3.Name = "panelCorP3";
+            panelCorP3.Size = new Size(14, 60);
+            panelCorP3.TabIndex = 4;
+            // 
             // label3
             // 
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(70, 0);
+            label3.Location = new Point(80, 0);
             label3.Margin = new Padding(0);
             label3.Name = "label3";
             label3.Padding = new Padding(10, 0, 0, 0);
-            label3.Size = new Size(250, 60);
+            label3.Size = new Size(240, 60);
             label3.TabIndex = 2;
             label3.Text = "Classificação";
             label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -469,7 +539,7 @@
             // 
             pictureBoxClassificacao.Cursor = Cursors.Hand;
             pictureBoxClassificacao.Image = Properties.Resources.main_classificacao_b;
-            pictureBoxClassificacao.Location = new Point(10, 0);
+            pictureBoxClassificacao.Location = new Point(20, 0);
             pictureBoxClassificacao.Margin = new Padding(0);
             pictureBoxClassificacao.Name = "pictureBoxClassificacao";
             pictureBoxClassificacao.Size = new Size(60, 60);
@@ -481,22 +551,32 @@
             // panel12
             // 
             panel12.BackColor = Color.FromArgb(230, 240, 240);
+            panel12.Controls.Add(panelCorS4);
             panel12.Controls.Add(label4);
             panel12.Controls.Add(pictureBoxPilotos);
+            panel12.Controls.Add(panelCorP4);
             panel12.Location = new Point(20, 330);
             panel12.Margin = new Padding(0);
             panel12.Name = "panel12";
             panel12.Size = new Size(320, 60);
             panel12.TabIndex = 4;
             // 
+            // panelCorS4
+            // 
+            panelCorS4.Location = new Point(14, 0);
+            panelCorS4.Margin = new Padding(0);
+            panelCorS4.Name = "panelCorS4";
+            panelCorS4.Size = new Size(6, 60);
+            panelCorS4.TabIndex = 5;
+            // 
             // label4
             // 
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(70, 0);
+            label4.Location = new Point(80, 0);
             label4.Margin = new Padding(0);
             label4.Name = "label4";
             label4.Padding = new Padding(10, 0, 0, 0);
-            label4.Size = new Size(250, 60);
+            label4.Size = new Size(240, 60);
             label4.TabIndex = 2;
             label4.Text = "Pilotos";
             label4.TextAlign = ContentAlignment.MiddleLeft;
@@ -505,13 +585,21 @@
             // 
             pictureBoxPilotos.Cursor = Cursors.Hand;
             pictureBoxPilotos.Image = Properties.Resources.main_user_b;
-            pictureBoxPilotos.Location = new Point(10, 0);
+            pictureBoxPilotos.Location = new Point(20, 0);
             pictureBoxPilotos.Margin = new Padding(0);
             pictureBoxPilotos.Name = "pictureBoxPilotos";
             pictureBoxPilotos.Size = new Size(60, 60);
             pictureBoxPilotos.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBoxPilotos.TabIndex = 1;
             pictureBoxPilotos.TabStop = false;
+            // 
+            // panelCorP4
+            // 
+            panelCorP4.Location = new Point(0, 0);
+            panelCorP4.Margin = new Padding(0);
+            panelCorP4.Name = "panelCorP4";
+            panelCorP4.Size = new Size(14, 60);
+            panelCorP4.TabIndex = 4;
             // 
             // panel13
             // 
@@ -627,6 +715,8 @@
             // panel19
             // 
             panel19.BackColor = Color.FromArgb(230, 240, 240);
+            panel19.Controls.Add(panelCorS5);
+            panel19.Controls.Add(panelCorP5);
             panel19.Controls.Add(label5);
             panel19.Controls.Add(pictureBoxEquipes);
             panel19.Location = new Point(20, 400);
@@ -635,14 +725,30 @@
             panel19.Size = new Size(320, 60);
             panel19.TabIndex = 11;
             // 
+            // panelCorS5
+            // 
+            panelCorS5.Location = new Point(14, 0);
+            panelCorS5.Margin = new Padding(0);
+            panelCorS5.Name = "panelCorS5";
+            panelCorS5.Size = new Size(6, 60);
+            panelCorS5.TabIndex = 5;
+            // 
+            // panelCorP5
+            // 
+            panelCorP5.Location = new Point(0, 0);
+            panelCorP5.Margin = new Padding(0);
+            panelCorP5.Name = "panelCorP5";
+            panelCorP5.Size = new Size(14, 60);
+            panelCorP5.TabIndex = 4;
+            // 
             // label5
             // 
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(70, 0);
+            label5.Location = new Point(80, 0);
             label5.Margin = new Padding(0);
             label5.Name = "label5";
             label5.Padding = new Padding(10, 0, 0, 0);
-            label5.Size = new Size(250, 60);
+            label5.Size = new Size(240, 60);
             label5.TabIndex = 2;
             label5.Text = "Equipes";
             label5.TextAlign = ContentAlignment.MiddleLeft;
@@ -651,7 +757,7 @@
             // 
             pictureBoxEquipes.Cursor = Cursors.Hand;
             pictureBoxEquipes.Image = Properties.Resources.main_equipes_b;
-            pictureBoxEquipes.Location = new Point(10, 0);
+            pictureBoxEquipes.Location = new Point(20, 0);
             pictureBoxEquipes.Margin = new Padding(0);
             pictureBoxEquipes.Name = "pictureBoxEquipes";
             pictureBoxEquipes.Size = new Size(60, 60);
@@ -688,9 +794,9 @@
             Text = "Form1";
             Load += TelaPrincipal_Load;
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnFechar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnOpcao).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBtnSalvar).EndInit();
             panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxBtnContinuar).EndInit();
             panel8.ResumeLayout(false);
@@ -749,9 +855,9 @@
         private Panel panel18;
         private DataGridView dgvClassEquipes;
         private DataGridView dgvClassPilotos;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox3;
+        private PictureBox pictureBoxBtnSalvar;
+        private PictureBox pictureBoxBtnFechar;
+        private PictureBox pictureBoxBtnOpcao;
         private PictureBox pictureBoxEscritorio;
         private PictureBox pictureBoxFinancias;
         private PictureBox pictureBoxClassificacao;
@@ -763,5 +869,15 @@
         private Label label3;
         private Label label4;
         private Label label5;
+        private Panel panelCorP1;
+        private Panel panelCorS1;
+        private Panel panelCorS2;
+        private Panel panelCorP2;
+        private Panel panelCorS3;
+        private Panel panelCorP3;
+        private Panel panelCorS4;
+        private Panel panelCorP4;
+        private Panel panelCorS5;
+        private Panel panelCorP5;
     }
 }

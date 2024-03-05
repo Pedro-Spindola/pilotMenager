@@ -139,4 +139,25 @@
   <data name="main_equipes_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\main_equipes_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="fechar_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\fechar_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fechar_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\fechar_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="menu_continuar_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\menu_continuar_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opcao_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\opcao_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="opcao_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\opcao_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="salvar_b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\salvar_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="salvar_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\salvar_w.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

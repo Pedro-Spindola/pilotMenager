@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using System.Diagnostics;
+using System.Drawing.Printing;
 
 namespace Pilot_Menager
 {
@@ -26,7 +27,8 @@ namespace Pilot_Menager
         private Pistas[] pistas = new Pistas[3];        // Crinado array com a quantidade de pistas. 
         private Random random = new Random();
         private Financias financias = new Financias();
-
+        Color corPrincipal;
+        Color corSecundaria;
         public TelaPrincipal(Principal principal)
         {
             InitializeComponent();
@@ -42,7 +44,13 @@ namespace Pilot_Menager
             {
                 CarregarDadosDosArquivos();
             }
+            // Converte a string hexadecimal em um objeto Color
+            principal.CorPrincipal = pilotos[0].Cor1;
+            principal.CorSecundaria = pilotos[0].Cor2;
+            corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
+            corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
 
+            AtualizarCores();
             AtualizarNomes();
             AtualizarFinancias();
             AtualizarDate();
@@ -221,6 +229,27 @@ namespace Pilot_Menager
                 principal.ProxGPSemana = 0;
             }
 
+        }
+        public void AtualizarCores()
+        {
+            pictureBoxBtnFechar.Image = Properties.Resources.fechar_b;
+            pictureBoxBtnSalvar.Image = Properties.Resources.salvar_b;
+            pictureBoxBtnOpcao.Image = Properties.Resources.opcao_b;
+            panel1.BackColor = corPrincipal;
+            panel1.ForeColor = Color.White;
+            panel2.BackColor = corSecundaria;
+            panel3.BackColor = corSecundaria;
+            panelCorP1.BackColor = corPrincipal;
+            panelCorP2.BackColor = corPrincipal;
+            panelCorP3.BackColor = corPrincipal;
+            panelCorP4.BackColor = corPrincipal;
+            panelCorP5.BackColor = corPrincipal;
+            panelCorS1.BackColor = corSecundaria;
+            panelCorS2.BackColor = corSecundaria;
+            panelCorS3.BackColor = corSecundaria;
+            panelCorS4.BackColor = corSecundaria;
+            panelCorS5.BackColor = corSecundaria;
+            //Image = Properties.Resources.
         }
         public void AtualizarFinanciasSemanal()
         {
