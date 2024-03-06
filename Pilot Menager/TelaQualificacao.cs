@@ -754,7 +754,7 @@ namespace Pilot_Menager
             int atributo06 = (m3 + importanciPiloto);
             int atributo07 = (m3 + importanciaCarro);
 
-            int somaDosAtributos = ((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07) * 10);
+            int somaDosAtributos = (((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07) * 10)+r.Next(0,10));
 
             int volta = ((tempoBase + t) - somaDosAtributos);
 

@@ -51,6 +51,7 @@ namespace Pilot_Menager
                 PreencherDataGridViewClassPilotos(0, 10, dvgTelaClassificacaoPiloto);
                 PreencherDataGridViewClassEquipes(0, 10, dvgTelaClassificacaoEquipe);
                 PreencherDataGridViewCampeosPilotos(dvgTelaCampeosPiloto);
+                PreencherDataGridViewCampeosEquipe(dvgTelaCampeosEquipes);
             }
             else if (principal.Categoria == "F2")
             {
@@ -482,9 +483,9 @@ namespace Pilot_Menager
             dgv.DataSource = classEquipes;
 
             // Altura das linhas
-            dgv.RowTemplate.Height = 20;
+            dgv.RowTemplate.Height = 26;
             // Define a altura do cabeçalho das colunas
-            dgv.ColumnHeadersHeight = 25;
+            dgv.ColumnHeadersHeight = 30;
 
 
             // Defina a ordem de exibi��o das colunas com base nos �ndices
@@ -523,7 +524,7 @@ namespace Pilot_Menager
                 // Cria uma nova linha no DataTable
                 DataRow row = classEquipes.NewRow();
 
-                string path = Path.Combine("Paises", piloto.Sede + ".png");
+                string path = row["Path"].ToString();
                 // Carrega a imagem da sede do piloto
                 Image sedeImage = Image.FromFile(path);
 
@@ -542,8 +543,37 @@ namespace Pilot_Menager
             // Define o DataTable como a fonte de dados do DataGridView
             dgv.DataSource = classEquipes;
         }
-        private void PreencherDataGridViewCampeosEquipe(DataGridView dgv, List<Principal> campeosEquipes)
+        private void PreencherDataGridViewCampeosEquipe(DataGridView dgv)
         {
+            DataTable classEquipes = (DataTable)dgv.DataSource;
+
+            // Limpa as linhas do DataGridView
+            classEquipes.Rows.Clear();
+
+            // Adiciona cada equipe campeão como uma nova linha no DataGridView
+            foreach (var piloto in principal.equipesCampeoes)
+            {
+                // Cria uma nova linha no DataTable
+                DataRow row = classEquipes.NewRow();
+
+                string path = row["Path"].ToString();
+
+                // Carrega a imagem da sede do piloto
+                Image sedeImage = Image.FromFile(path);
+
+                // Adiciona os dados do piloto à linha do DataGridView
+                row["Ano"] = piloto.Ano;
+                row["Sede"] = sedeImage;
+                row["Nome"] = piloto.Nome;
+                row["P"] = piloto.Pontos;
+                // Adiciona a linha ao DataTable
+                classEquipes.Rows.Add(row);
+
+                //classEquipes.Rows.Add(piloto.Ano, sedeImage, piloto.Nome, piloto.Pontos);
+            }
+
+            // Define o DataTable como a fonte de dados do DataGridView
+            dgv.DataSource = classEquipes;
         }
         private void btnVolta_Click(object sender, EventArgs e)
         {

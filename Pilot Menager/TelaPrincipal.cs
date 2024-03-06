@@ -29,6 +29,7 @@ namespace Pilot_Menager
         private Financias financias = new Financias();
         Color corPrincipal;
         Color corSecundaria;
+        Color corTexto;
         public TelaPrincipal(Principal principal)
         {
             InitializeComponent();
@@ -63,16 +64,6 @@ namespace Pilot_Menager
             AtualizarTabelas();
 
             //Apenas para teste
-            // Adicionando pilotos campeões
-            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 348, "Mercedes");
-            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 347, "Mercedes");
-            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 346, "Mercedes");
-            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 345, "Mercedes");
-            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 344, "Mercedes");
-            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 343, "Mercedes");
-            principal.AdicionarPilotoCampeao(2022, "Brasil", "Lewis Hamilton", 342, "Mercedes");
-            principal.AdicionarPilotoCampeao(2020, "Brasil", "Lewis Hamilton", 341, "Mercedes");
-            principal.AdicionarPilotoCampeao(2021, "Brasil", "Lewis Hamilton", 340, "Mercedes");
         }
         public void IniciarNovoGame()
         {
@@ -227,16 +218,51 @@ namespace Pilot_Menager
                 principal.ProxGP = "";
                 principal.ProxGPais = "";
                 principal.ProxGPSemana = 0;
+                FinalDeTemporadaDataBase();
             }
 
         }
         public void AtualizarCores()
         {
-            pictureBoxBtnFechar.Image = Properties.Resources.fechar_b;
-            pictureBoxBtnSalvar.Image = Properties.Resources.salvar_b;
-            pictureBoxBtnOpcao.Image = Properties.Resources.opcao_b;
+            if (principal.CorTexto == "Branco")
+            {
+                pictureBoxBtnFechar.Image = Properties.Resources.fechar_w;
+                pictureBoxBtnSalvar.Image = Properties.Resources.salvar_w;
+                pictureBoxBtnOpcao.Image = Properties.Resources.opcao_w;
+                pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_w;
+                panel1.ForeColor = Color.White;
+            }
+            else if (principal.CorTexto == "Preto")
+            {
+                pictureBoxBtnFechar.Image = Properties.Resources.fechar_b;
+                pictureBoxBtnSalvar.Image = Properties.Resources.salvar_b;
+                pictureBoxBtnOpcao.Image = Properties.Resources.opcao_b;
+                pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_b;
+                panel1.ForeColor = Color.Black;
+            }
+            else if (principal.CorTexto == "Automatico")
+            {
+                // Calcula o brilho da cor (luminosidade)
+                double brilho = (corPrincipal.R * 0.299 + corPrincipal.G * 0.587 + corPrincipal.B * 0.114) / 255;
+
+                if (brilho < 0.4)
+                {
+                    pictureBoxBtnFechar.Image = Properties.Resources.fechar_w;
+                    pictureBoxBtnSalvar.Image = Properties.Resources.salvar_w;
+                    pictureBoxBtnOpcao.Image = Properties.Resources.opcao_w;
+                    pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_w;
+                    panel1.ForeColor = Color.White;
+                }
+                else
+                {
+                    pictureBoxBtnFechar.Image = Properties.Resources.fechar_b;
+                    pictureBoxBtnSalvar.Image = Properties.Resources.salvar_b;
+                    pictureBoxBtnOpcao.Image = Properties.Resources.opcao_b;
+                    pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_b;
+                    panel1.ForeColor = Color.Black;
+                }
+            }
             panel1.BackColor = corPrincipal;
-            panel1.ForeColor = Color.White;
             panel2.BackColor = corSecundaria;
             panel3.BackColor = corSecundaria;
             panelCorP1.BackColor = corPrincipal;
@@ -249,7 +275,6 @@ namespace Pilot_Menager
             panelCorS3.BackColor = corSecundaria;
             panelCorS4.BackColor = corSecundaria;
             panelCorS5.BackColor = corSecundaria;
-            //Image = Properties.Resources.
         }
         public void AtualizarFinanciasSemanal()
         {
@@ -291,12 +316,12 @@ namespace Pilot_Menager
             DataTable classEquipes = (DataTable)dgvClassEquipes.DataSource;
             DataTable classPilotos = (DataTable)dgvClassPilotos.DataSource;
 
-            // Desative a op��o de ordena��o em todas as colunas
+            // Desative a opção de ordenação em todas as colunas
             foreach (DataGridViewColumn column in dgvClassEquipes.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            // Desative a op��o de ordena��o em todas as colunas
+            // Desative a opção de ordenação em todas as colunas
             foreach (DataGridViewColumn column in dgvClassPilotos.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -598,6 +623,38 @@ namespace Pilot_Menager
             // Limpe a sele��o inicial
             dgvClassPilotos.ClearSelection();
         }
+        private void FinalDeTemporadaDataBase()
+        {
+            DataTable classEquipes = (DataTable)dgvClassEquipes.DataSource;
+            DataTable classPilotos = (DataTable)dgvClassPilotos.DataSource;
+
+            // Desative a opção de ordenação em todas as colunas
+            foreach (DataGridViewColumn column in dgvClassEquipes.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            // Desative a opção de ordenação em todas as colunas
+            foreach (DataGridViewColumn column in dgvClassPilotos.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            // Ordene automaticamente a coluna 3 do maior para o menor
+            dgvClassEquipes.Sort(dgvClassEquipes.Columns[3], ListSortDirection.Descending);
+
+            // Ordene automaticamente a coluna 4 do maior para o menor
+            dgvClassPilotos.Sort(dgvClassPilotos.Columns[4], ListSortDirection.Descending);
+
+            for (int i = 0; i < 1; i++)
+            {
+                principal.AdicionarPilotoCampeao(principal.ContadorDeAno, dgvClassPilotos.Rows[i].Cells["Path"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassPilotos.Rows[i].Cells["P"].Value.ToString()), dgvClassPilotos.Rows[i].Cells["Equipe"].Value.ToString());
+            }
+            for (int i = 0; i < 1; i++)
+            {
+                principal.AdicionarEquipeCampeao(principal.ContadorDeAno, dgvClassEquipes.Rows[i].Cells["Path"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassEquipes.Rows[i].Cells["P"].Value.ToString()));
+            }
+            dgvClassEquipes.ClearSelection();
+            dgvClassPilotos.ClearSelection();
+        }
         public void SalvarDadosDosArquivo()
         {
             Equipes[] saveEquipe = equipes;
@@ -707,12 +764,9 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            TelaQualificacao telaQualificacao = new TelaQualificacao(principal, equipes, pilotos, pistas);
-            telaQualificacao.ShowDialog();
-
-            AtualizarDataGridViewClassEquipes();
-            AtualizarDataGridViewClassPilotos();
-            AtualizarTabelas();
+            TelaSettings telaSettings = new TelaSettings(principal);
+            telaSettings.ShowDialog();
+            AtualizarCores();
         }
         private void pictureBoxClassificacao_Click(object sender, EventArgs e)
         {

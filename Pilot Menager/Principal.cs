@@ -12,6 +12,7 @@ namespace Pilot_Menager
 
         private string corPrincipal = "";
         private string corSecundaria = "";
+        private string corTexto = "Automatico";
 
         private string nomeJogador = "";
         private string sobrenomeJogador = "";
@@ -127,7 +128,7 @@ namespace Pilot_Menager
             pilotosCampeoes.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
         }
         public List<Historicos.EquipeCampeao> equipesCampeoes = new List<Historicos.EquipeCampeao>();
-        public void AdicionarEquipeCampeao(int ano, string sede, string nome, int pontos, string equipe)
+        public void AdicionarEquipeCampeao(int ano, string sede, string nome, int pontos)
         {
             equipesCampeoes.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
         }
@@ -141,6 +142,11 @@ namespace Pilot_Menager
         {
             get { return corSecundaria; }
             set { corSecundaria = value; }
+        }
+        public string CorTexto
+        { 
+            get { return corTexto; }
+            set { corTexto = value; }
         }
         public string NomeJogador
         {
