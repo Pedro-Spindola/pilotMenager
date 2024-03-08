@@ -20,7 +20,7 @@ namespace Pilot_Menager
         Pilotos[] pilotos;
         Pistas[] pistas;
         string categoria = "";
-
+        string listcategoria = "";
         Random random = new Random();
         private int btnclick = 0;
         public TelaQualificacao(Principal princ, Equipes[] equip, Pilotos[] pilot, Pistas[] pist)
@@ -34,9 +34,25 @@ namespace Pilot_Menager
         private void TelaQualificacao_Load(object sender, EventArgs e)
         {
             AtualizarNomes();
-            CriarDataGridViewQualificacaoEquipesF1(categoria, dvgTableF1);
-            PreencherDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
-            AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+
+            if (pilotos[0].Categoria == "F1")
+            {
+                CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
+                PreencherDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
+                AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+            }
+            else if (pilotos[0].Categoria == "F2")
+            {
+                CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
+                PreencherDataGridViewQualificacaoEquipesF1(10, 20, dvgTableF1);
+                AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+            }
+            else if (pilotos[0].Categoria == "F3")
+            {
+                CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
+                PreencherDataGridViewQualificacaoEquipesF1(20, 10, dvgTableF1);
+                AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+            }
 
             labelTreinoCorrida.Text = "Treino";
         }
@@ -67,9 +83,9 @@ namespace Pilot_Menager
 
             dvgTableQualificacaoF1.ClearSelection();
         }
-        private void CriarDataGridViewQualificacaoEquipesF1(string serieF1, DataGridView dvgTableQualificacaoF1)
+        private void CriarDataGridViewQualificacaoEquipesF1(DataGridView dvgTableQualificacaoF1)
         {
-            DataTable qualificacaoEquipesF1 = new DataTable(serieF1);
+            DataTable qualificacaoEquipesF1 = new DataTable();
 
             DataColumn sedeColumn = new DataColumn("Nac", typeof(Image));
 
@@ -263,9 +279,9 @@ namespace Pilot_Menager
 
             dvgTableQualificacaoF1.ClearSelection();
         }
-        private void CriarDataGridViewCorridaEquipesF1(string serieF1, DataGridView dvgTableQualificacaoF1)
+        private void CriarDataGridViewCorridaEquipesF1(DataGridView dvgTableQualificacaoF1)
         {
-            DataTable CorridaEquipesF1 = new DataTable(serieF1);
+            DataTable CorridaEquipesF1 = new DataTable();
 
             DataColumn sedeColumn = new DataColumn("Nac", typeof(Image));
 
@@ -443,10 +459,26 @@ namespace Pilot_Menager
         }
         private void pictureBoxBtnContinuarQualificacao_Click(object sender, EventArgs e)
         {
-            string f1 = "F1";
-            FuncaoParaRealizarSemanaDeCorrida(0, 10, f1);  //Equiepes 0 a 10
+            // Desabilitar o btn
+            pictureBoxBtnContinuarQualificacao.Enabled = false;
+            string fCategoria = pilotos[0].Categoria;
+
+            if (pilotos[0].Categoria == "F1")
+            {
+                FuncaoParaRealizarSemanaDeCorrida(0, 10, fCategoria);
+            }
+            else if (pilotos[0].Categoria == "F2")
+            {
+                FuncaoParaRealizarSemanaDeCorrida(10, 20, fCategoria);
+            }
+            else if (pilotos[0].Categoria == "F3")
+            {
+                FuncaoParaRealizarSemanaDeCorrida(20, 30, fCategoria);
+            }
+            // Reabilitar o btn
+            pictureBoxBtnContinuarQualificacao.Enabled = true;
         }
-        private async Task FuncaoParaRealizarSemanaDeCorrida(int equipeF1Min, int equipeF1Max, string f1)  // 0 a 10
+        private async Task FuncaoParaRealizarSemanaDeCorrida(int equipeF1Min, int equipeF1Max, string fCategoria)
         {
             btnclick++;
             if (btnclick == 1)
@@ -460,7 +492,7 @@ namespace Pilot_Menager
                     {
                         for (int k = equipeF1Min; k < equipeF1Max; k++)
                         {
-                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == f1)
+                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
                             {
                                 int tempoDaVoltaAtual = AlgoritmoParaVoltas(equipes[k].ValorDoMotor, equipes[k].Aerodinamica, equipes[k].Freio, equipes[k].AsaDianteira, equipes[k].AsaTraseira, equipes[k].Cambio,
                                 equipes[k].Eletrico, equipes[k].Direcao, equipes[k].Confiabilidade, pilotos[j].Largada, pilotos[j].Concentracao, pilotos[j].Ultrapassagem, pilotos[j].Experiencia, pilotos[j].Rapidez,
@@ -485,7 +517,7 @@ namespace Pilot_Menager
                     {
                         for (int k = equipeF1Min; k < equipeF1Max; k++)
                         {
-                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == f1)
+                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == fCategoria)
                             {
                                 if (pilotos[i].TempoDeVoltaQualificacao > pilotos[j].TempoDeVoltaQualificacao)
                                 {
@@ -499,7 +531,7 @@ namespace Pilot_Menager
             else if (btnclick == 2)
             {
                 AtualizarNomes();
-                CriarDataGridViewCorridaEquipesF1(categoria, dvgTableF1);
+                CriarDataGridViewCorridaEquipesF1(dvgTableF1);
                 PreencherDataGridViewCorridaEquipesF1(equipeF1Min, equipeF1Max, dvgTableF1);
                 AtualizarTabelasCorridaInicio(dvgTableF1);
 
@@ -519,7 +551,7 @@ namespace Pilot_Menager
                         {
                             for (int k = equipeF1Min; k < equipeF1Max; k++)
                             {
-                                if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == f1)
+                                if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
                                     pilotos[j].TempoCorrida = i * 100;
                                 }
@@ -531,7 +563,7 @@ namespace Pilot_Menager
                     {
                         for (int k = equipeF1Min; k < equipeF1Max; k++)
                         {
-                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == f1)
+                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
                             {
                                 int tempoDaVoltaAtual = AlgoritmoParaVoltas(equipes[k].ValorDoMotor, equipes[k].Aerodinamica, equipes[k].Freio, equipes[k].AsaDianteira, equipes[k].AsaTraseira, equipes[k].Cambio,
                                 equipes[k].Eletrico, equipes[k].Direcao, equipes[k].Confiabilidade, pilotos[j].Largada, pilotos[j].Concentracao, pilotos[j].Ultrapassagem, pilotos[j].Experiencia, pilotos[j].Rapidez,
@@ -554,7 +586,7 @@ namespace Pilot_Menager
                         {
                             for (int l = equipeF1Min; l < equipeF1Max; l++)
                             {
-                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == f1)
+                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
                                     if (pilotos[j].TempoCorrida > pilotos[k].TempoCorrida)
                                     {
@@ -571,7 +603,7 @@ namespace Pilot_Menager
                         {
                             for (int l = equipeF1Min; l < equipeF1Max; l++)
                             {
-                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == f1)
+                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
                                     if (pilotos[k].PosicaoNaCorrida == 0)
                                     {
@@ -588,7 +620,7 @@ namespace Pilot_Menager
                         {
                             for (int l = equipeF1Min; l < equipeF1Max; l++)
                             {
-                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == f1)
+                                if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
                                     if (pilotos[j].PosicaoNaCorrida == (pilotos[k].PosicaoNaCorrida + 1))
                                     {
@@ -614,7 +646,7 @@ namespace Pilot_Menager
                     {
                         for (int k = equipeF1Min; k < equipeF1Max; k++)
                         {
-                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == f1)
+                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == fCategoria)
                             {
                                 if (pilotos[i].TempoDeVoltaMaisRapidaCorrida > pilotos[j].TempoDeVoltaMaisRapidaCorrida)
                                 {
@@ -710,6 +742,25 @@ namespace Pilot_Menager
             }
             else if (btnclick == 4)
             {
+                // Obtém a lista de categorias
+                List<Principal> categorias = Principal.ObterListaCategoria();
+
+                // Itera sobre cada categoria na lista
+                foreach (var categoria in categorias)
+                {
+                    if (categoria.categoria != fCategoria && categoria.categoria == "F1")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(0, 10, "F1");
+                    }
+                    else if (categoria.categoria != fCategoria && categoria.categoria == "F2")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(10, 20, "F2");
+                    }
+                    else if (categoria.categoria != fCategoria && categoria.categoria == "F3")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(20, 30, "F3");
+                    }
+                }
                 for (int j = 0; j < pilotos.Length; j++)
                 {
                     pilotos[j].TempoDeVoltaQualificacao = 0;
@@ -725,6 +776,241 @@ namespace Pilot_Menager
                 this.Close();
             }
         }
+        private void FuncaoParaRealizarSemanaDeCorridaCPU(int equipeF1Min, int equipeF1Max, string fCategoria)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = equipeF1Min; k < equipeF1Max; k++)
+                    {
+                        if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                        {
+                            int tempoDaVoltaAtual = AlgoritmoParaVoltas(equipes[k].ValorDoMotor, equipes[k].Aerodinamica, equipes[k].Freio, equipes[k].AsaDianteira, equipes[k].AsaTraseira, equipes[k].Cambio,
+                            equipes[k].Eletrico, equipes[k].Direcao, equipes[k].Confiabilidade, pilotos[j].Largada, pilotos[j].Concentracao, pilotos[j].Ultrapassagem, pilotos[j].Experiencia, pilotos[j].Rapidez,
+                            pilotos[j].Chuva, pilotos[j].AcertoDoCarro, pilotos[j].Fisico, principal.ImportanciaPilotoTemporada, principal.ImportanciaCarroTemporada, pistas[principal.EtapaAtual].Curvas, pistas[principal.EtapaAtual].Retas, pistas[principal.EtapaAtual].TempoBase);
+                            // Está ordenando a volta mais rapida do piloto.
+                            if (pilotos[j].TempoDeVoltaQualificacao > tempoDaVoltaAtual || pilotos[j].TempoDeVoltaQualificacao == 0)
+                            {
+                                pilotos[j].TempoDeVoltaQualificacao = tempoDaVoltaAtual;
+                            }
+                        }
+                    }
+                }
+            }
+            // Vai executar a ordem de qualificação dos pilotos.
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = equipeF1Min; k < equipeF1Max; k++)
+                    {
+                        if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == fCategoria)
+                        {
+                            if (pilotos[i].TempoDeVoltaQualificacao > pilotos[j].TempoDeVoltaQualificacao)
+                            {
+                                pilotos[i].QualificacaoParaCorrida++;
+                            }
+                        }
+                    }
+                }
+            }
+            // Vai executar as voltas da cominha corrida.
+            for (int i = 1; i <= pistas[principal.EtapaAtual].NumerosDeVoltas; i++)
+            {
+                // Distribui as vantagem da classificação
+                if (i == 1)
+                {
+                    for (int j = 0; j < pilotos.Length; j++)
+                    {
+                        for (int k = equipeF1Min; k < equipeF1Max; k++)
+                        {
+                            if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                            {
+                                pilotos[j].TempoCorrida = i * 100;
+                            }
+                        }
+                    }
+                }
+
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = equipeF1Min; k < equipeF1Max; k++)
+                    {
+                        if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                        {
+                            int tempoDaVoltaAtual = AlgoritmoParaVoltas(equipes[k].ValorDoMotor, equipes[k].Aerodinamica, equipes[k].Freio, equipes[k].AsaDianteira, equipes[k].AsaTraseira, equipes[k].Cambio,
+                            equipes[k].Eletrico, equipes[k].Direcao, equipes[k].Confiabilidade, pilotos[j].Largada, pilotos[j].Concentracao, pilotos[j].Ultrapassagem, pilotos[j].Experiencia, pilotos[j].Rapidez,
+                            pilotos[j].Chuva, pilotos[j].AcertoDoCarro, pilotos[j].Fisico, principal.ImportanciaPilotoTemporada, principal.ImportanciaCarroTemporada, pistas[principal.EtapaAtual].Curvas, pistas[principal.EtapaAtual].Retas, pistas[principal.EtapaAtual].TempoBase);
+                            pilotos[j].TempoCorrida = pilotos[j].TempoCorrida + tempoDaVoltaAtual;
+                            pilotos[j].TempoDeVoltaCorrida = tempoDaVoltaAtual;
+                            // Está ordenando a volta mais rapida do piloto.
+                            if (pilotos[j].TempoDeVoltaMaisRapidaCorrida > tempoDaVoltaAtual || pilotos[j].TempoDeVoltaMaisRapidaCorrida == 0)
+                            {
+                                pilotos[j].TempoDeVoltaMaisRapidaCorrida = tempoDaVoltaAtual;
+                            }
+                        }
+                    }
+                }
+                // Calcular a posição na corrida.
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    pilotos[j].PosicaoNaCorrida = 0;
+                    for (int k = 0; k < pilotos.Length; k++)
+                    {
+                        for (int l = equipeF1Min; l < equipeF1Max; l++)
+                        {
+                            if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                            {
+                                if (pilotos[j].TempoCorrida > pilotos[k].TempoCorrida)
+                                {
+                                    pilotos[j].PosicaoNaCorrida++;
+                                }
+                            }
+                        }
+                    }
+                }
+                // Calcula a diferença de tempo do piloto para o primeiro.
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = 0; k < pilotos.Length; k++)
+                    {
+                        for (int l = equipeF1Min; l < equipeF1Max; l++)
+                        {
+                            if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                            {
+                                if (pilotos[k].PosicaoNaCorrida == 0)
+                                {
+                                    pilotos[j].DiferancaPri = pilotos[j].TempoCorrida - pilotos[k].TempoCorrida;
+                                }
+                            }
+                        }
+                    }
+                }
+                // Calcula a diferença de tempo do piloto para a anterior.
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = 0; k < pilotos.Length; k++)
+                    {
+                        for (int l = equipeF1Min; l < equipeF1Max; l++)
+                        {
+                            if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto && pilotos[j].Categoria == fCategoria)
+                            {
+                                if (pilotos[j].PosicaoNaCorrida == (pilotos[k].PosicaoNaCorrida + 1))
+                                {
+                                    pilotos[j].DiferancaAnt = pilotos[j].TempoCorrida - pilotos[k].TempoCorrida;
+                                }
+                                else if (pilotos[j].PosicaoNaCorrida == 0)
+                                {
+                                    pilotos[j].DiferancaAnt = pilotos[j].TempoCorrida;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Vai executar a ordem das voltas mais rapida dos pilotos.
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    for (int k = equipeF1Min; k < equipeF1Max; k++)
+                    {
+                        if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[i].Categoria == fCategoria)
+                        {
+                            if (pilotos[i].TempoDeVoltaMaisRapidaCorrida > pilotos[j].TempoDeVoltaMaisRapidaCorrida)
+                            {
+                                pilotos[i].PosicaoNaVoltaMaisRapida++;
+                            }
+                        }
+                    }
+                }
+            }
+            // Pontuando o piloto com a volta mais rapida.
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                for (int k = equipeF1Min; k < equipeF1Max; k++)
+                {
+                    if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
+                    {
+                        if (pilotos[i].PosicaoNaVoltaMaisRapida == 0)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.PontoVoltaMaisRapida;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.PontoVoltaMaisRapida;
+                        }
+                    }
+                }
+            }
+            // Pontuação da Corrida para os Pilotos e Equipes
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                for (int k = equipeF1Min; k < equipeF1Max; k++)
+                {
+                    if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
+                    {
+                        if (pilotos[i].PosicaoNaCorrida == 0)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.PrimeiroLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.PrimeiroLugar;
+                            pilotos[i].PrimeiroColocado++;
+                            equipes[k].PrimeiroColocado++;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 1)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.SegundoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.SegundoLugar;
+                            pilotos[i].SegundoColocado++;
+                            equipes[k].SegundoColocado++;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 2)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.TerceiroLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.TerceiroLugar;
+                            pilotos[i].TerceiroColocado++;
+                            equipes[k].TerceiroColocado++;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 3)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.QuartoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.QuartoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 4)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.QuintoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.QuintoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 5)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.SextoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.SextoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 6)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.SetimoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.SetimoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 7)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.OitavoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.OitavoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 8)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.NonoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.NonoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 9)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoLugar;
+                        }
+                    }
+                }
+            }
+            // Atualizar o atributos classificação dos pilotos *Fazer
+            // Atualizar o atributos classificação das equipes *Fazer
+        }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
         }

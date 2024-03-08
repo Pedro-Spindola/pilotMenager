@@ -30,7 +30,8 @@ namespace Pilot_Menager
         private int proxGPSemana = 0;
         private int etapaAtual = 0;
 
-        private string categoria = "";
+        // Variavel sendo utilizada na Tela de Classificação.
+        public string categoria = "";
 
         private int configInicioGame = 0;                   // 1 = Novo Jogo, 2 = Continuar Game
         private int tempoRodada = 200;                       // Tempo que vai passar o gamer em milessegundos.
@@ -95,18 +96,12 @@ namespace Pilot_Menager
                 return tempoFormatado;
             }
         }
-
         public string nomeAbreviado(string nome, string sobrenome)
         {
             char primeiraLetra = nome[0];
             string nomeCompleto = $"{primeiraLetra}. {sobrenome}";
 
             return nomeCompleto;
-        }
-        public string Categoria
-        {
-            get { return categoria; }
-            set { categoria = value; }
         }
         public static List<Principal> ObterListaCategoria()
         {
@@ -120,19 +115,53 @@ namespace Pilot_Menager
             return listSerie;
         }
 
-        public List<Historicos.PilotoCampeao> pilotosCampeoes = new List<Historicos.PilotoCampeao>();
+        public List<Historicos.PilotoCampeao> pilotosCampeoesF1 = new List<Historicos.PilotoCampeao>();
+        public List<Historicos.PilotoCampeao> pilotosCampeoesF2 = new List<Historicos.PilotoCampeao>();
+        public List<Historicos.PilotoCampeao> pilotosCampeoesF3 = new List<Historicos.PilotoCampeao>();
 
         // Método para adicionar um piloto campeão à lista
-        public void AdicionarPilotoCampeao(int ano, string sede, string nome, int pontos, string equipe)
+        public void AdicionarPilotoCampeao(string categoria, int ano, string sede, string nome, int pontos, string equipe)
         {
-            pilotosCampeoes.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+            if (categoria == "F1")
+            {
+                pilotosCampeoesF1.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+            }
+            else if (categoria == "F2")
+            {
+                pilotosCampeoesF2.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+            }
+            else if (categoria == "F3")
+            {
+                pilotosCampeoesF3.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+            }
         }
-        public List<Historicos.EquipeCampeao> equipesCampeoes = new List<Historicos.EquipeCampeao>();
-        public void AdicionarEquipeCampeao(int ano, string sede, string nome, int pontos)
+
+        public List<Historicos.EquipeCampeao> equipesCampeoesF1 = new List<Historicos.EquipeCampeao>();
+        public List<Historicos.EquipeCampeao> equipesCampeoesF2 = new List<Historicos.EquipeCampeao>();
+        public List<Historicos.EquipeCampeao> equipesCampeoesF3 = new List<Historicos.EquipeCampeao>();
+
+        // Método para adicionar um equipe campeão à lista
+        public void AdicionarEquipeCampeao(string categoria, int ano, string sede, string nome, int pontos)
         {
-            equipesCampeoes.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+            if (categoria == "F1")
+            {
+                equipesCampeoesF1.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+            }
+            else if (categoria == "F2")
+            {
+                equipesCampeoesF2.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+            }
+            else if (categoria == "F3")
+            {
+                equipesCampeoesF3.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+            }
         }
         // Get e Set
+        public string Categoria
+        {
+            get { return categoria; }
+            set { categoria = value; }
+        }
         public string CorPrincipal
         {
             get { return corPrincipal; }
@@ -187,6 +216,11 @@ namespace Pilot_Menager
         {
             get { return statusDaTemporada; }
             set { statusDaTemporada = value; }
+        }
+        public int TotalSemanas
+        {
+            get { return totalSemanas; }
+            set { totalSemanas = value; }
         }
         public string ProxGP
         {

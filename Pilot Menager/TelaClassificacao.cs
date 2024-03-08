@@ -27,10 +27,10 @@ namespace Pilot_Menager
         }
         private void TelaClassificacao_Load(object sender, EventArgs e)
         {
-            CriarDataGridViewClassPilotos(principal.Categoria, dvgTelaClassificacaoPiloto);
-            CriarDataGridViewClassEquipes(principal.Categoria, dvgTelaClassificacaoEquipe);
-            CriarDataGridViewCampeosPiloto(principal.Categoria, dvgTelaCampeosPiloto);
-            CriarDataGridViewCampeosEquipe(principal.Categoria, dvgTelaCampeosEquipes);
+            CriarDataGridViewClassPilotos(dvgTelaClassificacaoPiloto);
+            CriarDataGridViewClassEquipes(dvgTelaClassificacaoEquipe);
+            CriarDataGridViewCampeosPiloto(dvgTelaCampeosPiloto);
+            CriarDataGridViewCampeosEquipe(dvgTelaCampeosEquipes);
 
             List<Principal> nomeCategoria = Principal.ObterListaCategoria();
 
@@ -50,18 +50,25 @@ namespace Pilot_Menager
             {
                 PreencherDataGridViewClassPilotos(0, 10, dvgTelaClassificacaoPiloto);
                 PreencherDataGridViewClassEquipes(0, 10, dvgTelaClassificacaoEquipe);
-                PreencherDataGridViewCampeosPilotos(dvgTelaCampeosPiloto);
-                PreencherDataGridViewCampeosEquipe(dvgTelaCampeosEquipes);
+                // Informa a categoria
+                PreencherDataGridViewCampeosPilotos(principal.pilotosCampeoesF1, dvgTelaCampeosPiloto);
+                PreencherDataGridViewCampeosEquipe(principal.equipesCampeoesF1, dvgTelaCampeosEquipes);
             }
             else if (principal.Categoria == "F2")
             {
                 PreencherDataGridViewClassPilotos(10, 20, dvgTelaClassificacaoPiloto);
                 PreencherDataGridViewClassEquipes(10, 20, dvgTelaClassificacaoEquipe);
+                // Informa a categoria
+                PreencherDataGridViewCampeosPilotos(principal.pilotosCampeoesF2, dvgTelaCampeosPiloto);
+                PreencherDataGridViewCampeosEquipe(principal.equipesCampeoesF2, dvgTelaCampeosEquipes);
             }
             else if (principal.Categoria == "F3")
             {
                 PreencherDataGridViewClassPilotos(20, 30, dvgTelaClassificacaoPiloto);
                 PreencherDataGridViewClassEquipes(20, 30, dvgTelaClassificacaoEquipe);
+                // Informa a categoria
+                PreencherDataGridViewCampeosPilotos(principal.pilotosCampeoesF3, dvgTelaCampeosPiloto);
+                PreencherDataGridViewCampeosEquipe(principal.equipesCampeoesF3, dvgTelaCampeosEquipes);
             }
         }
         public void AtualizarTabelas(DataGridView dataGridViewPilotos, DataGridView dataGridViewEquipes, DataGridView dvgTelaCampeosPiloto, DataGridView dvgTelaCampeosEquipes)
@@ -117,9 +124,9 @@ namespace Pilot_Menager
             dataGridViewEquipes.ClearSelection();
             dataGridViewPilotos.ClearSelection();
         }
-        private void CriarDataGridViewClassPilotos(string categoria, DataGridView dataGridViewPilotos)
+        private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
         {
-            DataTable classPilotos = new DataTable(categoria);
+            DataTable classPilotos = new DataTable();
 
             DataColumn sedeColumn = new DataColumn("Nac", typeof(Image));
 
@@ -241,9 +248,9 @@ namespace Pilot_Menager
             // Limpe a sele��o inicial
             dataGridViewPilotos.ClearSelection();
         }
-        private void CriarDataGridViewClassEquipes(string categoria, DataGridView dataGridViewEquipes)
+        private void CriarDataGridViewClassEquipes( DataGridView dataGridViewEquipes)
         {
-            DataTable classEquipes = new DataTable(categoria);
+            DataTable classEquipes = new DataTable();
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
 
             classEquipes.Columns.Add("#", typeof(int));
@@ -354,9 +361,9 @@ namespace Pilot_Menager
             // Limpe a seleção inicial
             dataGridViewEquipes.ClearSelection();
         }
-        private void CriarDataGridViewCampeosPiloto(string categoria, DataGridView dgv)
+        private void CriarDataGridViewCampeosPiloto(DataGridView dgv)
         {
-            DataTable classEquipes = new DataTable(categoria);
+            DataTable classEquipes = new DataTable();
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
 
             classEquipes.Columns.Add("Ano", typeof(int));
@@ -432,9 +439,9 @@ namespace Pilot_Menager
             dgv.Columns[5].Width = 6;
             dgv.Columns[6].Width = 140;
         }
-        private void CriarDataGridViewCampeosEquipe(string categoria, DataGridView dgv)
+        private void CriarDataGridViewCampeosEquipe(DataGridView dgv)
         {
-            DataTable classEquipes = new DataTable(categoria);
+            DataTable classEquipes = new DataTable();
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
 
             classEquipes.Columns.Add("Ano", typeof(string));
@@ -510,7 +517,7 @@ namespace Pilot_Menager
             dgv.Columns[5].Width = 50;
 
         }
-        private void PreencherDataGridViewCampeosPilotos(DataGridView dgv)
+        private void PreencherDataGridViewCampeosPilotos(List<Historicos.PilotoCampeao> pilotosCampeoesCategoria, DataGridView dgv)
         {
             DataTable classEquipes = (DataTable)dgv.DataSource;
 
@@ -519,12 +526,14 @@ namespace Pilot_Menager
 
 
             // Adiciona cada piloto campeão como uma nova linha no DataGridView
-            foreach (var piloto in principal.pilotosCampeoes)
+            foreach (var piloto in pilotosCampeoesCategoria)
             {
                 // Cria uma nova linha no DataTable
                 DataRow row = classEquipes.NewRow();
 
+                row["Path"] = Path.Combine("Paises", piloto.Sede + ".png");
                 string path = row["Path"].ToString();
+
                 // Carrega a imagem da sede do piloto
                 Image sedeImage = Image.FromFile(path);
 
@@ -534,6 +543,7 @@ namespace Pilot_Menager
                 row["Nome"] = piloto.Nome;
                 row["P"] = piloto.Pontos;
                 row["Equipe"] = piloto.Equipe;
+
                 // Adiciona a linha ao DataTable
                 classEquipes.Rows.Add(row);
 
@@ -543,7 +553,7 @@ namespace Pilot_Menager
             // Define o DataTable como a fonte de dados do DataGridView
             dgv.DataSource = classEquipes;
         }
-        private void PreencherDataGridViewCampeosEquipe(DataGridView dgv)
+        private void PreencherDataGridViewCampeosEquipe(List<Historicos.EquipeCampeao> equipesCampeoesCategoria, DataGridView dgv)
         {
             DataTable classEquipes = (DataTable)dgv.DataSource;
 
@@ -551,21 +561,22 @@ namespace Pilot_Menager
             classEquipes.Rows.Clear();
 
             // Adiciona cada equipe campeão como uma nova linha no DataGridView
-            foreach (var piloto in principal.equipesCampeoes)
+            foreach (var equipe in equipesCampeoesCategoria)
             {
                 // Cria uma nova linha no DataTable
                 DataRow row = classEquipes.NewRow();
 
+                row["Path"] = Path.Combine("Paises", equipe.Sede + ".png");
                 string path = row["Path"].ToString();
 
                 // Carrega a imagem da sede do piloto
                 Image sedeImage = Image.FromFile(path);
 
                 // Adiciona os dados do piloto à linha do DataGridView
-                row["Ano"] = piloto.Ano;
+                row["Ano"] = equipe.Ano;
                 row["Sede"] = sedeImage;
-                row["Nome"] = piloto.Nome;
-                row["P"] = piloto.Pontos;
+                row["Nome"] = equipe.Nome;
+                row["P"] = equipe.Pontos;
                 // Adiciona a linha ao DataTable
                 classEquipes.Rows.Add(row);
 
