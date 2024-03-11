@@ -120,19 +120,19 @@ namespace Pilot_Menager
         public List<Historicos.PilotoCampeao> pilotosCampeoesF3 = new List<Historicos.PilotoCampeao>();
 
         // Método para adicionar um piloto campeão à lista
-        public void AdicionarPilotoCampeao(string categoria, int ano, string sede, string nome, int pontos, string equipe)
+        public void AdicionarPilotoCampeao(string categoria, int ano, string sede, string nome, int pontos, string cor1, string equipe)
         {
             if (categoria == "F1")
             {
-                pilotosCampeoesF1.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+                pilotosCampeoesF1.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, C1 = cor1, Equipe = equipe });
             }
             else if (categoria == "F2")
             {
-                pilotosCampeoesF2.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+                pilotosCampeoesF2.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, C1 = cor1, Equipe = equipe });
             }
             else if (categoria == "F3")
             {
-                pilotosCampeoesF3.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, Equipe = equipe });
+                pilotosCampeoesF3.Add(new Historicos.PilotoCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos, C1 = cor1, Equipe = equipe });
             }
         }
 
@@ -141,19 +141,19 @@ namespace Pilot_Menager
         public List<Historicos.EquipeCampeao> equipesCampeoesF3 = new List<Historicos.EquipeCampeao>();
 
         // Método para adicionar um equipe campeão à lista
-        public void AdicionarEquipeCampeao(string categoria, int ano, string sede, string nome, int pontos)
+        public void AdicionarEquipeCampeao(string categoria, int ano, string sede, string cor1, string nome, int pontos)
         {
             if (categoria == "F1")
             {
-                equipesCampeoesF1.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+                equipesCampeoesF1.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, C1 = cor1, Nome = nome, Pontos = pontos });
             }
             else if (categoria == "F2")
             {
-                equipesCampeoesF2.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+                equipesCampeoesF2.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, C1 = cor1, Nome = nome, Pontos = pontos });
             }
             else if (categoria == "F3")
             {
-                equipesCampeoesF3.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, Nome = nome, Pontos = pontos });
+                equipesCampeoesF3.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, C1 = cor1, Nome = nome, Pontos = pontos });
             }
         }
         // Get e Set
@@ -327,16 +327,14 @@ namespace Pilot_Menager
             public string Sede { get; set; }
             public string Nome { get; set; }
             public int Pontos { get; set; }
-            //public string C1 { get; set; }
-            //public string C2 { get; set; }
+            public string C1 { get; set; }
             public string Equipe { get; set; }
         }
         public class EquipeCampeao
         {
             public int Ano { get; set; }
             public string Sede { get; set; }
-            //public string C1 { get; set; }
-            //public string C2 { get; set; }
+            public string C1 { get; set; }
             public string Nome { get; set; }
             public int Pontos { get; set; }
         }

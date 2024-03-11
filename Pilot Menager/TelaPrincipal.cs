@@ -59,21 +59,7 @@ namespace Pilot_Menager
             CriarDataGridViewClassEquipes();
             CriarDataGridViewClassPilotos();
 
-            if (pilotos[0].Categoria == "F1")
-            {
-                PreencherDataGridViewClassEquipes(0, 10);
-                PreencherDataGridViewClassPilotos(0, 10);
-            }
-            else if (pilotos[0].Categoria == "F2")
-            {
-                PreencherDataGridViewClassPilotos(10, 20);
-                PreencherDataGridViewClassEquipes(10, 20);
-            }
-            else if (pilotos[0].Categoria == "F3")
-            {
-                PreencherDataGridViewClassPilotos(20, 30);
-                PreencherDataGridViewClassEquipes(20, 30);
-            } 
+            AtualizarTabelaInicioDeTemporada();
 
             AtualizarTabelas();
         }
@@ -337,22 +323,58 @@ namespace Pilot_Menager
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            // Ordene automaticamente a coluna 3 do maior para o menor
-            dgvClassEquipes.Sort(dgvClassEquipes.Columns[3], ListSortDirection.Descending);
-
             // Ordene automaticamente a coluna 4 do maior para o menor
-            dgvClassPilotos.Sort(dgvClassPilotos.Columns[4], ListSortDirection.Descending);
+            dgvClassEquipes.Sort(dgvClassEquipes.Columns[4], ListSortDirection.Descending);
+
+            // Ordene automaticamente a coluna 5 do maior para o menor
+            dgvClassPilotos.Sort(dgvClassPilotos.Columns[5], ListSortDirection.Descending);
 
             for (int i = 0; i < dgvClassEquipes.Rows.Count; i++)
             {
                 dgvClassEquipes.Rows[i].Cells["#"].Value = i + 1;
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dgvClassEquipes.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dgvClassEquipes.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
             for (int i = 0; i < dgvClassPilotos.Rows.Count; i++)
             {
                 dgvClassPilotos.Rows[i].Cells["#"].Value = i + 1;
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dgvClassPilotos.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dgvClassPilotos.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
             dgvClassEquipes.ClearSelection();
             dgvClassPilotos.ClearSelection();
+        }
+        public void AtualizarTabelaInicioDeTemporada()
+        {
+            if (pilotos[0].Categoria == "F1")
+            {
+                PreencherDataGridViewClassEquipes(0, 10);
+                PreencherDataGridViewClassPilotos(0, 10);
+            }
+            else if (pilotos[0].Categoria == "F2")
+            {
+                PreencherDataGridViewClassPilotos(10, 20);
+                PreencherDataGridViewClassEquipes(10, 20);
+            }
+            else if (pilotos[0].Categoria == "F3")
+            {
+                PreencherDataGridViewClassPilotos(20, 30);
+                PreencherDataGridViewClassEquipes(20, 30);
+            }
         }
         private void CriarDataGridViewClassEquipes()
         {
@@ -361,6 +383,7 @@ namespace Pilot_Menager
 
             classEquipes.Columns.Add("#", typeof(int));
             classEquipes.Columns.Add(sedeColumn);
+            classEquipes.Columns.Add("C1", typeof(string));
             classEquipes.Columns.Add("Nome", typeof(string));
             classEquipes.Columns.Add("P", typeof(int));
             classEquipes.Columns.Add("1º", typeof(int));
@@ -407,24 +430,26 @@ namespace Pilot_Menager
             // Defina a ordem de exibi��o das colunas com base nos �ndices
             dgvClassEquipes.Columns["#"].DisplayIndex = 0;
             dgvClassEquipes.Columns["Sede"].DisplayIndex = 1;
-            dgvClassEquipes.Columns["Nome"].DisplayIndex = 2;
-            dgvClassEquipes.Columns["P"].DisplayIndex = 3;
-            dgvClassEquipes.Columns["1º"].DisplayIndex = 4;
-            dgvClassEquipes.Columns["2º"].DisplayIndex = 5;
-            dgvClassEquipes.Columns["3º"].DisplayIndex = 6;
-            dgvClassEquipes.Columns["Path"].DisplayIndex = 7;
-            dgvClassEquipes.Columns["Nacionalidade"].DisplayIndex = 8;
+            dgvClassEquipes.Columns["C1"].DisplayIndex = 2;
+            dgvClassEquipes.Columns["Nome"].DisplayIndex = 3;
+            dgvClassEquipes.Columns["P"].DisplayIndex = 4;
+            dgvClassEquipes.Columns["1º"].DisplayIndex = 5;
+            dgvClassEquipes.Columns["2º"].DisplayIndex = 6;
+            dgvClassEquipes.Columns["3º"].DisplayIndex = 7;
+            dgvClassEquipes.Columns["Path"].DisplayIndex = 8;
+            dgvClassEquipes.Columns["Nacionalidade"].DisplayIndex = 9;
 
             dgvClassEquipes.Columns["Path"].Visible = false;
             dgvClassEquipes.Columns["Nacionalidade"].Visible = false;
 
             dgvClassEquipes.Columns[0].Width = 40;
             dgvClassEquipes.Columns[1].Width = 50;
-            dgvClassEquipes.Columns[2].Width = 240;
-            dgvClassEquipes.Columns[3].Width = 50;
-            dgvClassEquipes.Columns[4].Width = 40;
+            dgvClassEquipes.Columns[2].Width = 10;
+            dgvClassEquipes.Columns[3].Width = 230;
+            dgvClassEquipes.Columns[4].Width = 50;
             dgvClassEquipes.Columns[5].Width = 40;
             dgvClassEquipes.Columns[6].Width = 40;
+            dgvClassEquipes.Columns[7].Width = 40;
 
         }
         private void PreencherDataGridViewClassEquipes(int equipeMin, int equipeMax)
@@ -439,6 +464,7 @@ namespace Pilot_Menager
             {
                 DataRow row = classEquipes.NewRow();
 
+                row["C1"] = equipes[i].Cor1;
                 row["Nome"] = equipes[i].NomeEquipe;
                 row["P"] = equipes[i].PontosCampeonato;
                 row["1º"] = equipes[i].PrimeiroColocado;
@@ -506,6 +532,7 @@ namespace Pilot_Menager
             classPilotos.Columns.Add("#", typeof(int));
             classPilotos.Columns.Add(sedeColumn);
             classPilotos.Columns.Add("Nome", typeof(string));
+            classPilotos.Columns.Add("C1", typeof(string));
             classPilotos.Columns.Add("Equipe", typeof(string));
             classPilotos.Columns.Add("P", typeof(int));
             classPilotos.Columns.Add("1º", typeof(int));
@@ -554,13 +581,14 @@ namespace Pilot_Menager
             dgvClassPilotos.Columns["#"].DisplayIndex = 0;
             dgvClassPilotos.Columns["Nac"].DisplayIndex = 1;
             dgvClassPilotos.Columns["Nome"].DisplayIndex = 2;
-            dgvClassPilotos.Columns["Equipe"].DisplayIndex = 3;
-            dgvClassPilotos.Columns["P"].DisplayIndex = 4;
-            dgvClassPilotos.Columns["1º"].DisplayIndex = 5;
-            dgvClassPilotos.Columns["2º"].DisplayIndex = 6;
-            dgvClassPilotos.Columns["3º"].DisplayIndex = 7;
-            dgvClassPilotos.Columns["Path"].DisplayIndex = 8;
-            dgvClassPilotos.Columns["Nacionalidade"].DisplayIndex = 9;
+            dgvClassPilotos.Columns["C1"].DisplayIndex = 3;
+            dgvClassPilotos.Columns["Equipe"].DisplayIndex = 4;
+            dgvClassPilotos.Columns["P"].DisplayIndex = 5;
+            dgvClassPilotos.Columns["1º"].DisplayIndex = 6;
+            dgvClassPilotos.Columns["2º"].DisplayIndex = 7;
+            dgvClassPilotos.Columns["3º"].DisplayIndex = 8;
+            dgvClassPilotos.Columns["Path"].DisplayIndex = 9;
+            dgvClassPilotos.Columns["Nacionalidade"].DisplayIndex = 10;
 
             dgvClassPilotos.Columns["Nome"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvClassPilotos.Columns["Path"].Visible = false;
@@ -570,12 +598,13 @@ namespace Pilot_Menager
 
             dgvClassPilotos.Columns[0].Width = 40;
             dgvClassPilotos.Columns[1].Width = 50;
-            dgvClassPilotos.Columns[2].Width = 170;
-            dgvClassPilotos.Columns[3].Width = 110;
-            dgvClassPilotos.Columns[4].Width = 40;
-            dgvClassPilotos.Columns[5].Width = 30;
+            dgvClassPilotos.Columns[2].Width = 160;
+            dgvClassPilotos.Columns[3].Width = 10;
+            dgvClassPilotos.Columns[4].Width = 110;
+            dgvClassPilotos.Columns[5].Width = 40;
             dgvClassPilotos.Columns[6].Width = 30;
             dgvClassPilotos.Columns[7].Width = 30;
+            dgvClassPilotos.Columns[8].Width = 30;
         }
         private void PreencherDataGridViewClassPilotos(int equipeMin, int equipeMax)
         {
@@ -595,6 +624,7 @@ namespace Pilot_Menager
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
+                        row["C1"] = pilotos[i].Cor1;
                         row["Equipe"] = pilotos[i].EquipePiloto;
                         row["P"] = pilotos[i].PontosCampeonato;
                         row["1º"] = pilotos[i].PrimeiroColocado;
@@ -673,21 +703,21 @@ namespace Pilot_Menager
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            // Ordene automaticamente a coluna 3 do maior para o menor
-            dgvClassEquipes.Sort(dgvClassEquipes.Columns[3], ListSortDirection.Descending);
-
             // Ordene automaticamente a coluna 4 do maior para o menor
-            dgvClassPilotos.Sort(dgvClassPilotos.Columns[4], ListSortDirection.Descending);
+            dgvClassEquipes.Sort(dgvClassEquipes.Columns[4], ListSortDirection.Descending);
+
+            // Ordene automaticamente a coluna 5 do maior para o menor
+            dgvClassPilotos.Sort(dgvClassPilotos.Columns[5], ListSortDirection.Descending);
 
             // Aqui tenho que adc os campeões da F1, F2, F3
 
             for (int i = 0; i < 1; i++)
             {
-                principal.AdicionarPilotoCampeao(cata, principal.ContadorDeAno, dgvClassPilotos.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassPilotos.Rows[i].Cells["P"].Value.ToString()), dgvClassPilotos.Rows[i].Cells["Equipe"].Value.ToString());
+                principal.AdicionarPilotoCampeao(cata, principal.ContadorDeAno, dgvClassPilotos.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassPilotos.Rows[i].Cells["P"].Value.ToString()), dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Equipe"].Value.ToString());
             }
             for (int i = 0; i < 1; i++)
             {
-                principal.AdicionarEquipeCampeao(cata, principal.ContadorDeAno, dgvClassEquipes.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassEquipes.Rows[i].Cells["P"].Value.ToString()));
+                principal.AdicionarEquipeCampeao(cata, principal.ContadorDeAno, dgvClassEquipes.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassEquipes.Rows[i].Cells["P"].Value.ToString()));
             }
 
             dgvClassEquipes.ClearSelection();
@@ -703,8 +733,12 @@ namespace Pilot_Menager
                 Equipes = saveEquipe,
                 Pilotos = savePiloto,
                 Pistas = savePista,
-                //PilotosCampeoes = principal.pilotosCampeoes,
-                //EquipesCampeoes = principal.equipesCampeoes,
+                PilotosCampeoesF1 = principal.pilotosCampeoesF1,
+                PilotosCampeoesF2 = principal.pilotosCampeoesF2,
+                PilotosCampeoesF3 = principal.pilotosCampeoesF3,
+                EquipesCampeoesF1 = principal.equipesCampeoesF1,
+                EquipesCampeoesF2 = principal.equipesCampeoesF2,
+                EquipesCampeoesF3 = principal.equipesCampeoesF3,
                 NomeJogador = principal.NomeJogador,
                 SobrenomeJogador = principal.SobrenomeJogador,
                 NacionalidadeJogador = principal.NacionalidadeJogador,
@@ -738,8 +772,12 @@ namespace Pilot_Menager
                     equipes = dadosCompletos.Equipes;
                     pilotos = dadosCompletos.Pilotos;
                     pistas = dadosCompletos.Pistas;
-                    //principal.pilotosCampeoes = dadosCompletos.PilotosCampeoes;
-                    //principal.equipesCampeoes = dadosCompletos.EquipesCampeoes;
+                    principal.pilotosCampeoesF1 = dadosCompletos.PilotosCampeoesF1;
+                    principal.pilotosCampeoesF2 = dadosCompletos.PilotosCampeoesF2;
+                    principal.pilotosCampeoesF3 = dadosCompletos.PilotosCampeoesF3;
+                    principal.equipesCampeoesF1 = dadosCompletos.EquipesCampeoesF1;
+                    principal.equipesCampeoesF2 = dadosCompletos.EquipesCampeoesF2;
+                    principal.equipesCampeoesF3 = dadosCompletos.EquipesCampeoesF3;
                     principal.NomeJogador = dadosCompletos.NomeJogador;
                     principal.SobrenomeJogador = dadosCompletos.SobrenomeJogador;
                     principal.NacionalidadeJogador = dadosCompletos.NacionalidadeJogador;
@@ -803,7 +841,8 @@ namespace Pilot_Menager
                 AtualizarDate();
                 AtualizarNomes();
 
-            } else if (principal.ContadorDeSemana == principal.TotalSemanas)
+            }
+            else if (principal.ContadorDeSemana == principal.TotalSemanas)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -826,12 +865,14 @@ namespace Pilot_Menager
                         FinalDeTemporadaDataBase("F3");
                     }
                 }
+
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
                 AtualizarFinancias();
                 AtualizarDate();
                 AtualizarNomes();
+                AtualizarTabelaInicioDeTemporada();
             }
             else
             {
@@ -862,14 +903,24 @@ namespace Pilot_Menager
             TelaClassificacao telaClassificacao = new TelaClassificacao(principal, equipes, pilotos, pistas);
             telaClassificacao.ShowDialog();
         }
+
+        private void pictureBoxPilotos_Click(object sender, EventArgs e)
+        {
+            TelaPilotos telaPilotos = new TelaPilotos(principal, equipes, pilotos, pistas);
+            telaPilotos.ShowDialog();
+        }
     }
     class DadosCompletos
     {
         public Equipes[] Equipes { get; set; }
         public Pilotos[] Pilotos { get; set; }
         public Pistas[] Pistas { get; set; }
-        public List<Historicos.PilotoCampeao> PilotosCampeoes { get; set; }
-        public List<Historicos.EquipeCampeao> EquipesCampeoes { get; set; }
+        public List<Historicos.PilotoCampeao> PilotosCampeoesF1 { get; set; }
+        public List<Historicos.PilotoCampeao> PilotosCampeoesF2 { get; set; }
+        public List<Historicos.PilotoCampeao> PilotosCampeoesF3 { get; set; }
+        public List<Historicos.EquipeCampeao> EquipesCampeoesF1 { get; set; }
+        public List<Historicos.EquipeCampeao> EquipesCampeoesF2 { get; set; }
+        public List<Historicos.EquipeCampeao> EquipesCampeoesF3 { get; set; }
         public string NomeJogador { get; set; }
         public string SobrenomeJogador { get; set; }
         public string NacionalidadeJogador { get; set; }

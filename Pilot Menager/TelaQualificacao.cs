@@ -23,6 +23,9 @@ namespace Pilot_Menager
         string listcategoria = "";
         Random random = new Random();
         private int btnclick = 0;
+        Color corPrincipal;
+        Color corSecundaria;
+        Color corTexto;
         public TelaQualificacao(Principal princ, Equipes[] equip, Pilotos[] pilot, Pistas[] pist)
         {
             InitializeComponent();
@@ -33,6 +36,9 @@ namespace Pilot_Menager
         }
         private void TelaQualificacao_Load(object sender, EventArgs e)
         {
+            corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
+            corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
+
             AtualizarNomes();
 
             if (pilotos[0].Categoria == "F1")
@@ -62,6 +68,34 @@ namespace Pilot_Menager
             labelNomePais.Text = principal.ProxGPais;
             labelSemanaGP.Text = string.Format("Semana {0:D2} / {1}", principal.ProxGPSemana, principal.ContadorDeAno);
             pictureBoxPaisGP.ImageLocation = Path.Combine("Paises", principal.ProxGP + ".png");
+
+            if (principal.CorTexto == "Branco")
+            {
+                panel1.ForeColor = Color.White;
+            }
+            else if (principal.CorTexto == "Preto")
+            {
+                panel1.ForeColor = Color.Black;
+            }
+            else if (principal.CorTexto == "Automatico")
+            {
+                // Calcula o brilho da cor (luminosidade)
+                double brilho = (corPrincipal.R * 0.299 + corPrincipal.G * 0.587 + corPrincipal.B * 0.114) / 255;
+
+                if (brilho < 0.4)
+                {
+                    pictureBoxBtnContinuarQualificacao.Image = Properties.Resources.menu_continuar_w;
+                    panel1.ForeColor = Color.White;
+                }
+                else
+                {
+                    pictureBoxBtnContinuarQualificacao.Image = Properties.Resources.menu_continuar_b;
+                    panel1.ForeColor = Color.Black;
+                }
+            }
+            panel1.BackColor = corPrincipal;
+            panel2.BackColor = corSecundaria;
+            panel3.BackColor = corSecundaria;
         }
         private void AtualizarTabelasQualificacaoVoltas(DataGridView dvgTableQualificacaoF1)
         {
@@ -74,11 +108,20 @@ namespace Pilot_Menager
             }
 
             // Ordene automaticamente a coluna 5 do maior para o menor
-            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[7], ListSortDirection.Ascending);
+            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[6], ListSortDirection.Ascending);
 
             for (int i = 0; i < dvgTableQualificacaoF1.Rows.Count; i++)
             {
                 dvgTableQualificacaoF1.Rows[i].Cells["#"].Value = i + 1;
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dvgTableQualificacaoF1.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
 
             dvgTableQualificacaoF1.ClearSelection();
@@ -90,7 +133,6 @@ namespace Pilot_Menager
             DataColumn sedeColumn = new DataColumn("Nac", typeof(Image));
 
             qualificacaoEquipesF1.Columns.Add("C1", typeof(string));
-            qualificacaoEquipesF1.Columns.Add("C2", typeof(string));
             qualificacaoEquipesF1.Columns.Add("#", typeof(int));
             qualificacaoEquipesF1.Columns.Add(sedeColumn);
             qualificacaoEquipesF1.Columns.Add("Nome", typeof(string));
@@ -138,28 +180,25 @@ namespace Pilot_Menager
 
             // Defina a ordem de exibição das colunas com base nos índices
             dvgTableQualificacaoF1.Columns["C1"].DisplayIndex = 0;
-            dvgTableQualificacaoF1.Columns["C2"].DisplayIndex = 1;
-            dvgTableQualificacaoF1.Columns["#"].DisplayIndex = 2;
-            dvgTableQualificacaoF1.Columns["Nac"].DisplayIndex = 3;
-            dvgTableQualificacaoF1.Columns["Nome"].DisplayIndex = 4;
-            dvgTableQualificacaoF1.Columns["Equipe"].DisplayIndex = 5;
-            dvgTableQualificacaoF1.Columns["Melhor Tempo"].DisplayIndex = 6;
-            dvgTableQualificacaoF1.Columns["Segundos"].DisplayIndex = 7;
-            dvgTableQualificacaoF1.Columns["Path"].DisplayIndex = 8;
+            dvgTableQualificacaoF1.Columns["#"].DisplayIndex = 1;
+            dvgTableQualificacaoF1.Columns["Nac"].DisplayIndex = 2;
+            dvgTableQualificacaoF1.Columns["Nome"].DisplayIndex = 3;
+            dvgTableQualificacaoF1.Columns["Equipe"].DisplayIndex = 4;
+            dvgTableQualificacaoF1.Columns["Melhor Tempo"].DisplayIndex = 5;
+            dvgTableQualificacaoF1.Columns["Segundos"].DisplayIndex = 6;
+            dvgTableQualificacaoF1.Columns["Path"].DisplayIndex = 7;
 
             dvgTableQualificacaoF1.Columns["Nome"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dvgTableQualificacaoF1.Columns["Path"].Visible = false;
             dvgTableQualificacaoF1.Columns["Segundos"].Visible = false;
             dvgTableQualificacaoF1.Columns["C1"].HeaderText = string.Empty;
-            dvgTableQualificacaoF1.Columns["C2"].HeaderText = string.Empty;
 
-            dvgTableQualificacaoF1.Columns[0].Width = 20;
-            dvgTableQualificacaoF1.Columns[1].Width = 10;
-            dvgTableQualificacaoF1.Columns[2].Width = 40;
-            dvgTableQualificacaoF1.Columns[3].Width = 50;
-            dvgTableQualificacaoF1.Columns[4].Width = 320;
-            dvgTableQualificacaoF1.Columns[5].Width = 230;
-            dvgTableQualificacaoF1.Columns[6].Width = 170;
+            dvgTableQualificacaoF1.Columns[0].Width = 10;
+            dvgTableQualificacaoF1.Columns[1].Width = 40;
+            dvgTableQualificacaoF1.Columns[2].Width = 50;
+            dvgTableQualificacaoF1.Columns[3].Width = 330;
+            dvgTableQualificacaoF1.Columns[4].Width = 240;
+            dvgTableQualificacaoF1.Columns[5].Width = 170;
         }
         private void PreencherDataGridViewQualificacaoEquipesF1(int equipeF1Min, int equipeF1Max, DataGridView dvgTableQualificacaoF1)
         {
@@ -174,6 +213,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["C1"] = pilotos[i].Cor1;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["Equipe"] = pilotos[i].EquipePiloto;
                         string tempo = principal.formatarNumero(pilotos[i].TempoDeVoltaQualificacao);
@@ -214,6 +254,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["C1"] = pilotos[i].Cor1;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["Equipe"] = pilotos[i].EquipePiloto;
                         string tempo = principal.formatarNumero(pilotos[i].TempoDeVoltaQualificacao);
@@ -250,11 +291,20 @@ namespace Pilot_Menager
             }
 
             // Ordene automaticamente a coluna 10 do maior para o menor
-            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[10], ListSortDirection.Ascending);
+            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[9], ListSortDirection.Ascending);
 
             for (int i = 0; i < dvgTableQualificacaoF1.Rows.Count; i++)
             {
                 dvgTableQualificacaoF1.Rows[i].Cells["#"].Value = i + 1;
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dvgTableQualificacaoF1.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
 
             dvgTableQualificacaoF1.ClearSelection();
@@ -270,11 +320,20 @@ namespace Pilot_Menager
             }
 
             // Ordene automaticamente a coluna 11 do maior para o menor
-            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[11], ListSortDirection.Ascending);
+            dvgTableQualificacaoF1.Sort(dvgTableQualificacaoF1.Columns[10], ListSortDirection.Ascending);
 
             for (int i = 0; i < dvgTableQualificacaoF1.Rows.Count; i++)
             {
                 dvgTableQualificacaoF1.Rows[i].Cells["#"].Value = i + 1;
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dvgTableQualificacaoF1.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dvgTableQualificacaoF1.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
 
             dvgTableQualificacaoF1.ClearSelection();
@@ -286,7 +345,6 @@ namespace Pilot_Menager
             DataColumn sedeColumn = new DataColumn("Nac", typeof(Image));
 
             CorridaEquipesF1.Columns.Add("C1", typeof(string));
-            CorridaEquipesF1.Columns.Add("C2", typeof(string));
             CorridaEquipesF1.Columns.Add("#", typeof(int));
             CorridaEquipesF1.Columns.Add(sedeColumn);
             CorridaEquipesF1.Columns.Add("Nome", typeof(string));
@@ -337,18 +395,17 @@ namespace Pilot_Menager
 
             // Defina a ordem de exibição das colunas com base nos índices
             dvgTableQualificacaoF1.Columns["C1"].DisplayIndex = 0;
-            dvgTableQualificacaoF1.Columns["C2"].DisplayIndex = 1;
-            dvgTableQualificacaoF1.Columns["#"].DisplayIndex = 2;
-            dvgTableQualificacaoF1.Columns["Nac"].DisplayIndex = 3;
-            dvgTableQualificacaoF1.Columns["Nome"].DisplayIndex = 4;
-            dvgTableQualificacaoF1.Columns["Equipe"].DisplayIndex = 5;
-            dvgTableQualificacaoF1.Columns["Ult. Volta"].DisplayIndex = 6;
-            dvgTableQualificacaoF1.Columns["Dif. Ant."].DisplayIndex = 7;
-            dvgTableQualificacaoF1.Columns["Dif. Pri."].DisplayIndex = 8;
-            dvgTableQualificacaoF1.Columns["Segundos"].DisplayIndex = 9;
-            dvgTableQualificacaoF1.Columns["Qualific"].DisplayIndex = 10;
-            dvgTableQualificacaoF1.Columns["TempoTotal"].DisplayIndex = 11;
-            dvgTableQualificacaoF1.Columns["Path"].DisplayIndex = 12;
+            dvgTableQualificacaoF1.Columns["#"].DisplayIndex = 1;
+            dvgTableQualificacaoF1.Columns["Nac"].DisplayIndex = 2;
+            dvgTableQualificacaoF1.Columns["Nome"].DisplayIndex = 3;
+            dvgTableQualificacaoF1.Columns["Equipe"].DisplayIndex = 4;
+            dvgTableQualificacaoF1.Columns["Ult. Volta"].DisplayIndex = 5;
+            dvgTableQualificacaoF1.Columns["Dif. Ant."].DisplayIndex = 6;
+            dvgTableQualificacaoF1.Columns["Dif. Pri."].DisplayIndex = 7;
+            dvgTableQualificacaoF1.Columns["Segundos"].DisplayIndex = 8;
+            dvgTableQualificacaoF1.Columns["Qualific"].DisplayIndex = 9;
+            dvgTableQualificacaoF1.Columns["TempoTotal"].DisplayIndex = 10;
+            dvgTableQualificacaoF1.Columns["Path"].DisplayIndex = 11;
 
 
             dvgTableQualificacaoF1.Columns["Nome"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -356,18 +413,15 @@ namespace Pilot_Menager
             dvgTableQualificacaoF1.Columns["Segundos"].Visible = false;
             dvgTableQualificacaoF1.Columns["Qualific"].Visible = false;
             dvgTableQualificacaoF1.Columns["TempoTotal"].Visible = false;
-            dvgTableQualificacaoF1.Columns["C1"].HeaderText = string.Empty;
-            dvgTableQualificacaoF1.Columns["C2"].HeaderText = string.Empty;
 
-            dvgTableQualificacaoF1.Columns[0].Width = 20;
-            dvgTableQualificacaoF1.Columns[1].Width = 10;
-            dvgTableQualificacaoF1.Columns[2].Width = 40;
-            dvgTableQualificacaoF1.Columns[3].Width = 50;
-            dvgTableQualificacaoF1.Columns[4].Width = 260;
-            dvgTableQualificacaoF1.Columns[5].Width = 160;
+            dvgTableQualificacaoF1.Columns[0].Width = 10;
+            dvgTableQualificacaoF1.Columns[1].Width = 40;
+            dvgTableQualificacaoF1.Columns[2].Width = 50;
+            dvgTableQualificacaoF1.Columns[3].Width = 270;
+            dvgTableQualificacaoF1.Columns[4].Width = 170;
+            dvgTableQualificacaoF1.Columns[5].Width = 100;
             dvgTableQualificacaoF1.Columns[6].Width = 100;
             dvgTableQualificacaoF1.Columns[7].Width = 100;
-            dvgTableQualificacaoF1.Columns[8].Width = 100;
         }
         private void PreencherDataGridViewCorridaEquipesF1(int equipeF1Min, int equipeF1Max, DataGridView dvgTableQualificacaoF1)
         {
@@ -381,6 +435,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["C1"] = pilotos[i].Cor1;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["Equipe"] = pilotos[i].EquipePiloto;
                         string tempo = principal.formatarNumero(pilotos[i].TempoDeVoltaCorrida);
@@ -427,6 +482,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["C1"] = pilotos[i].Cor1;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["Equipe"] = pilotos[i].EquipePiloto;
                         string tempo = principal.formatarNumero(pilotos[i].TempoDeVoltaCorrida);
@@ -1009,10 +1065,6 @@ namespace Pilot_Menager
             }
             // Atualizar o atributos classificação dos pilotos *Fazer
             // Atualizar o atributos classificação das equipes *Fazer
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
         }
         private int AlgoritmoParaVoltas(int motor, int aerodinamica, int freio, int asaDianteira, int asaTraseira, int cambio,
         int eletrico, int direcao, int confiabilidade, int largada, int concentracao, int ultrapassagem, int experiencia, int rapidez,

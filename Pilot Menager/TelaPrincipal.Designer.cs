@@ -592,6 +592,7 @@
             pictureBoxPilotos.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBoxPilotos.TabIndex = 1;
             pictureBoxPilotos.TabStop = false;
+            pictureBoxPilotos.Click += pictureBoxPilotos_Click;
             // 
             // panelCorP4
             // 
