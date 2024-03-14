@@ -16,6 +16,7 @@ namespace Pilot_Menager
         private string sede;
         private string categoria;
 
+        private int posicaoAtualCampeonato = 1;
         private int pontosCampeonato;
         private int primeiroColocado;
         private int segundoColocado;
@@ -115,6 +116,11 @@ namespace Pilot_Menager
         {
             get { return segundoPiloto; }
             set { segundoPiloto = value; }
+        }
+        public int PosicaoAtualCampeonato
+        {
+            get { return posicaoAtualCampeonato; }
+            set { posicaoAtualCampeonato = value; }
         }
         public int PontosCampeonato
         {

@@ -166,6 +166,76 @@ namespace Pilot_Menager
             dataGridViewEquipes.ClearSelection();
             dataGridViewPilotos.ClearSelection();
         }
+        private void ManipulacaoClassificacaoCampeonatoEquipes(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
+        {
+            // Método de manipulação do evento SortCompare
+            if (e.Column.Index == 4) // Ordena pela coluna 4
+            {
+                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[4].Value);
+                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[4].Value);
+                e.SortResult = valorCelula1.CompareTo(valorCelula2);
+
+                if (e.SortResult == 0)
+                {
+                    // Se o valor da coluna 4 for igual, ordena pela coluna 5
+                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
+                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
+                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
+
+                    if (e.SortResult == 0)
+                    {
+                        // Se o valor da coluna 5 for igual, ordena pela coluna 6
+                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
+                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
+                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
+
+                        if (e.SortResult == 0)
+                        {
+                            // Se o valor da coluna 6 for igual, ordena pela coluna 7
+                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
+                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
+                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
+                        }
+                    }
+                }
+                e.Handled = true; // Indica que a comparação foi tratada
+            }
+        }
+        private void ManipulacaoClassificacaoCampeonatoPilotos(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
+        {
+            // Método de manipulação do evento SortCompare
+            if (e.Column.Index == 5) // Ordena pela coluna 5
+            {
+                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
+                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
+                e.SortResult = valorCelula1.CompareTo(valorCelula2);
+
+                if (e.SortResult == 0)
+                {
+                    // Se o valor da coluna 5 for igual, ordena pela coluna 6
+                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
+                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
+                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
+
+                    if (e.SortResult == 0)
+                    {
+                        // Se o valor da coluna 6 for igual, ordena pela coluna 7
+                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
+                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
+                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
+
+                        if (e.SortResult == 0)
+                        {
+                            // Se o valor da coluna 7 for igual, ordena pela coluna 8
+                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[8].Value);
+                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[8].Value);
+                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
+                        }
+                    }
+                }
+                e.Handled = true; // Indica que a comparação foi tratada
+            }
+        }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
         {
             DataTable classPilotos = new DataTable();

@@ -32,9 +32,9 @@
             panel = new Panel();
             dvgTableF1 = new DataGridView();
             panel1 = new Panel();
-            label2 = new Label();
+            lbQualificacaoVoltas = new Label();
             pictureBox1 = new PictureBox();
-            label1 = new Label();
+            lbQualificacaoClima = new Label();
             panel4 = new Panel();
             labelNomeGp = new Label();
             labelSemanaGP = new Label();
@@ -83,9 +83,9 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lbQualificacaoVoltas);
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lbQualificacaoClima);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(pictureBoxBtnContinuarQualificacao);
             panel1.Controls.Add(pictureBoxPaisGP);
@@ -95,18 +95,18 @@
             panel1.Size = new Size(1340, 80);
             panel1.TabIndex = 3;
             // 
-            // label2
+            // lbQualificacaoVoltas
             // 
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ImageAlign = ContentAlignment.MiddleLeft;
-            label2.Location = new Point(50, 10);
-            label2.Margin = new Padding(0);
-            label2.Name = "label2";
-            label2.Padding = new Padding(5, 0, 0, 0);
-            label2.Size = new Size(140, 20);
-            label2.TabIndex = 6;
-            label2.Text = "Voltas:  0 / 00";
-            label2.TextAlign = ContentAlignment.MiddleLeft;
+            lbQualificacaoVoltas.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lbQualificacaoVoltas.ImageAlign = ContentAlignment.MiddleLeft;
+            lbQualificacaoVoltas.Location = new Point(50, 10);
+            lbQualificacaoVoltas.Margin = new Padding(0);
+            lbQualificacaoVoltas.Name = "lbQualificacaoVoltas";
+            lbQualificacaoVoltas.Padding = new Padding(5, 0, 0, 0);
+            lbQualificacaoVoltas.Size = new Size(140, 20);
+            lbQualificacaoVoltas.TabIndex = 6;
+            lbQualificacaoVoltas.Text = "Voltas:  0 / 00";
+            lbQualificacaoVoltas.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pictureBox1
             // 
@@ -117,18 +117,18 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
-            // label1
+            // lbQualificacaoClima
             // 
-            label1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ImageAlign = ContentAlignment.MiddleLeft;
-            label1.Location = new Point(50, 45);
-            label1.Margin = new Padding(0);
-            label1.Name = "label1";
-            label1.Padding = new Padding(5, 0, 0, 0);
-            label1.Size = new Size(100, 20);
-            label1.TabIndex = 4;
-            label1.Text = "Clima: Chuva";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
+            lbQualificacaoClima.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            lbQualificacaoClima.ImageAlign = ContentAlignment.MiddleLeft;
+            lbQualificacaoClima.Location = new Point(50, 45);
+            lbQualificacaoClima.Margin = new Padding(0);
+            lbQualificacaoClima.Name = "lbQualificacaoClima";
+            lbQualificacaoClima.Padding = new Padding(5, 0, 0, 0);
+            lbQualificacaoClima.Size = new Size(100, 20);
+            lbQualificacaoClima.TabIndex = 4;
+            lbQualificacaoClima.Text = "Clima: Chuva";
+            lbQualificacaoClima.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel4
             // 
@@ -281,8 +281,8 @@
         private PictureBox pictureBoxPaisGP;
         private ProgressBar progressBarQualificacao;
         private Label labelTreinoCorrida;
-        private Label label2;
+        private Label lbQualificacaoVoltas;
         private PictureBox pictureBox1;
-        private Label label1;
+        private Label lbQualificacaoClima;
     }
 }

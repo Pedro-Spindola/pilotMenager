@@ -23,6 +23,7 @@ namespace Pilot_Menager
         string listcategoria = "";
         Random random = new Random();
         private int btnclick = 0;
+        private int numberVoltasF = 0, numberVoltasT = 0;
         Color corPrincipal;
         Color corSecundaria;
         Color corTexto;
@@ -68,6 +69,9 @@ namespace Pilot_Menager
             labelNomePais.Text = principal.ProxGPais;
             labelSemanaGP.Text = string.Format("Semana {0:D2} / {1}", principal.ProxGPSemana, principal.ContadorDeAno);
             pictureBoxPaisGP.ImageLocation = Path.Combine("Paises", principal.ProxGP + ".png");
+            lbQualificacaoClima.Text = string.Format("Clima: ");
+            numberVoltasT = principal.ProxGPVoltas;
+            lbQualificacaoVoltas.Text = string.Format("Voltas: " + numberVoltasF + " / " + numberVoltasT);
 
             if (principal.CorTexto == "Branco")
             {
@@ -96,6 +100,9 @@ namespace Pilot_Menager
             panel1.BackColor = corPrincipal;
             panel2.BackColor = corSecundaria;
             panel3.BackColor = corSecundaria;
+        }
+        private void contadorDeVoltas() {
+            lbQualificacaoVoltas.Text = string.Format("Voltas: " + numberVoltasF + " / " + numberVoltasT);
         }
         private void AtualizarTabelasQualificacaoVoltas(DataGridView dvgTableQualificacaoF1)
         {
@@ -596,9 +603,9 @@ namespace Pilot_Menager
             }
             else if (btnclick == 3)
             {
-                progressBarQualificacao.Maximum = pistas[principal.EtapaAtual].NumerosDeVoltas;
+                progressBarQualificacao.Maximum = numberVoltasT;
                 // Vai executar as voltas da cominha corrida.
-                for (int i = 1; i <= pistas[principal.EtapaAtual].NumerosDeVoltas; i++)
+                for (int i = 1; i <= numberVoltasT; i++)
                 {
                     // Distribui as vantagem da classificação
                     if (i == 1)
@@ -694,6 +701,8 @@ namespace Pilot_Menager
                     AtualizarTabelasCorridaVoltas(dvgTableF1);
                     await Task.Delay(principal.TempoRodada);
                     progressBarQualificacao.Value = i;
+                    numberVoltasF = i;
+                    contadorDeVoltas();
                 }
                 // Vai executar a ordem das voltas mais rapida dos pilotos.
                 for (int i = 0; i < pilotos.Length; i++)
@@ -829,6 +838,7 @@ namespace Pilot_Menager
                     pilotos[j].DiferancaAnt = 0;
                     pilotos[j].DiferancaPri = 0;
                 }
+                MessageBox.Show(equipes[0].PontosCampeonato.ToString() + " - " + equipes[0].PrimeiroColocado.ToString());
                 this.Close();
             }
         }
@@ -1092,7 +1102,7 @@ namespace Pilot_Menager
             int atributo06 = (m3 + importanciPiloto);
             int atributo07 = (m3 + importanciaCarro);
 
-            int somaDosAtributos = (((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07) * 10)+r.Next(0,10));
+            int somaDosAtributos = (((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07) * 10) + r.Next(0, 10));
 
             int volta = ((tempoBase + t) - somaDosAtributos);
 

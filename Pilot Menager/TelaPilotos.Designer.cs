@@ -32,6 +32,8 @@
             panel17 = new Panel();
             dvgTelaPilotoExibirTodosPilotos = new DataGridView();
             panel1 = new Panel();
+            TpHabPiloto = new Label();
+            label13 = new Label();
             TpLabelCor1 = new Label();
             TpPaisPiloto = new Label();
             TpIdadePiloto = new Label();
@@ -114,6 +116,8 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(230, 240, 240);
+            panel1.Controls.Add(TpHabPiloto);
+            panel1.Controls.Add(label13);
             panel1.Controls.Add(TpLabelCor1);
             panel1.Controls.Add(TpPaisPiloto);
             panel1.Controls.Add(TpIdadePiloto);
@@ -127,6 +131,29 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(390, 100);
             panel1.TabIndex = 12;
+            // 
+            // TpHabPiloto
+            // 
+            TpHabPiloto.Anchor = AnchorStyles.None;
+            TpHabPiloto.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            TpHabPiloto.Location = new Point(265, 75);
+            TpHabPiloto.Margin = new Padding(0);
+            TpHabPiloto.Name = "TpHabPiloto";
+            TpHabPiloto.Size = new Size(100, 25);
+            TpHabPiloto.TabIndex = 29;
+            TpHabPiloto.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            label13.Anchor = AnchorStyles.None;
+            label13.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.Location = new Point(240, 50);
+            label13.Margin = new Padding(0);
+            label13.Name = "label13";
+            label13.Size = new Size(150, 25);
+            label13.TabIndex = 28;
+            label13.Text = "HABILIDADE";
+            label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // TpLabelCor1
             // 
@@ -142,18 +169,18 @@
             // TpPaisPiloto
             // 
             TpPaisPiloto.Anchor = AnchorStyles.None;
-            TpPaisPiloto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpPaisPiloto.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TpPaisPiloto.Location = new Point(110, 75);
             TpPaisPiloto.Margin = new Padding(0);
             TpPaisPiloto.Name = "TpPaisPiloto";
-            TpPaisPiloto.Size = new Size(100, 25);
+            TpPaisPiloto.Size = new Size(155, 25);
             TpPaisPiloto.TabIndex = 25;
             TpPaisPiloto.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TpIdadePiloto
             // 
             TpIdadePiloto.Anchor = AnchorStyles.None;
-            TpIdadePiloto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpIdadePiloto.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TpIdadePiloto.Location = new Point(110, 50);
             TpIdadePiloto.Margin = new Padding(0);
             TpIdadePiloto.Name = "TpIdadePiloto";
@@ -164,7 +191,7 @@
             // TpNomeCompletoPiloto
             // 
             TpNomeCompletoPiloto.Anchor = AnchorStyles.None;
-            TpNomeCompletoPiloto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpNomeCompletoPiloto.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TpNomeCompletoPiloto.Location = new Point(110, 25);
             TpNomeCompletoPiloto.Margin = new Padding(0);
             TpNomeCompletoPiloto.Name = "TpNomeCompletoPiloto";
@@ -724,5 +751,7 @@
         private Label label14;
         private DataGridView dgvTelaPilotoExibirHistoricoPiloto;
         private Label label7;
+        private Label TpHabPiloto;
+        private Label label13;
     }
 }

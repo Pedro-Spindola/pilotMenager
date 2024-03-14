@@ -9,6 +9,7 @@ namespace Pilot_Menager
     internal class Pilotos
     {
         // Métodos
+
         private string nacionalidadePiloto = "";
         private string nomePiloto = "";
         private string sobrenomePiloto = "";
@@ -16,6 +17,7 @@ namespace Pilot_Menager
         private string contratoPiloto = "";
         private string equipePiloto = "";
         private string categoria = "";
+        private int posicaoAtualCampeonato;
         private int idadePiloto;
         private int augePiloto;
         private int aposentadoriaPiloto;
@@ -173,6 +175,24 @@ namespace Pilot_Menager
 
             mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
         }
+
+        public List<Pilotos.PilotoTemporadas> pilotosTemporadas = new List<Pilotos.PilotoTemporadas>();
+
+        // Método para adicionar um piloto campeão à lista
+        public void AdicionarPilotoCampeao(int position, int ano, string sede, int pontos, string cor1, string equipe, string catAtual)
+        {
+            pilotosTemporadas.Add(new Pilotos.PilotoTemporadas { Position = position,  Ano = ano, Sede = sede, Pontos = pontos, C1 = cor1, Equipe = equipe, CategoriaAtual = catAtual });
+        }
+        public class PilotoTemporadas
+        {
+            public int Position { get; set; }
+            public int Ano { get; set; }
+            public string Sede { get; set; }
+            public int Pontos { get; set; }
+            public string C1 { get; set; }
+            public string Equipe { get; set; }
+            public string CategoriaAtual { get; set; }
+        }
         // Get Set
         public string NacionalidadePiloto
         {
@@ -208,6 +228,11 @@ namespace Pilot_Menager
         {
             get { return categoria; }
             set { categoria = value; }
+        }
+        public int PosicaoAtualCampeonato
+        {
+            get { return posicaoAtualCampeonato; }
+            set { posicaoAtualCampeonato = value; }
         }
         public int IdadePiloto
         {

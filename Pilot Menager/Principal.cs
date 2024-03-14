@@ -29,6 +29,7 @@ namespace Pilot_Menager
         private string proxGPais = "";
         private int proxGPSemana = 0;
         private int etapaAtual = 0;
+        private int proxGPVoltas = 0;
 
         // Variavel sendo utilizada na Tela de Classificação.
         public string categoria = "";
@@ -236,6 +237,11 @@ namespace Pilot_Menager
         {
             get { return proxGPSemana; }
             set { proxGPSemana = value; }
+        }
+        public int ProxGPVoltas
+        {
+            get { return proxGPVoltas; }
+            set { proxGPVoltas = value; }
         }
         public int EtapaAtual
         {

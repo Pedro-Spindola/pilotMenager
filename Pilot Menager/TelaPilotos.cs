@@ -45,6 +45,7 @@ namespace Pilot_Menager
                 TpNomeCompletoPiloto.Text = pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto;
                 TpIdadePiloto.Text = pilotos[i].IdadePiloto.ToString() + " Anos";
                 TpPaisPiloto.Text = pilotos[i].NacionalidadePiloto;
+                TpHabPiloto.Text = pilotos[i].MediaPiloto.ToString();
 
                 TpLargada.Text = pilotos[i].Largada.ToString();
                 TpConcentracao.Text = pilotos[i].Concentracao.ToString();
@@ -169,7 +170,95 @@ namespace Pilot_Menager
             // Limpe a seleção inicial
             dataGridViewPilotos.ClearSelection();
         }
+        private void CriarDataGridViewHistoricoDoPiloto(DataGridView dgv)
+        {
+            DataTable histoticoPiloto = new DataTable();
 
+            histoticoPiloto.Columns.Add("#", typeof(int));
+            histoticoPiloto.Columns.Add("Ano", typeof(int));
+            histoticoPiloto.Columns.Add("C1", typeof(string));
+            histoticoPiloto.Columns.Add("Equipe", typeof(string));
+            histoticoPiloto.Columns.Add("P", typeof(string));
+            histoticoPiloto.Columns.Add("Serie", typeof(string));
+
+            // Configurando Layout
+            dgv.RowHeadersVisible = false;
+            dgv.AllowUserToAddRows = false;
+            dgv.AllowUserToDeleteRows = false;
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeRows = false;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.ScrollBars = ScrollBars.Vertical;
+            dgv.AllowUserToAddRows = false;
+            dgv.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
+            dgv.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 255);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.GridColor = Color.FromArgb(220, 220, 220);
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgv.DataSource = histoticoPiloto;
+
+            // Altura das linhas
+            dgv.RowTemplate.Height = 26;
+            // Define a altura do cabeçalho das colunas
+            dgv.ColumnHeadersHeight = 30;
+
+            // Defina a ordem de exibiçao das colunas com base nos índices
+            dgv.Columns["#"].DisplayIndex = 0;
+            dgv.Columns["Ano"].DisplayIndex = 1;
+            dgv.Columns["C1"].DisplayIndex = 2;
+            dgv.Columns["Equipe"].DisplayIndex = 3;
+            dgv.Columns["P"].DisplayIndex = 4;
+            dgv.Columns["Serie"].DisplayIndex = 5;
+
+            dgv.Columns["C1"].HeaderText = string.Empty;
+
+            dgv.Columns[0].Width = 35;
+            dgv.Columns[1].Width = 45;
+            dgv.Columns[2].Width = 10;
+            dgv.Columns[3].Width = 140;
+            dgv.Columns[4].Width = 60;
+            dgv.Columns[5].Width = 100;
+        }
+        /*
+        private void PreencherDataGridViewHistoricoPilotos(List<Pilotos.PilotoTemporadas> pilotosTemporadas, DataGridView dgv)
+        {
+            DataTable histoticoPiloto = (DataTable)dgv.DataSource;
+
+            // Limpa as linhas do DataGridView
+            histoticoPiloto.Rows.Clear();
+
+            // Adiciona cada piloto campeão como uma nova linha no DataGridView
+            foreach (var piloto in pilotosTemporadas)
+            {
+                // Cria uma nova linha no DataTable
+                DataRow row = histoticoPiloto.NewRow();
+
+                row["Path"] = Path.Combine("Paises", piloto.Sede + ".png");
+                string path = row["Path"].ToString();
+
+                // Carrega a imagem da sede do piloto
+                Image sedeImage = Image.FromFile(path);
+
+                // Adiciona os dados do piloto à linha do DataGridView
+                row["#"] = piloto.;
+                row["Ano"] = piloto.Ano;
+                row["C1"] = sedeImage;
+                row["Equipe"] = piloto.Nome;
+                row["P"] = piloto.Pontos;
+                row["Serie"] = piloto.Equipe;
+
+                // Adiciona a linha ao DataTable
+                histoticoPiloto.Rows.Add(row);
+            }
+
+            // Define o DataTable como a fonte de dados do DataGridView
+            dgv.DataSource = histoticoPiloto;
+        }*/
         private void label7_Click(object sender, EventArgs e)
         {
             this.Close();

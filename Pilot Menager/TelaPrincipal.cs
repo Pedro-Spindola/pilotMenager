@@ -45,6 +45,7 @@ namespace Pilot_Menager
             {
                 CarregarDadosDosArquivos();
             }
+
             // Converte a string hexadecimal em um objeto Color
             principal.CorPrincipal = pilotos[0].Cor1;
             principal.CorSecundaria = pilotos[0].Cor2;
@@ -161,6 +162,7 @@ namespace Pilot_Menager
             principal.ProxGP = pistas[0].NomeGp;
             principal.ProxGPais = pistas[0].NomeCircuito;
             principal.ProxGPSemana = pistas[0].SemanaDaProva;
+            principal.ProxGPVoltas = pistas[0].NumerosDeVoltas;
 
         }
         public void dadosPistas()
@@ -198,24 +200,28 @@ namespace Pilot_Menager
                 principal.ProxGP = pistas[0].NomeGp;
                 principal.ProxGPais = pistas[0].NomeCircuito;
                 principal.ProxGPSemana = pistas[0].SemanaDaProva;
+                principal.ProxGPVoltas = pistas[0].NumerosDeVoltas;
             }
             else if (contador > 3 && contador <= 5)
             {
                 principal.ProxGP = pistas[1].NomeGp;
                 principal.ProxGPais = pistas[1].NomeCircuito;
                 principal.ProxGPSemana = pistas[1].SemanaDaProva;
+                principal.ProxGPVoltas = pistas[1].NumerosDeVoltas;
             }
             else if (contador > 5 && contador <= 8)
             {
                 principal.ProxGP = pistas[2].NomeGp;
                 principal.ProxGPais = pistas[2].NomeCircuito;
                 principal.ProxGPSemana = pistas[2].SemanaDaProva;
+                principal.ProxGPVoltas = pistas[2].NumerosDeVoltas;
             }
             else
             {
                 principal.ProxGP = "";
                 principal.ProxGPais = "";
                 principal.ProxGPSemana = 0;
+                principal.ProxGPVoltas = 0;
             }
 
         }
@@ -323,11 +329,19 @@ namespace Pilot_Menager
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            // Manipular o evento SortCompare para o DataGridView dgvClassEquipes
+            //dgvClassEquipes.SortCompare += (sender, e) => ManipulacaoClassificacaoCampeonatoEquipes(sender, e, dgvClassEquipes);
+
+            // Manipular o evento SortCompare para o DataGridView dgvClassPilotos
+            //dgvClassPilotos.SortCompare += (sender, e) => ManipulacaoClassificacaoCampeonatoPilotos(sender, e, dgvClassPilotos);
+
             // Ordene automaticamente a coluna 4 do maior para o menor
             dgvClassEquipes.Sort(dgvClassEquipes.Columns[4], ListSortDirection.Descending);
 
             // Ordene automaticamente a coluna 5 do maior para o menor
             dgvClassPilotos.Sort(dgvClassPilotos.Columns[5], ListSortDirection.Descending);
+
+
 
             for (int i = 0; i < dgvClassEquipes.Rows.Count; i++)
             {
@@ -374,6 +388,77 @@ namespace Pilot_Menager
             {
                 PreencherDataGridViewClassPilotos(20, 30);
                 PreencherDataGridViewClassEquipes(20, 30);
+            }
+        }
+        /*
+        private void ManipulacaoClassificacaoCampeonatoEquipes(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
+        {
+            MessageBox.Show("Aqui");
+            // Método de manipulação do evento SortCompare
+            if (e.Column.Index == 4) // Ordena pela coluna 4
+            {
+                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[4].Value);
+                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[4].Value);
+                e.SortResult = valorCelula1.CompareTo(valorCelula2);
+
+                if (e.SortResult == 0)
+                {
+                    // Se o valor da coluna 4 for igual, ordena pela coluna 5
+                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
+                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
+                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
+
+                    if (e.SortResult == 0)
+                    {
+                        // Se o valor da coluna 5 for igual, ordena pela coluna 6
+                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
+                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
+                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
+
+                        if (e.SortResult == 0)
+                        {
+                            // Se o valor da coluna 6 for igual, ordena pela coluna 7
+                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
+                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
+                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
+                        }
+                    }
+                }
+            }
+        }*/
+        private void ManipulacaoClassificacaoCampeonatoPilotos(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
+        {
+            // Método de manipulação do evento SortCompare
+            if (e.Column.Index == 5) // Ordena pela coluna 5
+            {
+                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
+                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
+                e.SortResult = valorCelula1.CompareTo(valorCelula2);
+
+                if (e.SortResult == 0)
+                {
+                    // Se o valor da coluna 5 for igual, ordena pela coluna 6
+                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
+                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
+                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
+
+                    if (e.SortResult == 0)
+                    {
+                        // Se o valor da coluna 6 for igual, ordena pela coluna 7
+                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
+                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
+                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
+
+                        if (e.SortResult == 0)
+                        {
+                            // Se o valor da coluna 7 for igual, ordena pela coluna 8
+                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[8].Value);
+                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[8].Value);
+                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
+                        }
+                    }
+                }
+                e.Handled = true; // Indica que a comparação foi tratada
             }
         }
         private void CriarDataGridViewClassEquipes()
@@ -894,16 +979,17 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(equipes[0].PontosCampeonato.ToString() + " - " + equipes[0].PrimeiroColocado.ToString());
+            /*
             TelaSettings telaSettings = new TelaSettings(principal);
             telaSettings.ShowDialog();
-            AtualizarCores();
+            AtualizarCores();*/
         }
         private void pictureBoxClassificacao_Click(object sender, EventArgs e)
         {
             TelaClassificacao telaClassificacao = new TelaClassificacao(principal, equipes, pilotos, pistas);
             telaClassificacao.ShowDialog();
         }
-
         private void pictureBoxPilotos_Click(object sender, EventArgs e)
         {
             TelaPilotos telaPilotos = new TelaPilotos(principal, equipes, pilotos, pistas);
