@@ -100,10 +100,10 @@ namespace Pilot_Menager
             }
 
             // Ordene automaticamente a coluna 3 do maior para o menor
-            dataGridViewEquipes.Sort(dataGridViewEquipes.Columns[4], ListSortDirection.Descending);
+            dataGridViewEquipes.Sort(dataGridViewEquipes.Columns[0], ListSortDirection.Ascending);
 
             // Ordene automaticamente a coluna 6 do maior para o menor
-            dataGridViewPilotos.Sort(dataGridViewPilotos.Columns[5], ListSortDirection.Descending);
+            dataGridViewPilotos.Sort(dataGridViewPilotos.Columns[0], ListSortDirection.Ascending);
 
             // Ordene automaticamente a coluna 0 do maior para o menor
             dvgTelaCampeosPiloto.Sort(dvgTelaCampeosPiloto.Columns[0], ListSortDirection.Descending);
@@ -137,7 +137,7 @@ namespace Pilot_Menager
             }
             for (int i = 0; i < dataGridViewEquipes.Rows.Count; i++)
             {
-                dataGridViewEquipes.Rows[i].Cells["#"].Value = i + 1;
+                //dataGridViewEquipes.Rows[i].Cells["#"].Value = i + 1;
                 // Obter os valores das células C1 e C2 como representações de texto das cores
                 string cor1Texto = dataGridViewEquipes.Rows[i].Cells["C1"].Value.ToString();
 
@@ -150,7 +150,7 @@ namespace Pilot_Menager
             }
             for (int i = 0; i < dataGridViewPilotos.Rows.Count; i++)
             {
-                dataGridViewPilotos.Rows[i].Cells["#"].Value = i + 1;
+                //dataGridViewPilotos.Rows[i].Cells["#"].Value = i + 1;
                 // Obter os valores das células C1 e C2 como representações de texto das cores
                 string cor1Texto = dataGridViewPilotos.Rows[i].Cells["C1"].Value.ToString();
 
@@ -165,76 +165,6 @@ namespace Pilot_Menager
             dvgTelaCampeosEquipes.ClearSelection();
             dataGridViewEquipes.ClearSelection();
             dataGridViewPilotos.ClearSelection();
-        }
-        private void ManipulacaoClassificacaoCampeonatoEquipes(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
-        {
-            // Método de manipulação do evento SortCompare
-            if (e.Column.Index == 4) // Ordena pela coluna 4
-            {
-                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[4].Value);
-                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[4].Value);
-                e.SortResult = valorCelula1.CompareTo(valorCelula2);
-
-                if (e.SortResult == 0)
-                {
-                    // Se o valor da coluna 4 for igual, ordena pela coluna 5
-                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
-                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
-                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
-
-                    if (e.SortResult == 0)
-                    {
-                        // Se o valor da coluna 5 for igual, ordena pela coluna 6
-                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
-                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
-                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
-
-                        if (e.SortResult == 0)
-                        {
-                            // Se o valor da coluna 6 for igual, ordena pela coluna 7
-                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
-                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
-                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
-                        }
-                    }
-                }
-                e.Handled = true; // Indica que a comparação foi tratada
-            }
-        }
-        private void ManipulacaoClassificacaoCampeonatoPilotos(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
-        {
-            // Método de manipulação do evento SortCompare
-            if (e.Column.Index == 5) // Ordena pela coluna 5
-            {
-                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
-                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
-                e.SortResult = valorCelula1.CompareTo(valorCelula2);
-
-                if (e.SortResult == 0)
-                {
-                    // Se o valor da coluna 5 for igual, ordena pela coluna 6
-                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
-                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
-                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
-
-                    if (e.SortResult == 0)
-                    {
-                        // Se o valor da coluna 6 for igual, ordena pela coluna 7
-                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
-                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
-                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
-
-                        if (e.SortResult == 0)
-                        {
-                            // Se o valor da coluna 7 for igual, ordena pela coluna 8
-                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[8].Value);
-                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[8].Value);
-                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
-                        }
-                    }
-                }
-                e.Handled = true; // Indica que a comparação foi tratada
-            }
         }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
         {
@@ -331,6 +261,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["#"] = pilotos[i].PosicaoAtualCampeonato;
                         row["C1"] = pilotos[i].Cor1;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["Equipe"] = pilotos[i].EquipePiloto;
@@ -441,6 +372,7 @@ namespace Pilot_Menager
             for (int i = equipeMin; i < equipeMax; i++)
             {
                 DataRow row = classEquipes.NewRow();
+                row["#"] = equipes[i].PosicaoAtualCampeonato;
                 row["C1"] = equipes[i].Cor1;
                 row["Nome"] = equipes[i].NomeEquipe;
                 row["P"] = equipes[i].PontosCampeonato;

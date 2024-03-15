@@ -32,9 +32,9 @@ namespace Pilot_Menager
         {
             CriarDataGridViewClassPilotos(dvgTelaPilotoExibirTodosPilotos);
             PreencherDataGridViewClassPilotos(dvgTelaPilotoExibirTodosPilotos);
+            CriarDataGridViewHistoricoDoPiloto(dgvTelaPilotoExibirHistoricoPiloto);
+
         }
-
-
         private void DataGridViewPilotos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -55,6 +55,13 @@ namespace Pilot_Menager
                 TpChuva.Text = pilotos[i].Chuva.ToString();
                 TpAcertoDoCarro.Text = pilotos[i].AcertoDoCarro.ToString();
                 TpFisico.Text = pilotos[i].Fisico.ToString();
+
+                TpSalarioPiloto.Text = string.Format("R$ {0:N2}", pilotos[i].SalarioPiloto);
+                TpStatusPiloto.Text = pilotos[i].StatusPiloto;
+                TpDuracaoPiloto.Text = string.Format("{0} Anos", pilotos[i].ContratoPiloto);
+
+                PreencherDataGridViewHistoricoPilotos(pilotos[i].pilotosTemporadas, dgvTelaPilotoExibirHistoricoPiloto);
+                AtualizarTabelas(dgvTelaPilotoExibirHistoricoPiloto);
             }
         }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
@@ -224,7 +231,6 @@ namespace Pilot_Menager
             dgv.Columns[4].Width = 60;
             dgv.Columns[5].Width = 100;
         }
-        /*
         private void PreencherDataGridViewHistoricoPilotos(List<Pilotos.PilotoTemporadas> pilotosTemporadas, DataGridView dgv)
         {
             DataTable histoticoPiloto = (DataTable)dgv.DataSource;
@@ -238,19 +244,14 @@ namespace Pilot_Menager
                 // Cria uma nova linha no DataTable
                 DataRow row = histoticoPiloto.NewRow();
 
-                row["Path"] = Path.Combine("Paises", piloto.Sede + ".png");
-                string path = row["Path"].ToString();
-
-                // Carrega a imagem da sede do piloto
-                Image sedeImage = Image.FromFile(path);
 
                 // Adiciona os dados do piloto à linha do DataGridView
-                row["#"] = piloto.;
+                row["#"] = piloto.Position;
                 row["Ano"] = piloto.Ano;
-                row["C1"] = sedeImage;
-                row["Equipe"] = piloto.Nome;
+                row["C1"] = piloto.C1;
+                row["Equipe"] = piloto.Equipe;
                 row["P"] = piloto.Pontos;
-                row["Serie"] = piloto.Equipe;
+                row["Serie"] = piloto.CategoriaAtual;
 
                 // Adiciona a linha ao DataTable
                 histoticoPiloto.Rows.Add(row);
@@ -258,7 +259,33 @@ namespace Pilot_Menager
 
             // Define o DataTable como a fonte de dados do DataGridView
             dgv.DataSource = histoticoPiloto;
-        }*/
+        }
+        public void AtualizarTabelas(DataGridView dgv)
+        {
+            DataTable histoticoPiloto = (DataTable)dgv.DataSource;
+
+            // Desative a opção de ordenação em todas as colunas
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            // Ordene automaticamente a coluna 4 do maior para o menor
+            dgv.Sort(dgv.Columns[1], ListSortDirection.Ascending);
+
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dgv.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dgv.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dgv.Rows[i].Cells["C1"].Style.ForeColor = cor1;
+            }
+            dgv.ClearSelection();
+        }
         private void label7_Click(object sender, EventArgs e)
         {
             this.Close();

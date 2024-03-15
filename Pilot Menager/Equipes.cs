@@ -32,7 +32,7 @@ namespace Pilot_Menager
         private int direcao;
         private int confiabilidade;
         private int mediaEquipe;
-        private int valorDoMotor; // Propriedade para o valor do motor da equipe
+        private int valorDoMotor; // Propriedade para o valor do motor da equipe.
         private string nameMotor;
         private Pilotos primeiroPiloto;
         private Pilotos segundoPiloto;

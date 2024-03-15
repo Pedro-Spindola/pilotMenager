@@ -18,7 +18,7 @@ namespace Pilot_Menager
         private string sobrenomeJogador = "";
         private int idadeJogador = 18;              
         private string nacionalidadeJogador = "";
-        private int habilidadeJogador = 32;             // Deverá gerar de forma aleatoria.
+        private int habilidadeJogador = 32;
 
         private int contadorDeSemana = 01;
         private int contadorDeAno = 2024;

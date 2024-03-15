@@ -42,7 +42,6 @@
             labelSaldoNaConta = new Label();
             panel7 = new Panel();
             pictureBoxNacionalidadePiloto = new PictureBox();
-            labelHabilidadeJogador = new Label();
             labelIdadeJogador = new Label();
             labelNomeJogador = new Label();
             panel6 = new Panel();
@@ -232,7 +231,6 @@
             // 
             panel7.BackColor = Color.Transparent;
             panel7.Controls.Add(pictureBoxNacionalidadePiloto);
-            panel7.Controls.Add(labelHabilidadeJogador);
             panel7.Controls.Add(labelIdadeJogador);
             panel7.Controls.Add(labelNomeJogador);
             panel7.Location = new Point(550, 0);
@@ -250,18 +248,6 @@
             pictureBoxNacionalidadePiloto.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBoxNacionalidadePiloto.TabIndex = 4;
             pictureBoxNacionalidadePiloto.TabStop = false;
-            // 
-            // labelHabilidadeJogador
-            // 
-            labelHabilidadeJogador.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            labelHabilidadeJogador.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelHabilidadeJogador.Location = new Point(200, 50);
-            labelHabilidadeJogador.Margin = new Padding(0);
-            labelHabilidadeJogador.Name = "labelHabilidadeJogador";
-            labelHabilidadeJogador.Size = new Size(90, 30);
-            labelHabilidadeJogador.TabIndex = 3;
-            labelHabilidadeJogador.Text = "00";
-            labelHabilidadeJogador.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // labelIdadeJogador
             // 
@@ -842,7 +828,6 @@
         private Label labelGpDoPais;
         private Label labelStatusTemporada;
         private PictureBox pictureBoxBtnContinuar;
-        private Label labelHabilidadeJogador;
         private PictureBox pictureBoxNacionalidadePiloto;
         private Panel panel10;
         private Panel panel4;

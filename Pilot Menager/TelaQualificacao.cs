@@ -838,8 +838,115 @@ namespace Pilot_Menager
                     pilotos[j].DiferancaAnt = 0;
                     pilotos[j].DiferancaPri = 0;
                 }
-                MessageBox.Show(equipes[0].PontosCampeonato.ToString() + " - " + equipes[0].PrimeiroColocado.ToString());
+                MetodoParaQualificarEquipes(0, 10);
+                MetodoParaQualificarEquipes(10, 20);
+                MetodoParaQualificarEquipes(20, 30);
+                MetodoParaQualificarPilotos("F1");
+                MetodoParaQualificarPilotos("F2");
+                MetodoParaQualificarPilotos("F3");
                 this.Close();
+            }
+        }
+        private void MetodoParaQualificarEquipes(int equipeMin, int equipeMax)
+        {
+            for (int i = equipeMin; i < equipeMax; i++)
+            {
+                equipes[i].PosicaoAtualCampeonato = 1;
+                for (int j = equipeMin; j < equipeMax; j++)
+                {
+                    if (i != j)
+                    {
+                        if (equipes[i].PontosCampeonato <= equipes[j].PontosCampeonato)
+                        {
+                            if (equipes[i].PontosCampeonato == equipes[j].PontosCampeonato)
+                            {
+                                if (equipes[i].PrimeiroColocado == equipes[j].PrimeiroColocado)
+                                {
+                                    if (equipes[i].SegundoColocado == equipes[j].SegundoColocado)
+                                    {
+                                        if (equipes[i].TerceiroColocado == equipes[j].TerceiroColocado)
+                                        {
+                                            if (i > j)
+                                            {
+                                                equipes[i].PosicaoAtualCampeonato++;
+                                            }
+                                        }
+                                        else if (equipes[i].TerceiroColocado < equipes[j].TerceiroColocado)
+                                        {
+                                            equipes[i].PosicaoAtualCampeonato++;
+                                        }
+                                    }
+                                    else if (equipes[i].SegundoColocado < equipes[j].SegundoColocado)
+                                    {
+                                        equipes[i].PosicaoAtualCampeonato++;
+                                    }
+                                }
+                                else if (equipes[i].PrimeiroColocado < equipes[j].PrimeiroColocado)
+                                {
+                                    equipes[i].PosicaoAtualCampeonato++;
+                                }
+                            }
+                            else if (equipes[i].PontosCampeonato < equipes[j].PontosCampeonato)
+                            {
+                                equipes[i].PosicaoAtualCampeonato++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void MetodoParaQualificarPilotos(string fCategoria)
+        {
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                if (pilotos[i].Categoria == fCategoria)
+                {
+                    pilotos[i].PosicaoAtualCampeonato = 1;
+                    for (int j = 0; j < pilotos.Length; j++)
+                    {
+                        if (pilotos[j].Categoria == fCategoria)
+                        {
+                            if (i != j)
+                            {
+                                if (pilotos[i].PontosCampeonato <= pilotos[j].PontosCampeonato)
+                                {
+                                    if (pilotos[i].PontosCampeonato == pilotos[j].PontosCampeonato)
+                                    {
+                                        if (pilotos[i].PrimeiroColocado == pilotos[j].PrimeiroColocado)
+                                        {
+                                            if (pilotos[i].SegundoColocado == pilotos[j].SegundoColocado)
+                                            {
+                                                if (pilotos[i].TerceiroColocado == pilotos[j].TerceiroColocado)
+                                                {
+                                                    if (i > j)
+                                                    {
+                                                        pilotos[i].PosicaoAtualCampeonato++;
+                                                    }
+                                                }
+                                                else if (pilotos[i].TerceiroColocado < pilotos[j].TerceiroColocado)
+                                                {
+                                                    pilotos[i].PosicaoAtualCampeonato++;
+                                                }
+                                            }
+                                            else if (pilotos[i].SegundoColocado < pilotos[j].SegundoColocado)
+                                            {
+                                                pilotos[i].PosicaoAtualCampeonato++;
+                                            }
+                                        }
+                                        else if (pilotos[i].PrimeiroColocado < pilotos[j].PrimeiroColocado)
+                                        {
+                                            pilotos[i].PosicaoAtualCampeonato++;
+                                        }
+                                    }
+                                    else if (pilotos[i].PontosCampeonato < pilotos[j].PontosCampeonato)
+                                    {
+                                        pilotos[i].PosicaoAtualCampeonato++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         private void FuncaoParaRealizarSemanaDeCorridaCPU(int equipeF1Min, int equipeF1Max, string fCategoria)

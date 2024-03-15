@@ -14,7 +14,8 @@ namespace Pilot_Menager
         private string nomePiloto = "";
         private string sobrenomePiloto = "";
         private string statusPiloto = "Disponivel";
-        private string contratoPiloto = "";
+        private int salarioPiloto = 0;
+        private int contratoPiloto = 0;
         private string equipePiloto = "";
         private string categoria = "";
         private int posicaoAtualCampeonato;
@@ -179,18 +180,17 @@ namespace Pilot_Menager
         public List<Pilotos.PilotoTemporadas> pilotosTemporadas = new List<Pilotos.PilotoTemporadas>();
 
         // Método para adicionar um piloto campeão à lista
-        public void AdicionarPilotoCampeao(int position, int ano, string sede, int pontos, string cor1, string equipe, string catAtual)
+        public void AdicionarPilotoCampeao(int position, int ano, string cor1, string equipe, int pontos, string catAtual)
         {
-            pilotosTemporadas.Add(new Pilotos.PilotoTemporadas { Position = position,  Ano = ano, Sede = sede, Pontos = pontos, C1 = cor1, Equipe = equipe, CategoriaAtual = catAtual });
+            pilotosTemporadas.Add(new Pilotos.PilotoTemporadas { Position = position,  Ano = ano, C1 = cor1, Equipe = equipe, Pontos = pontos, CategoriaAtual = catAtual });
         }
         public class PilotoTemporadas
         {
             public int Position { get; set; }
             public int Ano { get; set; }
-            public string Sede { get; set; }
-            public int Pontos { get; set; }
             public string C1 { get; set; }
             public string Equipe { get; set; }
+            public int Pontos { get; set; }
             public string CategoriaAtual { get; set; }
         }
         // Get Set
@@ -209,12 +209,17 @@ namespace Pilot_Menager
             get { return sobrenomePiloto; }
             set { sobrenomePiloto = value; }
         }
+        public int SalarioPiloto
+        {
+            get { return salarioPiloto; }
+            set { salarioPiloto = value; }
+        }
         public string StatusPiloto
         {
             get { return statusPiloto; }
             set { statusPiloto = value; }
         }
-        public string ContratoPiloto
+        public int ContratoPiloto
         {
             get { return contratoPiloto; }
             set { contratoPiloto = value; }

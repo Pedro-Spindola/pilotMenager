@@ -40,12 +40,17 @@ namespace Pilot_Menager
             if (principal.ConfigInicioGame == 1)
             {
                 IniciarNovoGame();
+                MetodoParaQualificarEquipes(0, 10);
+                MetodoParaQualificarEquipes(10, 20);
+                MetodoParaQualificarEquipes(20, 30);
+                MetodoParaQualificarPilotos("F1");
+                MetodoParaQualificarPilotos("F2");
+                MetodoParaQualificarPilotos("F3");
             }
             else if (principal.ConfigInicioGame == 2)
             {
                 CarregarDadosDosArquivos();
             }
-
             // Converte a string hexadecimal em um objeto Color
             principal.CorPrincipal = pilotos[0].Cor1;
             principal.CorSecundaria = pilotos[0].Cor2;
@@ -124,10 +129,11 @@ namespace Pilot_Menager
             equipes[0].PrimeiroPiloto = pilotos[0];
             pilotos[0].EquipePiloto = equipes[0].NomeEquipe;
             pilotos[0].StatusPiloto = "1º Piloto";
-            pilotos[0].ContratoPiloto = "2 anos";
+            pilotos[0].ContratoPiloto = random.Next(1, 4);
             pilotos[0].Cor1 = equipes[0].Cor1;
             pilotos[0].Cor2 = equipes[0].Cor2;
             pilotos[0].Categoria = equipes[0].Categoria;
+            pilotos[0].SalarioPiloto = random.Next(100000, 1000000);
 
             for (int i = 1; i < (equipes.Length * 2); i++)
             {
@@ -139,20 +145,22 @@ namespace Pilot_Menager
                     equipe.PrimeiroPiloto = pilotos[i];
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "1º Piloto";
-                    pilotos[i].ContratoPiloto = "2 anos";
+                    pilotos[i].ContratoPiloto = random.Next(1, 4);
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
+                    pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
                 }
                 else
                 {
                     equipe.SegundoPiloto = pilotos[i];
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "2º Piloto";
-                    pilotos[i].ContratoPiloto = "1 anos";
+                    pilotos[i].ContratoPiloto = random.Next(1, 4);
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
+                    pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
                 }
             }
             dadosPistas();
@@ -287,7 +295,6 @@ namespace Pilot_Menager
         {
             labelNomeJogador.Text = string.Format("{0} {1}", principal.NomeJogador, principal.SobrenomeJogador);
             labelIdadeJogador.Text = string.Format("Idade: {0:N0}", principal.IdadeJogador.ToString());
-            labelHabilidadeJogador.Text = string.Format("Hab: {0:N0}", principal.HabilidadeJogador.ToString());
             pictureBoxNacionalidadePiloto.ImageLocation = Path.Combine("Paises", principal.NacionalidadeJogador + ".png");
         }
         private void AtualizarFinancias()
@@ -329,23 +336,17 @@ namespace Pilot_Menager
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            // Manipular o evento SortCompare para o DataGridView dgvClassEquipes
-            //dgvClassEquipes.SortCompare += (sender, e) => ManipulacaoClassificacaoCampeonatoEquipes(sender, e, dgvClassEquipes);
-
-            // Manipular o evento SortCompare para o DataGridView dgvClassPilotos
-            //dgvClassPilotos.SortCompare += (sender, e) => ManipulacaoClassificacaoCampeonatoPilotos(sender, e, dgvClassPilotos);
-
             // Ordene automaticamente a coluna 4 do maior para o menor
-            dgvClassEquipes.Sort(dgvClassEquipes.Columns[4], ListSortDirection.Descending);
+            dgvClassEquipes.Sort(dgvClassEquipes.Columns[0], ListSortDirection.Ascending);
 
             // Ordene automaticamente a coluna 5 do maior para o menor
-            dgvClassPilotos.Sort(dgvClassPilotos.Columns[5], ListSortDirection.Descending);
+            dgvClassPilotos.Sort(dgvClassPilotos.Columns[0], ListSortDirection.Ascending);
 
 
 
             for (int i = 0; i < dgvClassEquipes.Rows.Count; i++)
             {
-                dgvClassEquipes.Rows[i].Cells["#"].Value = i + 1;
+                //dgvClassEquipes.Rows[i].Cells["#"].Value = i + 1;
                 // Obter os valores das células C1 e C2 como representações de texto das cores
                 string cor1Texto = dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString();
 
@@ -358,7 +359,7 @@ namespace Pilot_Menager
             }
             for (int i = 0; i < dgvClassPilotos.Rows.Count; i++)
             {
-                dgvClassPilotos.Rows[i].Cells["#"].Value = i + 1;
+                // dgvClassPilotos.Rows[i].Cells["#"].Value = i + 1;
                 // Obter os valores das células C1 e C2 como representações de texto das cores
                 string cor1Texto = dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString();
 
@@ -378,87 +379,19 @@ namespace Pilot_Menager
             {
                 PreencherDataGridViewClassEquipes(0, 10);
                 PreencherDataGridViewClassPilotos(0, 10);
+                AtualizarTabelas();
             }
             else if (pilotos[0].Categoria == "F2")
             {
                 PreencherDataGridViewClassPilotos(10, 20);
                 PreencherDataGridViewClassEquipes(10, 20);
+                AtualizarTabelas();
             }
             else if (pilotos[0].Categoria == "F3")
             {
                 PreencherDataGridViewClassPilotos(20, 30);
                 PreencherDataGridViewClassEquipes(20, 30);
-            }
-        }
-        /*
-        private void ManipulacaoClassificacaoCampeonatoEquipes(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
-        {
-            MessageBox.Show("Aqui");
-            // Método de manipulação do evento SortCompare
-            if (e.Column.Index == 4) // Ordena pela coluna 4
-            {
-                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[4].Value);
-                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[4].Value);
-                e.SortResult = valorCelula1.CompareTo(valorCelula2);
-
-                if (e.SortResult == 0)
-                {
-                    // Se o valor da coluna 4 for igual, ordena pela coluna 5
-                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
-                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
-                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
-
-                    if (e.SortResult == 0)
-                    {
-                        // Se o valor da coluna 5 for igual, ordena pela coluna 6
-                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
-                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
-                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
-
-                        if (e.SortResult == 0)
-                        {
-                            // Se o valor da coluna 6 for igual, ordena pela coluna 7
-                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
-                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
-                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
-                        }
-                    }
-                }
-            }
-        }*/
-        private void ManipulacaoClassificacaoCampeonatoPilotos(object sender, DataGridViewSortCompareEventArgs e, DataGridView dataGridView)
-        {
-            // Método de manipulação do evento SortCompare
-            if (e.Column.Index == 5) // Ordena pela coluna 5
-            {
-                int valorCelula1 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[5].Value);
-                int valorCelula2 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[5].Value);
-                e.SortResult = valorCelula1.CompareTo(valorCelula2);
-
-                if (e.SortResult == 0)
-                {
-                    // Se o valor da coluna 5 for igual, ordena pela coluna 6
-                    int valorCelula3 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[6].Value);
-                    int valorCelula4 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[6].Value);
-                    e.SortResult = valorCelula3.CompareTo(valorCelula4);
-
-                    if (e.SortResult == 0)
-                    {
-                        // Se o valor da coluna 6 for igual, ordena pela coluna 7
-                        int valorCelula5 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[7].Value);
-                        int valorCelula6 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[7].Value);
-                        e.SortResult = valorCelula5.CompareTo(valorCelula6);
-
-                        if (e.SortResult == 0)
-                        {
-                            // Se o valor da coluna 7 for igual, ordena pela coluna 8
-                            int valorCelula7 = Convert.ToInt32(dataGridView.Rows[e.RowIndex1].Cells[8].Value);
-                            int valorCelula8 = Convert.ToInt32(dataGridView.Rows[e.RowIndex2].Cells[8].Value);
-                            e.SortResult = valorCelula7.CompareTo(valorCelula8);
-                        }
-                    }
-                }
-                e.Handled = true; // Indica que a comparação foi tratada
+                AtualizarTabelas();
             }
         }
         private void CriarDataGridViewClassEquipes()
@@ -549,6 +482,7 @@ namespace Pilot_Menager
             {
                 DataRow row = classEquipes.NewRow();
 
+                row["#"] = equipes[i].PosicaoAtualCampeonato;
                 row["C1"] = equipes[i].Cor1;
                 row["Nome"] = equipes[i].NomeEquipe;
                 row["P"] = equipes[i].PontosCampeonato;
@@ -572,41 +506,6 @@ namespace Pilot_Menager
             dgvClassEquipes.DataSource = classEquipes;
 
             // Limpe a seleção inicial
-            dgvClassEquipes.ClearSelection();
-        }
-        private void AtualizarDataGridViewClassEquipes()
-        {
-            // Primeiro, atualize os dados no DataTable
-            DataTable classEquipes = (DataTable)dgvClassEquipes.DataSource;
-
-            // Limpe todas as linhas existentes no DataTable
-            classEquipes.Rows.Clear();
-
-            // Em seguida, preencha o DataTable com os novos dados
-            for (int i = 0; i < equipes.Length; i++)
-            {
-                DataRow row = classEquipes.NewRow();
-                row["Nome"] = equipes[i].NomeEquipe;
-                row["P"] = equipes[i].PontosCampeonato;
-                row["1º"] = equipes[i].PrimeiroColocado;
-                row["2º"] = equipes[i].SegundoColocado;
-                row["3º"] = equipes[i].TerceiroColocado;
-                row["Path"] = Path.Combine("Paises", equipes[i].Sede + ".png");
-                classEquipes.Rows.Add(row);
-            }
-            // Percorra as linhas da tabela classF1
-            foreach (DataRow row in classEquipes.Rows)
-            {
-                string imagePath = row["Path"].ToString();
-                if (!string.IsNullOrEmpty(imagePath)) // Verifica se o caminho do arquivo n�o est� vazio
-                {
-                    row["Sede"] = Image.FromFile(imagePath);
-                }
-            }
-            // Por fim, atualize o DataSource do DataGridView para refletir as mudan�as
-            dgvClassEquipes.DataSource = classEquipes;
-
-            // Limpe a sele��o inicial
             dgvClassEquipes.ClearSelection();
         }
         private void CriarDataGridViewClassPilotos()
@@ -708,6 +607,7 @@ namespace Pilot_Menager
                 {
                     if (equipes[k].NomeEquipe == pilotos[i].EquipePiloto)
                     {
+                        row["#"] = pilotos[i].PosicaoAtualCampeonato;
                         row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                         row["C1"] = pilotos[i].Cor1;
                         row["Equipe"] = pilotos[i].EquipePiloto;
@@ -736,42 +636,7 @@ namespace Pilot_Menager
             // Limpe a sele��o inicial
             dgvClassPilotos.ClearSelection();
         }
-        private void AtualizarDataGridViewClassPilotos()
-        {
-            DataTable classPilotos = (DataTable)dgvClassPilotos.DataSource;
-
-            // Limpe todas as linhas existentes no DataTable
-            classPilotos.Rows.Clear();
-
-            // Percorra o array de equipes usando um loop for
-            for (int i = 0; i < pilotos.Length; i++)
-            {
-                DataRow row = classPilotos.NewRow();
-
-                row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
-                row["Equipe"] = pilotos[i].EquipePiloto;
-                row["P"] = pilotos[i].PontosCampeonato;
-                row["1º"] = pilotos[i].PrimeiroColocado;
-                row["2º"] = pilotos[i].SegundoColocado;
-                row["3º"] = pilotos[i].TerceiroColocado;
-                row["Path"] = Path.Combine("Paises", pilotos[i].NacionalidadePiloto + ".png");
-
-                classPilotos.Rows.Add(row);
-            }
-            // Percorra as linhas da tabela classF1
-            foreach (DataRow row in classPilotos.Rows)
-            {
-                string imagePath = row["Path"].ToString();
-                row["Nac"] = Image.FromFile(imagePath);
-
-            }
-            // Atualize o DataGridView para refletir as mudan�as
-            dgvClassPilotos.DataSource = classPilotos;
-
-            // Limpe a sele��o inicial
-            dgvClassPilotos.ClearSelection();
-        }
-        private void FinalDeTemporadaDataBase(string cata)
+        private void FinalDeTemporadaDataBaseCampeoes(string cata)
         {
             DataTable classEquipes = (DataTable)dgvClassEquipes.DataSource;
             DataTable classPilotos = (DataTable)dgvClassPilotos.DataSource;
@@ -781,32 +646,50 @@ namespace Pilot_Menager
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
             // Desative a opção de ordenação em todas as colunas
             foreach (DataGridViewColumn column in dgvClassPilotos.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
             // Ordene automaticamente a coluna 4 do maior para o menor
-            dgvClassEquipes.Sort(dgvClassEquipes.Columns[4], ListSortDirection.Descending);
+            dgvClassEquipes.Sort(dgvClassEquipes.Columns[0], ListSortDirection.Ascending);
 
             // Ordene automaticamente a coluna 5 do maior para o menor
-            dgvClassPilotos.Sort(dgvClassPilotos.Columns[5], ListSortDirection.Descending);
+            dgvClassPilotos.Sort(dgvClassPilotos.Columns[0], ListSortDirection.Ascending);
 
-            // Aqui tenho que adc os campeões da F1, F2, F3
-
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < dgvClassEquipes.Rows.Count; i++)
             {
-                principal.AdicionarPilotoCampeao(cata, principal.ContadorDeAno, dgvClassPilotos.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassPilotos.Rows[i].Cells["P"].Value.ToString()), dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Equipe"].Value.ToString());
-            }
-            for (int i = 0; i < 1; i++)
-            {
-                principal.AdicionarEquipeCampeao(cata, principal.ContadorDeAno, dgvClassEquipes.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassEquipes.Rows[i].Cells["P"].Value.ToString()));
-            }
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString();
 
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dgvClassEquipes.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dgvClassEquipes.Rows[i].Cells["C1"].Style.ForeColor = cor1;
+            }
+            for (int i = 0; i < dgvClassPilotos.Rows.Count; i++)
+            {
+                // Obter os valores das células C1 e C2 como representações de texto das cores
+                string cor1Texto = dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString();
+
+                // Converter as representações de texto das cores em cores reais
+                Color cor1 = ColorTranslator.FromHtml(cor1Texto);
+
+                // Definir as cores de fundo das células C1 e C2
+                dgvClassPilotos.Rows[i].Cells["C1"].Style.BackColor = cor1;
+                dgvClassPilotos.Rows[i].Cells["C1"].Style.ForeColor = cor1;
+            }
             dgvClassEquipes.ClearSelection();
             dgvClassPilotos.ClearSelection();
+        }
+        private void FinalDeTemporadaHistoricosDosPilotos()
+        {
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                pilotos[i].AdicionarPilotoCampeao(pilotos[i].PosicaoAtualCampeonato, principal.ContadorDeAno, pilotos[i].Cor1, pilotos[i].EquipePiloto, pilotos[i].PontosCampeonato, pilotos[i].Categoria);
+            }
         }
         public void SalvarDadosDosArquivo()
         {
@@ -935,22 +818,22 @@ namespace Pilot_Menager
                     {
                         PreencherDataGridViewClassEquipes(0, 10);
                         PreencherDataGridViewClassPilotos(0, 10);
-                        FinalDeTemporadaDataBase("F1");
+                        FinalDeTemporadaDataBaseCampeoes("F1");
                     }
                     else if (i == 1)
                     {
                         PreencherDataGridViewClassPilotos(10, 20);
                         PreencherDataGridViewClassEquipes(10, 20);
-                        FinalDeTemporadaDataBase("F2");
+                        FinalDeTemporadaDataBaseCampeoes("F2");
                     }
                     else if (i == 2)
                     {
                         PreencherDataGridViewClassPilotos(20, 30);
                         PreencherDataGridViewClassEquipes(20, 30);
-                        FinalDeTemporadaDataBase("F3");
+                        FinalDeTemporadaDataBaseCampeoes("F3");
                     }
                 }
-
+                FinalDeTemporadaHistoricosDosPilotos();
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -979,7 +862,7 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(equipes[0].PontosCampeonato.ToString() + " - " + equipes[0].PrimeiroColocado.ToString());
+            MessageBox.Show(equipes[3].PosicaoAtualCampeonato.ToString() + " - " + equipes[3].PontosCampeonato.ToString());
             /*
             TelaSettings telaSettings = new TelaSettings(principal);
             telaSettings.ShowDialog();
@@ -994,6 +877,108 @@ namespace Pilot_Menager
         {
             TelaPilotos telaPilotos = new TelaPilotos(principal, equipes, pilotos, pistas);
             telaPilotos.ShowDialog();
+        }
+        private void MetodoParaQualificarEquipes(int equipeMin, int equipeMax)
+        {
+            for (int i = equipeMin; i < equipeMax; i++)
+            {
+                equipes[i].PosicaoAtualCampeonato = 1;
+                for (int j = equipeMin; j < equipeMax; j++)
+                {
+                    if (i != j)
+                    {
+                        if (equipes[i].PontosCampeonato <= equipes[j].PontosCampeonato)
+                        {
+                            if (equipes[i].PontosCampeonato == equipes[j].PontosCampeonato)
+                            {
+                                if (equipes[i].PrimeiroColocado == equipes[j].PrimeiroColocado)
+                                {
+                                    if (equipes[i].SegundoColocado == equipes[j].SegundoColocado)
+                                    {
+                                        if (equipes[i].TerceiroColocado == equipes[j].TerceiroColocado)
+                                        {
+                                            if (i > j)
+                                            {
+                                                equipes[i].PosicaoAtualCampeonato++;
+                                            }
+                                        }
+                                        else if (equipes[i].TerceiroColocado < equipes[j].TerceiroColocado)
+                                        {
+                                            equipes[i].PosicaoAtualCampeonato++;
+                                        }
+                                    }
+                                    else if (equipes[i].SegundoColocado < equipes[j].SegundoColocado)
+                                    {
+                                        equipes[i].PosicaoAtualCampeonato++;
+                                    }
+                                }
+                                else if (equipes[i].PrimeiroColocado < equipes[j].PrimeiroColocado)
+                                {
+                                    equipes[i].PosicaoAtualCampeonato++;
+                                }
+                            }
+                            else if (equipes[i].PontosCampeonato < equipes[j].PontosCampeonato)
+                            {
+                                equipes[i].PosicaoAtualCampeonato++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void MetodoParaQualificarPilotos(string fCategoria)
+        {
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                if (pilotos[i].Categoria == fCategoria)
+                {
+                    pilotos[i].PosicaoAtualCampeonato = 1;
+                    for (int j = 0; j < pilotos.Length; j++)
+                    {
+                        if (pilotos[j].Categoria == fCategoria)
+                        {
+                            if (i != j)
+                            {
+                                if (pilotos[i].PontosCampeonato <= pilotos[j].PontosCampeonato)
+                                {
+                                    if (pilotos[i].PontosCampeonato == pilotos[j].PontosCampeonato)
+                                    {
+                                        if (pilotos[i].PrimeiroColocado == pilotos[j].PrimeiroColocado)
+                                        {
+                                            if (pilotos[i].SegundoColocado == pilotos[j].SegundoColocado)
+                                            {
+                                                if (pilotos[i].TerceiroColocado == pilotos[j].TerceiroColocado)
+                                                {
+                                                    if (i > j)
+                                                    {
+                                                        pilotos[i].PosicaoAtualCampeonato++;
+                                                    }
+                                                }
+                                                else if (pilotos[i].TerceiroColocado < pilotos[j].TerceiroColocado)
+                                                {
+                                                    pilotos[i].PosicaoAtualCampeonato++;
+                                                }
+                                            }
+                                            else if (pilotos[i].SegundoColocado < pilotos[j].SegundoColocado)
+                                            {
+                                                pilotos[i].PosicaoAtualCampeonato++;
+                                            }
+                                        }
+                                        else if (pilotos[i].PrimeiroColocado < pilotos[j].PrimeiroColocado)
+                                        {
+                                            pilotos[i].PosicaoAtualCampeonato++;
+                                        }
+                                    }
+                                    else if (pilotos[i].PontosCampeonato < pilotos[j].PontosCampeonato)
+                                    {
+                                        pilotos[i].PosicaoAtualCampeonato++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     class DadosCompletos
