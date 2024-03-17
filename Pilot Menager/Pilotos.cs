@@ -180,7 +180,7 @@ namespace Pilot_Menager
         public List<Pilotos.PilotoTemporadas> pilotosTemporadas = new List<Pilotos.PilotoTemporadas>();
 
         // Método para adicionar um piloto campeão à lista
-        public void AdicionarPilotoCampeao(int position, int ano, string cor1, string equipe, int pontos, string catAtual)
+        public void AdicionarHistoricosPiloto(int position, int ano, string cor1, string equipe, int pontos, string catAtual)
         {
             pilotosTemporadas.Add(new Pilotos.PilotoTemporadas { Position = position,  Ano = ano, C1 = cor1, Equipe = equipe, Pontos = pontos, CategoriaAtual = catAtual });
         }

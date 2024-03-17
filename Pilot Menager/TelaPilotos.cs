@@ -15,14 +15,12 @@ namespace Pilot_Menager
         Principal principal;
         Equipes[] equipes;
         Pilotos[] pilotos;
-        Pistas[] pistas;
-        public TelaPilotos(Principal princ, Equipes[] equip, Pilotos[] pilot, Pistas[] pist)
+        public TelaPilotos(Principal princ, Equipes[] equip, Pilotos[] pilot)
         {
             InitializeComponent();
             principal = princ;
             equipes = equip;
             pilotos = pilot;
-            pistas = pist;
 
             // Manipular o evento CellDoubleClick
             dvgTelaPilotoExibirTodosPilotos.CellDoubleClick += DataGridViewPilotos_CellDoubleClick;
@@ -62,6 +60,19 @@ namespace Pilot_Menager
 
                 PreencherDataGridViewHistoricoPilotos(pilotos[i].pilotosTemporadas, dgvTelaPilotoExibirHistoricoPiloto);
                 AtualizarTabelas(dgvTelaPilotoExibirHistoricoPiloto);
+
+                Color corPrincipal;
+                Color corSecundaria;
+
+                corPrincipal = ColorTranslator.FromHtml(pilotos[i].Cor1);
+                corSecundaria = ColorTranslator.FromHtml(pilotos[i].Cor2);
+
+                TpLabelCor1A.BackColor = corPrincipal;
+                TpLabelCor1B.BackColor = corSecundaria;
+                TpLabelCor2A.BackColor = corPrincipal;
+                TpLabelCor2B.BackColor = corSecundaria;
+                TpLabelCor3A.BackColor = corPrincipal;
+                TpLabelCor3B.BackColor = corSecundaria;
             }
         }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
@@ -270,7 +281,7 @@ namespace Pilot_Menager
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             // Ordene automaticamente a coluna 4 do maior para o menor
-            dgv.Sort(dgv.Columns[1], ListSortDirection.Ascending);
+            dgv.Sort(dgv.Columns[1], ListSortDirection.Descending);
 
             for (int i = 0; i < dgv.Rows.Count; i++)
             {

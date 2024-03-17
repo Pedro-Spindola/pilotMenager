@@ -751,6 +751,7 @@
             pictureBoxEquipes.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBoxEquipes.TabIndex = 1;
             pictureBoxEquipes.TabStop = false;
+            pictureBoxEquipes.Click += pictureBoxEquipes_Click;
             // 
             // TelaPrincipal
             // 

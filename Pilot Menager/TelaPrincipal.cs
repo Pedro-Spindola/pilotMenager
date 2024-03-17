@@ -126,7 +126,6 @@ namespace Pilot_Menager
 
 
             // Atribuir Pilotos as Equipes
-            equipes[0].PrimeiroPiloto = pilotos[0];
             pilotos[0].EquipePiloto = equipes[0].NomeEquipe;
             pilotos[0].StatusPiloto = "1º Piloto";
             pilotos[0].ContratoPiloto = random.Next(1, 4);
@@ -135,6 +134,11 @@ namespace Pilot_Menager
             pilotos[0].Categoria = equipes[0].Categoria;
             pilotos[0].SalarioPiloto = random.Next(100000, 1000000);
 
+            equipes[0].PrimeiroPiloto = pilotos[0].NomePiloto;
+            equipes[0].PrimeiroPilotoContrato = pilotos[0].ContratoPiloto;
+            equipes[0].PrimeiroPilotoSalario = pilotos[0].SalarioPiloto;
+
+
             for (int i = 1; i < (equipes.Length * 2); i++)
             {
                 int equipeIndex = i / 2; // Equipe 0 para pilotos 0 e 1, equipe 1 para pilotos 2 e 3, etc.
@@ -142,7 +146,7 @@ namespace Pilot_Menager
                 Equipes equipe = equipes[equipeIndex];
                 if (i % 2 == 0)
                 {
-                    equipe.PrimeiroPiloto = pilotos[i];
+                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "1º Piloto";
                     pilotos[i].ContratoPiloto = random.Next(1, 4);
@@ -150,10 +154,13 @@ namespace Pilot_Menager
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
                     pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
+                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
+                    equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
+                    equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
                 }
                 else
                 {
-                    equipe.SegundoPiloto = pilotos[i];
+                    equipe.SegundoPiloto = pilotos[i].NomePiloto;
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "2º Piloto";
                     pilotos[i].ContratoPiloto = random.Next(1, 4);
@@ -161,11 +168,16 @@ namespace Pilot_Menager
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
                     pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
+                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
+                    equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
+                    equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
                 }
             }
             dadosPistas();
             EmbaralharPistas();
             DefinirSemanasPistas();
+
+            principal.IdadeJogador = pilotos[0].IdadePiloto;
 
             principal.ProxGP = pistas[0].NomeGp;
             principal.ProxGPais = pistas[0].NomeCircuito;
@@ -681,6 +693,11 @@ namespace Pilot_Menager
                 dgvClassPilotos.Rows[i].Cells["C1"].Style.BackColor = cor1;
                 dgvClassPilotos.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
+            for (int i = 0; i < 1; i++)
+            {
+                principal.AdicionarPilotoCampeao(cata, principal.ContadorDeAno, dgvClassPilotos.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassPilotos.Rows[i].Cells["P"].Value.ToString()), dgvClassPilotos.Rows[i].Cells["C1"].Value.ToString(), dgvClassPilotos.Rows[i].Cells["Equipe"].Value.ToString());
+                principal.AdicionarEquipeCampeao(cata, principal.ContadorDeAno, dgvClassEquipes.Rows[i].Cells["Nacionalidade"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["C1"].Value.ToString(), dgvClassEquipes.Rows[i].Cells["Nome"].Value.ToString(), Convert.ToInt32(dgvClassEquipes.Rows[i].Cells["P"].Value.ToString()));
+            }
             dgvClassEquipes.ClearSelection();
             dgvClassPilotos.ClearSelection();
         }
@@ -688,7 +705,67 @@ namespace Pilot_Menager
         {
             for (int i = 0; i < pilotos.Length; i++)
             {
-                pilotos[i].AdicionarPilotoCampeao(pilotos[i].PosicaoAtualCampeonato, principal.ContadorDeAno, pilotos[i].Cor1, pilotos[i].EquipePiloto, pilotos[i].PontosCampeonato, pilotos[i].Categoria);
+                pilotos[i].AdicionarHistoricosPiloto(pilotos[i].PosicaoAtualCampeonato, principal.ContadorDeAno, pilotos[i].Cor1, pilotos[i].EquipePiloto, pilotos[i].PontosCampeonato, pilotos[i].Categoria);
+            }
+        }
+        private void FinalDeTemporadaLimpaTable()
+        {
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                pilotos[i].PontosCampeonato = 0;
+                pilotos[i].PrimeiroColocado = 0;
+                pilotos[i].SegundoColocado = 0;
+                pilotos[i].TerceiroColocado = 0;
+                pilotos[i].IdadePiloto++;
+            }
+            for (int j = 0; j < equipes.Length; j++)
+            {
+                equipes[j].PontosCampeonato = 0;
+                equipes[j].PrimeiroColocado = 0;
+                equipes[j].SegundoColocado = 0;
+                equipes[j].TerceiroColocado = 0;
+            }
+            int equipeMin = 0;
+            int equipeMax = 10;
+            int position = 1;
+            for (int l = equipeMin; l < equipeMax; l++)
+            {
+                for (int k = 0; k < pilotos.Length; k++)
+                {
+                    if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto)
+                    {
+                        pilotos[k].PosicaoAtualCampeonato = position;
+                        position++;
+                    }
+                }
+            }
+            equipeMin = 10;
+            equipeMax = 20;
+            position = 1;
+            for (int l = equipeMin; l < equipeMax; l++)
+            {
+                for (int k = 0; k < pilotos.Length; k++)
+                {
+                    if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto)
+                    {
+                        pilotos[k].PosicaoAtualCampeonato = position;
+                        position++;
+                    }
+                }
+            }
+            equipeMin = 20;
+            equipeMax = 30;
+            position = 1;
+            for (int l = equipeMin; l < equipeMax; l++)
+            {
+                for (int k = 0; k < pilotos.Length; k++)
+                {
+                    if (equipes[l].NomeEquipe == pilotos[k].EquipePiloto)
+                    {
+                        pilotos[k].PosicaoAtualCampeonato = position;
+                        position++;
+                    }
+                }
             }
         }
         public void SalvarDadosDosArquivo()
@@ -781,9 +858,6 @@ namespace Pilot_Menager
                 TelaQualificacao telaQualificacao = new TelaQualificacao(principal, equipes, pilotos, pistas);
                 telaQualificacao.ShowDialog();
 
-                //AtualizarDataGridViewClassEquipes();
-                //AtualizarDataGridViewClassPilotos();
-
                 if (pilotos[0].Categoria == "F1")
                 {
                     PreencherDataGridViewClassEquipes(0, 10);
@@ -839,6 +913,14 @@ namespace Pilot_Menager
                 AtualizarFinanciasSemanal();
                 AtualizarFinancias();
                 AtualizarDate();
+
+                FinalDeTemporadaLimpaTable();
+
+                principal.CorPrincipal = pilotos[0].Cor1;
+                principal.CorSecundaria = pilotos[0].Cor2;
+                corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
+                corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
+                principal.IdadeJogador = pilotos[0].IdadePiloto;
                 AtualizarNomes();
                 AtualizarTabelaInicioDeTemporada();
             }
@@ -875,7 +957,7 @@ namespace Pilot_Menager
         }
         private void pictureBoxPilotos_Click(object sender, EventArgs e)
         {
-            TelaPilotos telaPilotos = new TelaPilotos(principal, equipes, pilotos, pistas);
+            TelaPilotos telaPilotos = new TelaPilotos(principal, equipes, pilotos);
             telaPilotos.ShowDialog();
         }
         private void MetodoParaQualificarEquipes(int equipeMin, int equipeMax)
@@ -979,6 +1061,11 @@ namespace Pilot_Menager
                     }
                 }
             }
+        }
+        private void pictureBoxEquipes_Click(object sender, EventArgs e)
+        {
+            TelaEquipes telaEquipes = new TelaEquipes(principal, equipes, pilotos);
+            telaEquipes.ShowDialog();
         }
     }
     class DadosCompletos

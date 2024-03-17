@@ -32,9 +32,10 @@
             panel17 = new Panel();
             dvgTelaPilotoExibirTodosPilotos = new DataGridView();
             panel1 = new Panel();
+            TpLabelCor1B = new Label();
             TpHabPiloto = new Label();
             label13 = new Label();
-            TpLabelCor1 = new Label();
+            TpLabelCor1A = new Label();
             TpPaisPiloto = new Label();
             TpIdadePiloto = new Label();
             TpNomeCompletoPiloto = new Label();
@@ -45,6 +46,7 @@
             panel4 = new Panel();
             label7 = new Label();
             panel3 = new Panel();
+            TpLabelCor3B = new Label();
             TpFisico = new Label();
             label26 = new Label();
             TpAcertoDoCarro = new Label();
@@ -59,14 +61,15 @@
             label16 = new Label();
             TpConcentracao = new Label();
             label14 = new Label();
-            TpLabelCor3 = new Label();
+            TpLabelCor3A = new Label();
             label9 = new Label();
             TpLargada = new Label();
             label8 = new Label();
             panel2 = new Panel();
             dgvTelaPilotoExibirHistoricoPiloto = new DataGridView();
             panel5 = new Panel();
-            TpLabelCor2 = new Label();
+            TpLabelCor2B = new Label();
+            TpLabelCor2A = new Label();
             TpEquipePiloto = new Label();
             TpStatusPiloto = new Label();
             TpDuracaoPiloto = new Label();
@@ -112,13 +115,15 @@
             dvgTelaPilotoExibirTodosPilotos.RowTemplate.Height = 25;
             dvgTelaPilotoExibirTodosPilotos.Size = new Size(500, 640);
             dvgTelaPilotoExibirTodosPilotos.TabIndex = 2;
+            dvgTelaPilotoExibirTodosPilotos.CellContentClick += DataGridViewPilotos_CellDoubleClick;
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(230, 240, 240);
+            panel1.Controls.Add(TpLabelCor1B);
             panel1.Controls.Add(TpHabPiloto);
             panel1.Controls.Add(label13);
-            panel1.Controls.Add(TpLabelCor1);
+            panel1.Controls.Add(TpLabelCor1A);
             panel1.Controls.Add(TpPaisPiloto);
             panel1.Controls.Add(TpIdadePiloto);
             panel1.Controls.Add(TpNomeCompletoPiloto);
@@ -131,6 +136,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(390, 100);
             panel1.TabIndex = 12;
+            // 
+            // TpLabelCor1B
+            // 
+            TpLabelCor1B.Anchor = AnchorStyles.None;
+            TpLabelCor1B.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor1B.Location = new Point(0, 65);
+            TpLabelCor1B.Margin = new Padding(0);
+            TpLabelCor1B.Name = "TpLabelCor1B";
+            TpLabelCor1B.Size = new Size(10, 35);
+            TpLabelCor1B.TabIndex = 30;
+            TpLabelCor1B.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TpHabPiloto
             // 
@@ -155,16 +171,16 @@
             label13.Text = "HABILIDADE";
             label13.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // TpLabelCor1
+            // TpLabelCor1A
             // 
-            TpLabelCor1.Anchor = AnchorStyles.None;
-            TpLabelCor1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpLabelCor1.Location = new Point(0, 0);
-            TpLabelCor1.Margin = new Padding(0);
-            TpLabelCor1.Name = "TpLabelCor1";
-            TpLabelCor1.Size = new Size(10, 100);
-            TpLabelCor1.TabIndex = 26;
-            TpLabelCor1.TextAlign = ContentAlignment.MiddleRight;
+            TpLabelCor1A.Anchor = AnchorStyles.None;
+            TpLabelCor1A.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor1A.Location = new Point(0, 0);
+            TpLabelCor1A.Margin = new Padding(0);
+            TpLabelCor1A.Name = "TpLabelCor1A";
+            TpLabelCor1A.Size = new Size(10, 65);
+            TpLabelCor1A.TabIndex = 26;
+            TpLabelCor1A.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TpPaisPiloto
             // 
@@ -272,6 +288,7 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(230, 240, 240);
+            panel3.Controls.Add(TpLabelCor3B);
             panel3.Controls.Add(TpFisico);
             panel3.Controls.Add(label26);
             panel3.Controls.Add(TpAcertoDoCarro);
@@ -286,7 +303,7 @@
             panel3.Controls.Add(label16);
             panel3.Controls.Add(TpConcentracao);
             panel3.Controls.Add(label14);
-            panel3.Controls.Add(TpLabelCor3);
+            panel3.Controls.Add(TpLabelCor3A);
             panel3.Controls.Add(label9);
             panel3.Controls.Add(TpLargada);
             panel3.Controls.Add(label8);
@@ -295,6 +312,17 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(390, 270);
             panel3.TabIndex = 15;
+            // 
+            // TpLabelCor3B
+            // 
+            TpLabelCor3B.Anchor = AnchorStyles.None;
+            TpLabelCor3B.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor3B.Location = new Point(0, 175);
+            TpLabelCor3B.Margin = new Padding(0);
+            TpLabelCor3B.Name = "TpLabelCor3B";
+            TpLabelCor3B.Size = new Size(10, 95);
+            TpLabelCor3B.TabIndex = 42;
+            TpLabelCor3B.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TpFisico
             // 
@@ -457,16 +485,16 @@
             label14.Text = "CONCENTRAÇÃO:";
             label14.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // TpLabelCor3
+            // TpLabelCor3A
             // 
-            TpLabelCor3.Anchor = AnchorStyles.None;
-            TpLabelCor3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpLabelCor3.Location = new Point(0, 0);
-            TpLabelCor3.Margin = new Padding(0);
-            TpLabelCor3.Name = "TpLabelCor3";
-            TpLabelCor3.Size = new Size(10, 270);
-            TpLabelCor3.TabIndex = 27;
-            TpLabelCor3.TextAlign = ContentAlignment.MiddleRight;
+            TpLabelCor3A.Anchor = AnchorStyles.None;
+            TpLabelCor3A.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor3A.Location = new Point(0, 0);
+            TpLabelCor3A.Margin = new Padding(0);
+            TpLabelCor3A.Name = "TpLabelCor3A";
+            TpLabelCor3A.Size = new Size(10, 175);
+            TpLabelCor3A.TabIndex = 27;
+            TpLabelCor3A.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label9
             // 
@@ -476,7 +504,7 @@
             label9.Name = "label9";
             label9.Size = new Size(380, 25);
             label9.TabIndex = 26;
-            label9.Text = "Dados Pessoais";
+            label9.Text = "Atributos";
             label9.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // TpLargada
@@ -509,7 +537,7 @@
             panel2.Location = new Point(530, 410);
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(390, 270);
+            panel2.Size = new Size(390, 330);
             panel2.TabIndex = 16;
             // 
             // dgvTelaPilotoExibirHistoricoPiloto
@@ -525,13 +553,14 @@
             dgvTelaPilotoExibirHistoricoPiloto.Name = "dgvTelaPilotoExibirHistoricoPiloto";
             dgvTelaPilotoExibirHistoricoPiloto.ReadOnly = true;
             dgvTelaPilotoExibirHistoricoPiloto.RowTemplate.Height = 25;
-            dgvTelaPilotoExibirHistoricoPiloto.Size = new Size(390, 270);
+            dgvTelaPilotoExibirHistoricoPiloto.Size = new Size(390, 330);
             dgvTelaPilotoExibirHistoricoPiloto.TabIndex = 3;
             // 
             // panel5
             // 
             panel5.BackColor = Color.FromArgb(230, 240, 240);
-            panel5.Controls.Add(TpLabelCor2);
+            panel5.Controls.Add(TpLabelCor2B);
+            panel5.Controls.Add(TpLabelCor2A);
             panel5.Controls.Add(TpEquipePiloto);
             panel5.Controls.Add(TpStatusPiloto);
             panel5.Controls.Add(TpDuracaoPiloto);
@@ -546,16 +575,27 @@
             panel5.Size = new Size(390, 100);
             panel5.TabIndex = 17;
             // 
-            // TpLabelCor2
+            // TpLabelCor2B
             // 
-            TpLabelCor2.Anchor = AnchorStyles.None;
-            TpLabelCor2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpLabelCor2.Location = new Point(0, 0);
-            TpLabelCor2.Margin = new Padding(0);
-            TpLabelCor2.Name = "TpLabelCor2";
-            TpLabelCor2.Size = new Size(10, 100);
-            TpLabelCor2.TabIndex = 33;
-            TpLabelCor2.TextAlign = ContentAlignment.MiddleRight;
+            TpLabelCor2B.Anchor = AnchorStyles.None;
+            TpLabelCor2B.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor2B.Location = new Point(0, 65);
+            TpLabelCor2B.Margin = new Padding(0);
+            TpLabelCor2B.Name = "TpLabelCor2B";
+            TpLabelCor2B.Size = new Size(10, 35);
+            TpLabelCor2B.TabIndex = 34;
+            TpLabelCor2B.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // TpLabelCor2A
+            // 
+            TpLabelCor2A.Anchor = AnchorStyles.None;
+            TpLabelCor2A.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpLabelCor2A.Location = new Point(0, 0);
+            TpLabelCor2A.Margin = new Padding(0);
+            TpLabelCor2A.Name = "TpLabelCor2A";
+            TpLabelCor2A.Size = new Size(10, 65);
+            TpLabelCor2A.TabIndex = 33;
+            TpLabelCor2A.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TpEquipePiloto
             // 
@@ -729,9 +769,9 @@
         private Label label12;
         private Label label6;
         private Label TpEquipePiloto;
-        private Label TpLabelCor1;
+        private Label TpLabelCor1A;
         private Label TpLabelCor2;
-        private Label TpLabelCor3;
+        private Label TpLabelCor3A;
         private Label label9;
         private Label TpLargada;
         private Label label8;
@@ -753,5 +793,9 @@
         private Label label7;
         private Label TpHabPiloto;
         private Label label13;
+        private Label TpLabelCor1B;
+        private Label TpLabelCor3B;
+        private Label TpLabelCor2B;
+        private Label TpLabelCor2A;
     }
 }

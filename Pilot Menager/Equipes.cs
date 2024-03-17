@@ -34,8 +34,13 @@ namespace Pilot_Menager
         private int mediaEquipe;
         private int valorDoMotor; // Propriedade para o valor do motor da equipe.
         private string nameMotor;
-        private Pilotos primeiroPiloto;
-        private Pilotos segundoPiloto;
+        // Pilotos
+        private string primeiroPiloto;
+        private int primeiroPilotoContrato;
+        private int primeiroPilotoSalario;
+        private string segundoPiloto;
+        private int segundoPilotoContrato;
+        private int segundoPilotoSalario;
 
         public Equipes()
         {
@@ -76,6 +81,23 @@ namespace Pilot_Menager
             segundoColocado = 0;
             terceiroColocado = 0;
         }
+        public List<Equipes.EquipeTemporadas> equipeTemporadas = new List<Equipes.EquipeTemporadas>();
+
+        // Método para adicionar historico da Equipe
+        public void AdicionarHistoricosEquipe(int position, int ano, string motor, string cor1, string equipe, int pontos, string catAtual)
+        {
+            equipeTemporadas.Add(new Equipes.EquipeTemporadas { Position = position, Ano = ano, Motor = motor, C1 = cor1, Equipe = equipe, Pontos = pontos, CategoriaAtual = catAtual });
+        }
+        public class EquipeTemporadas
+        {
+            public int Position { get; set; }
+            public int Ano { get; set; }
+            public string Motor { get; set; }
+            public string C1 { get; set; }
+            public string Equipe { get; set; }
+            public int Pontos { get; set; }
+            public string CategoriaAtual { get; set; }
+        }
         // Get Set
         public string NomeEquipe
         {
@@ -107,15 +129,35 @@ namespace Pilot_Menager
             get { return categoria; }
             set { categoria = value; }
         }
-        public Pilotos PrimeiroPiloto
+        public string PrimeiroPiloto
         {
             get { return primeiroPiloto; }
             set { primeiroPiloto = value; }
         }
-        public Pilotos SegundoPiloto
+        public string SegundoPiloto
         {
             get { return segundoPiloto; }
             set { segundoPiloto = value; }
+        }
+        public int PrimeiroPilotoContrato
+        {
+            get { return primeiroPilotoContrato; }
+            set { primeiroPilotoContrato = value; }
+        }
+        public int SegundoPilotoContrato
+        {
+            get { return segundoPilotoContrato; }
+            set { segundoPilotoContrato = value; }
+        }
+        public int PrimeiroPilotoSalario
+        {
+            get { return primeiroPilotoSalario; }
+            set { primeiroPilotoSalario = value; }
+        }
+        public int SegundoPilotoSalario
+        {
+            get { return segundoPilotoSalario; }
+            set { segundoPilotoSalario = value; }
         }
         public int PosicaoAtualCampeonato
         {
