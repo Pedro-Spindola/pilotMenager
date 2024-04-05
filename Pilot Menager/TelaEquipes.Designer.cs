@@ -40,6 +40,10 @@
             label5 = new Label();
             label3 = new Label();
             panel2 = new Panel();
+            TpPiloto1 = new Label();
+            label27 = new Label();
+            TpPiloto2 = new Label();
+            label19 = new Label();
             TpContratoPiloto2 = new Label();
             TpSalarioPiloto2 = new Label();
             label12 = new Label();
@@ -220,6 +224,10 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(230, 240, 240);
+            panel2.Controls.Add(TpPiloto1);
+            panel2.Controls.Add(label27);
+            panel2.Controls.Add(TpPiloto2);
+            panel2.Controls.Add(label19);
             panel2.Controls.Add(TpContratoPiloto2);
             panel2.Controls.Add(TpSalarioPiloto2);
             panel2.Controls.Add(label12);
@@ -238,14 +246,60 @@
             panel2.Size = new Size(390, 200);
             panel2.TabIndex = 12;
             // 
+            // TpPiloto1
+            // 
+            TpPiloto1.Anchor = AnchorStyles.None;
+            TpPiloto1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpPiloto1.Location = new Point(110, 25);
+            TpPiloto1.Margin = new Padding(0);
+            TpPiloto1.Name = "TpPiloto1";
+            TpPiloto1.Size = new Size(183, 25);
+            TpPiloto1.TabIndex = 56;
+            TpPiloto1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label27
+            // 
+            label27.Anchor = AnchorStyles.None;
+            label27.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label27.Location = new Point(10, 25);
+            label27.Margin = new Padding(0);
+            label27.Name = "label27";
+            label27.Size = new Size(100, 25);
+            label27.TabIndex = 55;
+            label27.Text = "NOME:";
+            label27.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // TpPiloto2
+            // 
+            TpPiloto2.Anchor = AnchorStyles.None;
+            TpPiloto2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TpPiloto2.Location = new Point(110, 125);
+            TpPiloto2.Margin = new Padding(0);
+            TpPiloto2.Name = "TpPiloto2";
+            TpPiloto2.Size = new Size(183, 25);
+            TpPiloto2.TabIndex = 54;
+            TpPiloto2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label19
+            // 
+            label19.Anchor = AnchorStyles.None;
+            label19.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label19.Location = new Point(10, 125);
+            label19.Margin = new Padding(0);
+            label19.Name = "label19";
+            label19.Size = new Size(100, 25);
+            label19.TabIndex = 53;
+            label19.Text = "NOME:";
+            label19.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // TpContratoPiloto2
             // 
             TpContratoPiloto2.Anchor = AnchorStyles.None;
             TpContratoPiloto2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpContratoPiloto2.Location = new Point(110, 160);
+            TpContratoPiloto2.Location = new Point(110, 175);
             TpContratoPiloto2.Margin = new Padding(0);
             TpContratoPiloto2.Name = "TpContratoPiloto2";
-            TpContratoPiloto2.Size = new Size(100, 25);
+            TpContratoPiloto2.Size = new Size(183, 25);
             TpContratoPiloto2.TabIndex = 52;
             TpContratoPiloto2.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -253,10 +307,10 @@
             // 
             TpSalarioPiloto2.Anchor = AnchorStyles.None;
             TpSalarioPiloto2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpSalarioPiloto2.Location = new Point(110, 135);
+            TpSalarioPiloto2.Location = new Point(110, 150);
             TpSalarioPiloto2.Margin = new Padding(0);
             TpSalarioPiloto2.Name = "TpSalarioPiloto2";
-            TpSalarioPiloto2.Size = new Size(100, 25);
+            TpSalarioPiloto2.Size = new Size(183, 25);
             TpSalarioPiloto2.TabIndex = 51;
             TpSalarioPiloto2.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -264,7 +318,7 @@
             // 
             label12.Anchor = AnchorStyles.None;
             label12.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(10, 135);
+            label12.Location = new Point(10, 150);
             label12.Margin = new Padding(0);
             label12.Name = "label12";
             label12.Size = new Size(100, 25);
@@ -276,7 +330,7 @@
             // 
             label13.Anchor = AnchorStyles.None;
             label13.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.Location = new Point(10, 160);
+            label13.Location = new Point(10, 175);
             label13.Margin = new Padding(0);
             label13.Name = "label13";
             label13.Size = new Size(100, 25);
@@ -288,10 +342,10 @@
             // 
             TpContratoPiloto1.Anchor = AnchorStyles.None;
             TpContratoPiloto1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpContratoPiloto1.Location = new Point(110, 60);
+            TpContratoPiloto1.Location = new Point(110, 75);
             TpContratoPiloto1.Margin = new Padding(0);
             TpContratoPiloto1.Name = "TpContratoPiloto1";
-            TpContratoPiloto1.Size = new Size(100, 25);
+            TpContratoPiloto1.Size = new Size(183, 25);
             TpContratoPiloto1.TabIndex = 48;
             TpContratoPiloto1.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -299,10 +353,10 @@
             // 
             TpSalarioPiloto1.Anchor = AnchorStyles.None;
             TpSalarioPiloto1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TpSalarioPiloto1.Location = new Point(110, 35);
+            TpSalarioPiloto1.Location = new Point(110, 50);
             TpSalarioPiloto1.Margin = new Padding(0);
             TpSalarioPiloto1.Name = "TpSalarioPiloto1";
-            TpSalarioPiloto1.Size = new Size(100, 25);
+            TpSalarioPiloto1.Size = new Size(183, 25);
             TpSalarioPiloto1.TabIndex = 47;
             TpSalarioPiloto1.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -310,7 +364,7 @@
             // 
             label10.Anchor = AnchorStyles.None;
             label10.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(10, 35);
+            label10.Location = new Point(10, 50);
             label10.Margin = new Padding(0);
             label10.Name = "label10";
             label10.Size = new Size(100, 25);
@@ -322,7 +376,7 @@
             // 
             label11.Anchor = AnchorStyles.None;
             label11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(10, 60);
+            label11.Location = new Point(10, 75);
             label11.Margin = new Padding(0);
             label11.Name = "label11";
             label11.Size = new Size(100, 25);
@@ -844,5 +898,9 @@
         private Label label21;
         private Label TpContratoMotor;
         private Label label25;
+        private Label label19;
+        private Label TpPiloto1;
+        private Label label27;
+        private Label TpPiloto2;
     }
 }

@@ -26,8 +26,10 @@ namespace Pilot_Menager
         private void TelaEquipes_Load(object sender, EventArgs e)
         {
             CriarDataGridViewClassEquipes(dvgTelaEquipesExibirTodasEquipes);
-            CriarDataGridViewHistoricoDoPiloto(dvgTelaEquipesExibirTodasEquipes);
             PreencherDataGridViewClassEquipes(dvgTelaEquipesExibirTodasEquipes);
+            AtualizarTabelas(dvgTelaEquipesExibirTodasEquipes);
+
+            CriarDataGridViewHistoricoDoPiloto(dgvTelaEquipeExibirHistoricoEquipe);
 
             // Manipular o evento CellDoubleClick
             dvgTelaEquipesExibirTodasEquipes.CellDoubleClick += dvgTelaEquipesExibirTodasEquipes_CellContentClick;
@@ -52,14 +54,16 @@ namespace Pilot_Menager
 
                 TpSalarioPiloto1.Text = string.Format("R$ {0:N2}", equipes[i].PrimeiroPilotoSalario);
                 TpContratoPiloto1.Text = string.Format("{0} Anos", equipes[i].PrimeiroPilotoContrato);
+                TpPiloto1.Text = string.Format(equipes[i].PrimeiroPiloto);
 
-                TpSalarioPiloto1.Text = string.Format("R$ {0:N2}", equipes[i].SegundoPilotoSalario);
-                TpContratoPiloto1.Text = string.Format("{0} Anos", equipes[i].SegundoPilotoContrato);
+                TpSalarioPiloto2.Text = string.Format("R$ {0:N2}", equipes[i].SegundoPilotoSalario);
+                TpContratoPiloto2.Text = string.Format("{0} Anos", equipes[i].SegundoPilotoContrato);
+                TpPiloto1.Text = string.Format(equipes[i].SegundoPiloto);
 
                 TpMotor.Text = equipes[i].NameMotor;
 
-                PreencherDataGridViewHistoricoPilotos(equipes[i].equipeTemporadas, dvgTelaEquipesExibirTodasEquipes);
-                AtualizarTabelas(dvgTelaEquipesExibirTodasEquipes);
+                PreencherDataGridViewHistoricoPilotos(equipes[i].equipeTemporadas, dgvTelaEquipeExibirHistoricoEquipe);
+                AtualizarTabelasHistorico(dgvTelaEquipeExibirHistoricoEquipe);
 
                 Color corPrincipal;
                 Color corSecundaria;
@@ -78,7 +82,6 @@ namespace Pilot_Menager
             DataColumn sedeColumn = new DataColumn("Sede", typeof(Image));
 
             classEquipes.Columns.Add("#", typeof(int));
-            classEquipes.Columns.Add("C1", typeof(string));
             classEquipes.Columns.Add(sedeColumn);
             classEquipes.Columns.Add("Nome", typeof(string));
             classEquipes.Columns.Add("P", typeof(int));
@@ -86,6 +89,7 @@ namespace Pilot_Menager
             classEquipes.Columns.Add("2º", typeof(int));
             classEquipes.Columns.Add("3º", typeof(int));
             classEquipes.Columns.Add("Path", typeof(string));
+            classEquipes.Columns.Add("Index", typeof(string));
 
             // Crie uma nova coluna de imagem para exibir as imagens
             DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
@@ -105,11 +109,19 @@ namespace Pilot_Menager
 
             // Configurando Layout
             dataGridViewEquipes.RowHeadersVisible = false;
-            dataGridViewEquipes.Enabled = false;
-            dataGridViewEquipes.ScrollBars = ScrollBars.None;
+            dataGridViewEquipes.AllowUserToAddRows = false;
+            dataGridViewEquipes.AllowUserToDeleteRows = false;
+            dataGridViewEquipes.AllowUserToOrderColumns = false;
+            dataGridViewEquipes.AllowUserToResizeColumns = false;
+            dataGridViewEquipes.AllowUserToResizeColumns = false;
+            dataGridViewEquipes.AllowUserToResizeRows = false;
+            dataGridViewEquipes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewEquipes.ScrollBars = ScrollBars.Vertical;
             dataGridViewEquipes.AllowUserToAddRows = false;
             dataGridViewEquipes.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(180, 180, 180); // Define a cor das linhas do cabe�alho
             dataGridViewEquipes.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewEquipes.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 255, 255);
+            dataGridViewEquipes.DefaultCellStyle.SelectionForeColor = Color.Black;
             dataGridViewEquipes.GridColor = Color.FromArgb(220, 220, 220);
             dataGridViewEquipes.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewEquipes.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -121,30 +133,27 @@ namespace Pilot_Menager
             // Define a altura do cabeçalho das colunas
             dataGridViewEquipes.ColumnHeadersHeight = 30;
 
-
             // Defina a ordem de exibi��o das colunas com base nos �ndices
             dataGridViewEquipes.Columns["#"].DisplayIndex = 0;
-            dataGridViewEquipes.Columns["C1"].DisplayIndex = 1;
-            dataGridViewEquipes.Columns["Sede"].DisplayIndex = 2;
-            dataGridViewEquipes.Columns["Nome"].DisplayIndex = 3;
-            dataGridViewEquipes.Columns["P"].DisplayIndex = 4;
-            dataGridViewEquipes.Columns["1º"].DisplayIndex = 5;
-            dataGridViewEquipes.Columns["2º"].DisplayIndex = 6;
-            dataGridViewEquipes.Columns["3º"].DisplayIndex = 7;
-            dataGridViewEquipes.Columns["Path"].DisplayIndex = 8;
+            dataGridViewEquipes.Columns["Sede"].DisplayIndex = 1;
+            dataGridViewEquipes.Columns["Nome"].DisplayIndex = 2;
+            dataGridViewEquipes.Columns["P"].DisplayIndex = 3;
+            dataGridViewEquipes.Columns["1º"].DisplayIndex = 4;
+            dataGridViewEquipes.Columns["2º"].DisplayIndex = 5;
+            dataGridViewEquipes.Columns["3º"].DisplayIndex = 6;
+            dataGridViewEquipes.Columns["Path"].DisplayIndex = 7;
+            dataGridViewEquipes.Columns["Index"].DisplayIndex = 8;
 
+            dataGridViewEquipes.Columns["Index"].Visible = false;
             dataGridViewEquipes.Columns["Path"].Visible = false;
-            dataGridViewEquipes.Columns["C1"].HeaderText = string.Empty;
 
             dataGridViewEquipes.Columns[0].Width = 30;
-            dataGridViewEquipes.Columns[1].Width = 10;
-            dataGridViewEquipes.Columns[2].Width = 40;
-            dataGridViewEquipes.Columns[3].Width = 250;
-            dataGridViewEquipes.Columns[4].Width = 50;
+            dataGridViewEquipes.Columns[1].Width = 40;
+            dataGridViewEquipes.Columns[2].Width = 250;
+            dataGridViewEquipes.Columns[3].Width = 50;
+            dataGridViewEquipes.Columns[4].Width = 40;
             dataGridViewEquipes.Columns[5].Width = 40;
             dataGridViewEquipes.Columns[6].Width = 40;
-            dataGridViewEquipes.Columns[7].Width = 40;
-
         }
         private void PreencherDataGridViewClassEquipes(DataGridView dataGridViewEquipes)
         {
@@ -158,13 +167,13 @@ namespace Pilot_Menager
             {
                 DataRow row = classEquipes.NewRow();
                 row["#"] = equipes[i].PosicaoAtualCampeonato;
-                row["C1"] = equipes[i].Cor1;
                 row["Nome"] = equipes[i].NomeEquipe;
                 row["P"] = equipes[i].PontosCampeonato;
                 row["1º"] = equipes[i].PrimeiroColocado;
                 row["2º"] = equipes[i].SegundoColocado;
                 row["3º"] = equipes[i].TerceiroColocado;
                 row["Path"] = Path.Combine("Paises", equipes[i].Sede + ".png");
+                row["Index"] = i;
                 classEquipes.Rows.Add(row);
             }
             // Percorra as linhas da tabela classF1
@@ -191,8 +200,10 @@ namespace Pilot_Menager
             histoticoEquipe.Columns.Add("Ano", typeof(int));
             histoticoEquipe.Columns.Add("Motor", typeof(string));
             histoticoEquipe.Columns.Add("C1", typeof(string));
-            histoticoEquipe.Columns.Add("Equipe", typeof(string));
             histoticoEquipe.Columns.Add("P", typeof(string));
+            histoticoEquipe.Columns.Add("1º", typeof(int));
+            histoticoEquipe.Columns.Add("2º", typeof(int));
+            histoticoEquipe.Columns.Add("3º", typeof(int));
             histoticoEquipe.Columns.Add("Serie", typeof(string));
 
             // Configurando Layout
@@ -226,19 +237,23 @@ namespace Pilot_Menager
             dgv.Columns["Ano"].DisplayIndex = 1;
             dgv.Columns["Motor"].DisplayIndex = 2;
             dgv.Columns["C1"].DisplayIndex = 3;
-            dgv.Columns["Equipe"].DisplayIndex = 4;
-            dgv.Columns["P"].DisplayIndex = 5;
-            dgv.Columns["Serie"].DisplayIndex = 6;
+            dgv.Columns["P"].DisplayIndex = 4;
+            dgv.Columns["1º"].DisplayIndex = 5;
+            dgv.Columns["2º"].DisplayIndex = 6;
+            dgv.Columns["3º"].DisplayIndex = 7;
+            dgv.Columns["Serie"].DisplayIndex = 8;
 
             dgv.Columns["C1"].HeaderText = string.Empty;
 
             dgv.Columns[0].Width = 30;
             dgv.Columns[1].Width = 40;
-            dgv.Columns[2].Width = 70;
+            dgv.Columns[2].Width = 100;
             dgv.Columns[3].Width = 10;
-            dgv.Columns[4].Width = 120;
-            dgv.Columns[5].Width = 50;
-            dgv.Columns[6].Width = 70;
+            dgv.Columns[4].Width = 40;
+            dgv.Columns[5].Width = 40;
+            dgv.Columns[6].Width = 40;
+            dgv.Columns[7].Width = 40;
+            dgv.Columns[8].Width = 50;
         }
         private void PreencherDataGridViewHistoricoPilotos(List<Equipes.EquipeTemporadas> equipeTemporadas, DataGridView dgv)
         {
@@ -259,8 +274,10 @@ namespace Pilot_Menager
                 row["Ano"] = piloto.Ano;
                 row["Motor"] = piloto.Motor;
                 row["C1"] = piloto.C1;
-                row["Equipe"] = piloto.Equipe;
                 row["P"] = piloto.Pontos;
+                row["1º"] = piloto.Primeiro;
+                row["2º"] = piloto.Segundo;
+                row["3º"] = piloto.Terceiro;
                 row["Serie"] = piloto.CategoriaAtual;
 
                 // Adiciona a linha ao DataTable
@@ -270,7 +287,7 @@ namespace Pilot_Menager
             // Define o DataTable como a fonte de dados do DataGridView
             dgv.DataSource = histoticoEquipe;
         }
-        public void AtualizarTabelas(DataGridView dgv)
+        public void AtualizarTabelasHistorico(DataGridView dgv)
         {
             DataTable histoticoEquipe = (DataTable)dgv.DataSource;
 
@@ -294,6 +311,25 @@ namespace Pilot_Menager
                 dgv.Rows[i].Cells["C1"].Style.BackColor = cor1;
                 dgv.Rows[i].Cells["C1"].Style.ForeColor = cor1;
             }
+            dgv.ClearSelection();
+        }
+        public void AtualizarTabelas(DataGridView dgv)
+        {
+            DataTable classEquipes = (DataTable)dgv.DataSource;
+
+            // Desative a opção de ordenação em todas as colunas
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                dgv.Rows[i].Cells["#"].Value = i + 1;
+            }
+            // Ordene automaticamente a coluna 4 do maior para o menor
+            dgv.Sort(dgv.Columns[0], ListSortDirection.Ascending);
+
             dgv.ClearSelection();
         }
         private void label7_Click(object sender, EventArgs e)

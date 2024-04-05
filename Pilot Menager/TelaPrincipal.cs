@@ -134,7 +134,7 @@ namespace Pilot_Menager
             pilotos[0].Categoria = equipes[0].Categoria;
             pilotos[0].SalarioPiloto = random.Next(100000, 1000000);
 
-            equipes[0].PrimeiroPiloto = pilotos[0].NomePiloto;
+            equipes[0].PrimeiroPiloto = $"{pilotos[0].NomePiloto} {pilotos[0].SobrenomePiloto}";
             equipes[0].PrimeiroPilotoContrato = pilotos[0].ContratoPiloto;
             equipes[0].PrimeiroPilotoSalario = pilotos[0].SalarioPiloto;
 
@@ -146,7 +146,6 @@ namespace Pilot_Menager
                 Equipes equipe = equipes[equipeIndex];
                 if (i % 2 == 0)
                 {
-                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "1º Piloto";
                     pilotos[i].ContratoPiloto = random.Next(1, 4);
@@ -154,13 +153,12 @@ namespace Pilot_Menager
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
                     pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
-                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
+                    equipe.PrimeiroPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
                     equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
                     equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
                 }
                 else
                 {
-                    equipe.SegundoPiloto = pilotos[i].NomePiloto;
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "2º Piloto";
                     pilotos[i].ContratoPiloto = random.Next(1, 4);
@@ -168,9 +166,9 @@ namespace Pilot_Menager
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
                     pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
-                    equipe.PrimeiroPiloto = pilotos[i].NomePiloto;
-                    equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
-                    equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
+                    equipe.SegundoPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
+                    equipe.SegundoPilotoContrato = pilotos[i].ContratoPiloto;
+                    equipe.SegundoPilotoSalario = pilotos[i].SalarioPiloto;
                 }
             }
             dadosPistas();
@@ -707,6 +705,10 @@ namespace Pilot_Menager
             {
                 pilotos[i].AdicionarHistoricosPiloto(pilotos[i].PosicaoAtualCampeonato, principal.ContadorDeAno, pilotos[i].Cor1, pilotos[i].EquipePiloto, pilotos[i].PontosCampeonato, pilotos[i].Categoria);
             }
+            for (int j = 0; j < equipes.Length; j++)
+            {
+                equipes[j].AdicionarHistoricosEquipe(equipes[j].PosicaoAtualCampeonato, principal.ContadorDeAno ,equipes[j].NameMotor, equipes[j].Cor1, equipes[j].PontosCampeonato, equipes[j].PrimeiroColocado, equipes[j].SegundoColocado, equipes[j].TerceiroColocado, equipes[j].Categoria);
+            }
         }
         private void FinalDeTemporadaLimpaTable()
         {
@@ -886,6 +888,8 @@ namespace Pilot_Menager
             }
             else if (principal.ContadorDeSemana == principal.TotalSemanas)
             {
+                FinalDeTemporadaHistoricosDosPilotos();
+                 
                 for (int i = 0; i < 3; i++)
                 {
                     if (i == 0)
@@ -907,7 +911,7 @@ namespace Pilot_Menager
                         FinalDeTemporadaDataBaseCampeoes("F3");
                     }
                 }
-                FinalDeTemporadaHistoricosDosPilotos();
+
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -944,7 +948,7 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(equipes[3].PosicaoAtualCampeonato.ToString() + " - " + equipes[3].PontosCampeonato.ToString());
+            MessageBox.Show(equipes[0].PrimeiroColocado.ToString() + " - " + equipes[0].PontosCampeonato.ToString());
             /*
             TelaSettings telaSettings = new TelaSettings(principal);
             telaSettings.ShowDialog();

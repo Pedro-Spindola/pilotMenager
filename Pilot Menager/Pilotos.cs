@@ -148,8 +148,6 @@ namespace Pilot_Menager
         {
             PaisPilotos paisPilotos = new PaisPilotos();
             string nacionalidade = nac;
-            //string nomeArquivo;
-            //string sobrenomeArquivo;
 
             nacionalidadePiloto = nac;
             nomePiloto = nn;
@@ -173,6 +171,36 @@ namespace Pilot_Menager
             chuva = random.Next(10, 30);
             acertoDoCarro = random.Next(10, 30);
             fisico = random.Next(10, 30);
+
+            mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
+        }
+        public void geraPiloto(string nome, string sobrenome, string nacionalidad, int idade, int auge, int aposentadoria, int largad, int concent, int ultrapassag, int experience, int rapid, int chuv, int acerto, int fisic)
+        {
+            PaisPilotos paisPilotos = new PaisPilotos();
+            string nacionalidade = nacionalidad;
+
+            nacionalidadePiloto = nacionalidad;
+            nomePiloto = nome;
+            sobrenomePiloto = sobrenome;
+
+            // Definir de forma aleatória a idade do piloto (18 até 21)
+            idadePiloto = idade;
+
+            // Definir de forma aleatória o auge do piloto (30 até 36)
+            augePiloto = auge;
+
+            // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
+            aposentadoriaPiloto = aposentadoria;
+
+            // Atribuindo de formas aleatória, a qualidade de cada atributos (1 a 3)
+            largada = largad;
+            concentracao = concent;
+            ultrapassagem = ultrapassag;
+            experiencia = experience;
+            rapidez = rapid;
+            chuva = chuv;
+            acertoDoCarro = acerto;
+            fisico = fisic;
 
             mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
         }

@@ -84,9 +84,9 @@ namespace Pilot_Menager
         public List<Equipes.EquipeTemporadas> equipeTemporadas = new List<Equipes.EquipeTemporadas>();
 
         // Método para adicionar historico da Equipe
-        public void AdicionarHistoricosEquipe(int position, int ano, string motor, string cor1, string equipe, int pontos, string catAtual)
+        public void AdicionarHistoricosEquipe(int position, int ano, string motor, string cor1, int pontos, int primeiro, int segundo, int terceiro, string catAtual)
         {
-            equipeTemporadas.Add(new Equipes.EquipeTemporadas { Position = position, Ano = ano, Motor = motor, C1 = cor1, Equipe = equipe, Pontos = pontos, CategoriaAtual = catAtual });
+            equipeTemporadas.Add(new Equipes.EquipeTemporadas { Position = position, Ano = ano, Motor = motor, C1 = cor1, Pontos = pontos, Primeiro = primeiro, Segundo = segundo, Terceiro = terceiro, CategoriaAtual = catAtual });
         }
         public class EquipeTemporadas
         {
@@ -94,8 +94,10 @@ namespace Pilot_Menager
             public int Ano { get; set; }
             public string Motor { get; set; }
             public string C1 { get; set; }
-            public string Equipe { get; set; }
             public int Pontos { get; set; }
+            public int Primeiro { get; set; }
+            public int Segundo { get; set; }
+            public int Terceiro { get; set; }
             public string CategoriaAtual { get; set; }
         }
         // Get Set
