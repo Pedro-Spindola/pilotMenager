@@ -86,6 +86,7 @@
             panelCorP5 = new Panel();
             label5 = new Label();
             pictureBoxEquipes = new PictureBox();
+            label6 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBtnFechar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBtnOpcao).BeginInit();
@@ -109,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvClassEquipes).BeginInit();
             panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClassPilotos).BeginInit();
+            panel16.SuspendLayout();
             panel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxEquipes).BeginInit();
             SuspendLayout();
@@ -675,6 +677,7 @@
             // panel16
             // 
             panel16.BackColor = Color.FromArgb(230, 240, 240);
+            panel16.Controls.Add(label6);
             panel16.Location = new Point(820, 120);
             panel16.Margin = new Padding(0);
             panel16.Name = "panel16";
@@ -753,6 +756,16 @@
             pictureBoxEquipes.TabStop = false;
             pictureBoxEquipes.Click += pictureBoxEquipes_Click;
             // 
+            // label6
+            // 
+            label6.Font = new Font("Comic Sans MS", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(0, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(500, 60);
+            label6.TabIndex = 20;
+            label6.Text = "PILOT MENAGER";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -804,6 +817,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvClassEquipes).EndInit();
             panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvClassPilotos).EndInit();
+            panel16.ResumeLayout(false);
             panel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxEquipes).EndInit();
             ResumeLayout(false);
@@ -866,5 +880,6 @@
         private Panel panelCorP4;
         private Panel panelCorS5;
         private Panel panelCorP5;
+        private Label label6;
     }
 }

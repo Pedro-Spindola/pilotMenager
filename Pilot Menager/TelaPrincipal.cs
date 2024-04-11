@@ -707,7 +707,7 @@ namespace Pilot_Menager
             }
             for (int j = 0; j < equipes.Length; j++)
             {
-                equipes[j].AdicionarHistoricosEquipe(equipes[j].PosicaoAtualCampeonato, principal.ContadorDeAno ,equipes[j].NameMotor, equipes[j].Cor1, equipes[j].PontosCampeonato, equipes[j].PrimeiroColocado, equipes[j].SegundoColocado, equipes[j].TerceiroColocado, equipes[j].Categoria);
+                equipes[j].AdicionarHistoricosEquipe(equipes[j].PosicaoAtualCampeonato, principal.ContadorDeAno, equipes[j].NameMotor, equipes[j].Cor1, equipes[j].PontosCampeonato, equipes[j].PrimeiroColocado, equipes[j].SegundoColocado, equipes[j].TerceiroColocado, equipes[j].Categoria);
             }
         }
         private void FinalDeTemporadaLimpaTable()
@@ -889,7 +889,7 @@ namespace Pilot_Menager
             else if (principal.ContadorDeSemana == principal.TotalSemanas)
             {
                 FinalDeTemporadaHistoricosDosPilotos();
-                 
+
                 for (int i = 0; i < 3; i++)
                 {
                     if (i == 0)

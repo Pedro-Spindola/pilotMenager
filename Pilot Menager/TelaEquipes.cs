@@ -58,7 +58,7 @@ namespace Pilot_Menager
 
                 TpSalarioPiloto2.Text = string.Format("R$ {0:N2}", equipes[i].SegundoPilotoSalario);
                 TpContratoPiloto2.Text = string.Format("{0} Anos", equipes[i].SegundoPilotoContrato);
-                TpPiloto1.Text = string.Format(equipes[i].SegundoPiloto);
+                TpPiloto2.Text = string.Format(equipes[i].SegundoPiloto);
 
                 TpMotor.Text = equipes[i].NameMotor;
 
