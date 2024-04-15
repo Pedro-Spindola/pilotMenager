@@ -272,6 +272,8 @@ namespace Pilot_Menager
                     pictureBoxBtnSalvar.Image = Properties.Resources.salvar_w;
                     pictureBoxBtnOpcao.Image = Properties.Resources.opcao_w;
                     pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_w;
+                    pictureBoxMensagemVisualizada.Image = Properties.Resources.cs_visual_w;
+                    pictureBoxMensagem.Image = Properties.Resources.cx_msg_w;
                     panel1.ForeColor = Color.White;
                 }
                 else
@@ -280,6 +282,8 @@ namespace Pilot_Menager
                     pictureBoxBtnSalvar.Image = Properties.Resources.salvar_b;
                     pictureBoxBtnOpcao.Image = Properties.Resources.opcao_b;
                     pictureBoxBtnContinuar.Image = Properties.Resources.menu_continuar_b;
+                    pictureBoxMensagemVisualizada.Image = Properties.Resources.cs_visual_b;
+                    pictureBoxMensagem.Image = Properties.Resources.cx_msg_b;
                     panel1.ForeColor = Color.Black;
                 }
             }
@@ -291,11 +295,21 @@ namespace Pilot_Menager
             panelCorP3.BackColor = corPrincipal;
             panelCorP4.BackColor = corPrincipal;
             panelCorP5.BackColor = corPrincipal;
+            panelCorP6.BackColor = corPrincipal;
+            panelCorP7.BackColor = corPrincipal;
             panelCorS1.BackColor = corSecundaria;
             panelCorS2.BackColor = corSecundaria;
             panelCorS3.BackColor = corSecundaria;
             panelCorS4.BackColor = corSecundaria;
             panelCorS5.BackColor = corSecundaria;
+            panelCorS6.BackColor = corSecundaria;
+
+
+            panelBarEquipe.BackColor = ColorTranslator.FromHtml("#50788C");
+            panelBarPatrocinador.BackColor = ColorTranslator.FromHtml("#E7B264");
+            panelBarDiretoria.BackColor = ColorTranslator.FromHtml("#D35252");
+            panelBarFamilia.BackColor = ColorTranslator.FromHtml("#4DB24B");
+
         }
         public void AtualizarFinanciasSemanal()
         {
