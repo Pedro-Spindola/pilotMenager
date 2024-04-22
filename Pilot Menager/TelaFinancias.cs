@@ -10,16 +10,25 @@ using System.Windows.Forms;
 
 namespace Pilot_Menager
 {
-    public partial class TelaFinancias : Form
+    internal partial class TelaFinancias : Form
     {
-        public TelaFinancias()
+        Principal principal;
+        Financias financias;
+        public TelaFinancias(Principal princ, Financias fin)
         {
+            principal = princ;
+            financias = fin;
             InitializeComponent();
         }
 
         private void TelaFinancias_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void label30_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

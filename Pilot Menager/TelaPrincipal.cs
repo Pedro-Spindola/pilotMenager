@@ -72,7 +72,7 @@ namespace Pilot_Menager
         public void IniciarNovoGame()
         {
             // Gerando um array de Pilotos
-            for (int i = 0; i < pilotos.Length; i++)
+            for (int i = 20; i < pilotos.Length; i++)
             {
                 Pilotos piloto = new Pilotos();
                 if (i == 0)
@@ -86,9 +86,31 @@ namespace Pilot_Menager
                     pilotos[i] = piloto;
                 }
             }
+            //
+            // public void geraPiloto( int largad, int concent, int ultrapassag, int experience, int rapid, int chuv, int acerto, int fisic)
+            pilotos[0] = new Pilotos(principal.NomeJogador, principal.SobrenomeJogador, principal.NacionalidadeJogador, 27, 33, 40, 95, 100, 95, 100, 100, 100, 95, 100);
+            pilotos[1] = new Pilotos("Sergio", "Perez", "México", 34, 32, 38, 90, 90, 90, 95, 80, 90, 90, 90);
+            pilotos[2] = new Pilotos("Lewis", "Hamilton", "Inglaterra", 39, 32, 40, 90, 90, 90, 100, 80, 90, 90, 80);
+            pilotos[3] = new Pilotos("George", "Russell", "Inglaterra", 26, 33, 37, 90, 90, 90, 80, 80, 80, 80, 90);
+            pilotos[4] = new Pilotos("Charles", "Leclerc", "Mônaco", 27, 32, 37, 100, 90, 100, 90, 100, 90, 100, 90);
+            pilotos[5] = new Pilotos("Carlos", "Sainz", "Espanha", 30, 31, 36, 90, 90, 100, 100, 90, 90, 90, 90);
+            pilotos[6] = new Pilotos("Alexander", "Albon", "Tailândia", 28, 33, 35, 70, 80, 80, 80, 70, 80, 80, 80);
+            pilotos[7] = new Pilotos("Logan", "Sargeant", "Estados Unidos", 24, 31, 36, 70, 70, 70, 70, 70, 70, 70, 80);
+            pilotos[8] = new Pilotos("Fernando", "Alonso", "Espanha", 43, 33, 43, 100, 90, 90, 100, 80, 80, 90, 90);
+            pilotos[9] = new Pilotos("Lance", "Stroll", "Canadá", 26, 30, 35, 80, 70, 75, 75, 80, 80, 85, 80);
+            pilotos[10] = new Pilotos("Lando", "Norris", "Inglaterra", 25, 33, 37, 90, 90, 85, 85, 90, 90, 90, 80);
+            pilotos[11] = new Pilotos("Oscar", "Piastri", "Austrália", 27, 33, 40, 80, 80, 80, 85, 85, 80, 85, 90);
+            pilotos[12] = new Pilotos("Esteban", "Ocon", "França", 28, 33, 36, 80, 80, 80, 75, 75, 80, 80, 80);
+            pilotos[13] = new Pilotos("Pierre", "Gasly", "França", 28, 32, 40, 80, 80, 85, 85, 90, 85, 80, 80);
+            pilotos[14] = new Pilotos("Daniel", "Ricciardo", "Austrália", 35, 33, 36, 80, 80, 70, 100, 80, 75, 85, 80);
+            pilotos[15] = new Pilotos("Yuki", "Tsunoda", "Japão", 24, 30, 36, 75, 75, 80, 80, 70, 75, 80, 90);
+            pilotos[16] = new Pilotos("Valtteri", "Bottas", "Finlândia", 35, 32, 38, 70, 80, 80, 70, 80, 85, 75, 85);
+            pilotos[17] = new Pilotos("Guanyu", "Zhou", "China", 25, 33, 35, 80, 70, 80, 70, 75, 85, 75, 70);
+            pilotos[18] = new Pilotos("Kevin", "Magnussen", "Dinamarca", 32, 33, 40, 80, 80, 85, 85, 85, 80, 80, 85);
+            pilotos[19] = new Pilotos("Nico", "Hülkenberg", "Alemanha", 37, 33, 39, 80, 80, 80, 100, 85, 75, 75, 80);
 
             // Gerando as Equipes
-            // Equipes F1
+
             equipes[0] = new Equipes("Red Bull", "#03183B", "#C70101", "#FFFFFF", "Austria", 95, 95, 95, 95, 95, 95, 95, 95, "Honda", "F1");
             equipes[1] = new Equipes("Mercedes", "#C4C4C4", "#09BF81", "#000000", "Alemanha", 85, 85, 85, 85, 85, 85, 85, 85, "Mercedes", "F1");
             equipes[2] = new Equipes("Ferrari", "#FF0000", "#FFFFFF", "#000000", "Itália", 85, 85, 85, 85, 85, 85, 85, 85, "Ferrari", "F1");
@@ -101,6 +123,7 @@ namespace Pilot_Menager
             equipes[9] = new Equipes("Haas", "#002420", "#000000", "#FFFFFF", "Estados Unidos", 70, 70, 70, 70, 70, 70, 70, 70, "Ferrari", "F1");
 
             // Equipes F2
+
             equipes[10] = new Equipes("MP Motorsport", "#FF883C", "#FF883C", "#FFFFFF", "Holanda", 65, 65, 65, 65, 65, 65, 65, 65, "TAG", "F2");
             equipes[11] = new Equipes("Infinity Audi", "#CCCCCC", "#991F21", "#000000", "Alemanha", 65, 65, 65, 65, 65, 65, 65, 65, "Audi", "F2");
             equipes[12] = new Equipes("Carlin", "#2151B0", "#75FF07", "#000000", "Inglaterra", 60, 60, 60, 60, 60, 60, 60, 60, "Renault", "F2");
@@ -123,7 +146,7 @@ namespace Pilot_Menager
             equipes[27] = new Equipes("Kessel", "#FF0081", "#236EFF", "#FFFFFF", "Suíça", 10, 10, 10, 10, 10, 10, 10, 10, "Ford", "F3");
             equipes[28] = new Equipes("Action Express", "#FF6E63", "#CCCCCC", "#000000", "Estados Unidos", 10, 10, 10, 10, 10, 10, 10, 10, "Toyota", "F3");
             equipes[29] = new Equipes("Team Senna", "#2D7D4E", "#FFD91C", "#000000", "Brasil", 10, 10, 10, 10, 10, 10, 10, 10, "Lamborghini", "F3");
-
+            
 
             // Atribuir Pilotos as Equipes
             pilotos[0].EquipePiloto = equipes[0].NomeEquipe;
@@ -1084,6 +1107,11 @@ namespace Pilot_Menager
         {
             TelaEquipes telaEquipes = new TelaEquipes(principal, equipes, pilotos);
             telaEquipes.ShowDialog();
+        }
+        private void pictureBoxFinancias_Click(object sender, EventArgs e)
+        {
+            TelaFinancias telaFinancias = new TelaFinancias(principal, financias);
+            telaFinancias.ShowDialog();
         }
     }
     class DadosCompletos
