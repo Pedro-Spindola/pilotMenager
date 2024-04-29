@@ -24,6 +24,7 @@ namespace Pilot_Menager
         Random random = new Random();
         private int btnclick = 0;
         private int numberVoltasF = 0, numberVoltasT = 0;
+        private int myIndex;
         Color corPrincipal;
         Color corSecundaria;
         Color corTexto;
@@ -39,28 +40,38 @@ namespace Pilot_Menager
         {
             corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
             corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
+            myIndex = principal.MyIndex;
 
             AtualizarNomes();
 
-            if (pilotos[0].Categoria == "F1")
+            if (pilotos[myIndex].Categoria == "F1")
             {
                 CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
                 PreencherDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
+                AtualizarDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
                 AtualizarTabelasQualificacaoVoltas(dvgTableF1);
             }
-            else if (pilotos[0].Categoria == "F2")
+            else if (pilotos[myIndex].Categoria == "F2")
             {
                 CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
                 PreencherDataGridViewQualificacaoEquipesF1(10, 20, dvgTableF1);
+                AtualizarDataGridViewQualificacaoEquipesF1(10, 20, dvgTableF1);
                 AtualizarTabelasQualificacaoVoltas(dvgTableF1);
             }
-            else if (pilotos[0].Categoria == "F3")
+            else if (pilotos[myIndex].Categoria == "F3")
             {
                 CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
-                PreencherDataGridViewQualificacaoEquipesF1(20, 10, dvgTableF1);
+                PreencherDataGridViewQualificacaoEquipesF1(20, 30, dvgTableF1);
+                AtualizarDataGridViewQualificacaoEquipesF1(20, 30, dvgTableF1);
                 AtualizarTabelasQualificacaoVoltas(dvgTableF1);
             }
-
+            else
+            {
+                CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
+                PreencherDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
+                AtualizarDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
+                AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+            }
             labelTreinoCorrida.Text = "Treino";
         }
         private void AtualizarNomes()
@@ -101,7 +112,8 @@ namespace Pilot_Menager
             panel2.BackColor = corSecundaria;
             panel3.BackColor = corSecundaria;
         }
-        private void contadorDeVoltas() {
+        private void contadorDeVoltas()
+        {
             lbQualificacaoVoltas.Text = string.Format("Voltas: " + numberVoltasF + " / " + numberVoltasT);
         }
         private void AtualizarTabelasQualificacaoVoltas(DataGridView dvgTableQualificacaoF1)
@@ -520,23 +532,23 @@ namespace Pilot_Menager
             // Limpe a seleção inicial
             dvgTableQualificacaoF1.ClearSelection();
         }
-        private void pictureBoxBtnContinuarQualificacao_Click(object sender, EventArgs e)
+        private async void pictureBoxBtnContinuarQualificacao_Click(object sender, EventArgs e)
         {
             // Desabilitar o btn
             pictureBoxBtnContinuarQualificacao.Enabled = false;
-            string fCategoria = pilotos[0].Categoria;
+            string fCategoria = pilotos[myIndex].Categoria;
 
-            if (pilotos[0].Categoria == "F1")
+            if (pilotos[myIndex].Categoria == "F1")
             {
-                FuncaoParaRealizarSemanaDeCorrida(0, 10, fCategoria);
+                await FuncaoParaRealizarSemanaDeCorrida(0, 10, fCategoria);
             }
-            else if (pilotos[0].Categoria == "F2")
+            else if (pilotos[myIndex].Categoria == "F2")
             {
-                FuncaoParaRealizarSemanaDeCorrida(10, 20, fCategoria);
+                await FuncaoParaRealizarSemanaDeCorrida(10, 20, fCategoria);
             }
-            else if (pilotos[0].Categoria == "F3")
+            else if (pilotos[myIndex].Categoria == "F3")
             {
-                FuncaoParaRealizarSemanaDeCorrida(20, 30, fCategoria);
+                await FuncaoParaRealizarSemanaDeCorrida(20, 30, fCategoria);
             }
             // Reabilitar o btn
             pictureBoxBtnContinuarQualificacao.Enabled = true;
@@ -798,6 +810,36 @@ namespace Pilot_Menager
                             {
                                 pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoLugar;
                                 equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 10)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoPrimeiroLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoPrimeiroLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 11)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoSegundoLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoSegundoLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 12)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoTerceiroLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoTerceiroLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 13)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoQuartoLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoQuartoLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 14)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoQuintoLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoQuintoLugar;
+                            }
+                            else if (pilotos[i].PosicaoNaCorrida == 15)
+                            {
+                                pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoSextoLugar;
+                                equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoSextoLugar;
                             }
                         }
                     }
@@ -1176,6 +1218,36 @@ namespace Pilot_Menager
                         {
                             pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoLugar;
                             equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 10)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoPrimeiroLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoPrimeiroLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 11)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoSegundoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoSegundoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 12)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoTerceiroLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoTerceiroLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 13)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoQuartoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoQuartoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 14)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoQuintoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoQuintoLugar;
+                        }
+                        else if (pilotos[i].PosicaoNaCorrida == 15)
+                        {
+                            pilotos[i].PontosCampeonato = pilotos[i].PontosCampeonato + principal.DecimoSextoLugar;
+                            equipes[k].PontosCampeonato = equipes[k].PontosCampeonato + principal.DecimoSextoLugar;
                         }
                     }
                 }

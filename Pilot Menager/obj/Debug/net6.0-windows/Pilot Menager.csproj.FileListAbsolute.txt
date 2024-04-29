@@ -23,3 +23,4 @@ C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\
 C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaPilotos.resources
 C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaSettings.resources
 C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaFinancias.resources
+C:\Users\Pedro Spindola\Documents\Develop\Pilot Menager\Pilot Menager\obj\Debug\net6.0-windows\Pilot_Menager.TelaEscolherEquipe.resources

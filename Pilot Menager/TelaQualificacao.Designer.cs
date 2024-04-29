@@ -226,6 +226,7 @@
             // 
             // labelTreinoCorrida
             // 
+            labelTreinoCorrida.BackColor = Color.Transparent;
             labelTreinoCorrida.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             labelTreinoCorrida.Location = new Point(570, 105);
             labelTreinoCorrida.Margin = new Padding(0);
@@ -240,6 +241,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(80, 80, 80);
+            BackgroundImage = Properties.Resources.wpTelaCorrida;
+            BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1340, 760);
             ControlBox = false;
             Controls.Add(labelTreinoCorrida);

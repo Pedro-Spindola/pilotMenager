@@ -37,10 +37,10 @@ namespace Pilot_Menager
         // Pilotos
         private string primeiroPiloto;
         private int primeiroPilotoContrato;
-        private int primeiroPilotoSalario;
+        private double primeiroPilotoSalario;
         private string segundoPiloto;
         private int segundoPilotoContrato;
-        private int segundoPilotoSalario;
+        private double segundoPilotoSalario;
 
         public Equipes()
         {
@@ -151,12 +151,12 @@ namespace Pilot_Menager
             get { return segundoPilotoContrato; }
             set { segundoPilotoContrato = value; }
         }
-        public int PrimeiroPilotoSalario
+        public double PrimeiroPilotoSalario
         {
             get { return primeiroPilotoSalario; }
             set { primeiroPilotoSalario = value; }
         }
-        public int SegundoPilotoSalario
+        public double SegundoPilotoSalario
         {
             get { return segundoPilotoSalario; }
             set { segundoPilotoSalario = value; }

@@ -720,7 +720,7 @@
             label6.Name = "label6";
             label6.Size = new Size(500, 60);
             label6.TabIndex = 20;
-            label6.Text = "PILOT MENAGER";
+            label6.Text = "DRIVER CHALLENGE";
             label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel17

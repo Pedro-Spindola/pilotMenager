@@ -23,13 +23,14 @@ namespace Pilot_Menager
     {
         Principal principal;
         private Equipes[] equipes = new Equipes[30];    // Criando array com a quantidade de equipes.
-        private Pilotos[] pilotos = new Pilotos[60];    // Criando array com a quantidade de pilotos.
-        private Pistas[] pistas = new Pistas[3];        // Crinado array com a quantidade de pistas. 
+        private Pilotos[] pilotos = new Pilotos[100];    // Criando array com a quantidade de pilotos.
+        private Pistas[] pistas = new Pistas[25];        // Crinado array com a quantidade de pistas. 
         private Random random = new Random();
         private Financias financias = new Financias();
         Color corPrincipal;
         Color corSecundaria;
         Color corTexto;
+        private int myIndex;
         public TelaPrincipal(Principal principal)
         {
             InitializeComponent();
@@ -40,6 +41,8 @@ namespace Pilot_Menager
             if (principal.ConfigInicioGame == 1)
             {
                 IniciarNovoGame();
+                string caminhoPtn = "Pontuacao.txt";
+                principal.ConfigurarFaixaDePontuacao(caminhoPtn);
                 MetodoParaQualificarEquipes(0, 10);
                 MetodoParaQualificarEquipes(10, 20);
                 MetodoParaQualificarEquipes(20, 30);
@@ -52,8 +55,9 @@ namespace Pilot_Menager
                 CarregarDadosDosArquivos();
             }
             // Converte a string hexadecimal em um objeto Color
-            principal.CorPrincipal = pilotos[0].Cor1;
-            principal.CorSecundaria = pilotos[0].Cor2;
+            myIndex = principal.MyIndex;
+            principal.CorPrincipal = pilotos[myIndex].Cor1;
+            principal.CorSecundaria = pilotos[myIndex].Cor2;
             corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
             corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
 
@@ -75,7 +79,7 @@ namespace Pilot_Menager
             for (int i = 20; i < pilotos.Length; i++)
             {
                 Pilotos piloto = new Pilotos();
-                if (i == 0)
+                if (i + 1 == pilotos.Length)
                 {
                     piloto.geraPiloto(principal.NomeJogador, principal.SobrenomeJogador, principal.NacionalidadeJogador);
                     pilotos[i] = piloto;
@@ -88,7 +92,7 @@ namespace Pilot_Menager
             }
             //
             // public void geraPiloto( int largad, int concent, int ultrapassag, int experience, int rapid, int chuv, int acerto, int fisic)
-            pilotos[0] = new Pilotos(principal.NomeJogador, principal.SobrenomeJogador, principal.NacionalidadeJogador, 27, 33, 40, 95, 100, 95, 100, 100, 100, 95, 100);
+            pilotos[0] = new Pilotos("Max", "Verstappen", "Holanda", 26, 32, 40, 100, 100, 100, 95, 100, 100, 95, 95);
             pilotos[1] = new Pilotos("Sergio", "Perez", "México", 34, 32, 38, 90, 90, 90, 95, 80, 90, 90, 90);
             pilotos[2] = new Pilotos("Lewis", "Hamilton", "Inglaterra", 39, 32, 40, 90, 90, 90, 100, 80, 90, 90, 80);
             pilotos[3] = new Pilotos("George", "Russell", "Inglaterra", 26, 33, 37, 90, 90, 90, 80, 80, 80, 80, 90);
@@ -146,23 +150,27 @@ namespace Pilot_Menager
             equipes[27] = new Equipes("Kessel", "#FF0081", "#236EFF", "#FFFFFF", "Suíça", 10, 10, 10, 10, 10, 10, 10, 10, "Ford", "F3");
             equipes[28] = new Equipes("Action Express", "#FF6E63", "#CCCCCC", "#000000", "Estados Unidos", 10, 10, 10, 10, 10, 10, 10, 10, "Toyota", "F3");
             equipes[29] = new Equipes("Team Senna", "#2D7D4E", "#FFD91C", "#000000", "Brasil", 10, 10, 10, 10, 10, 10, 10, 10, "Lamborghini", "F3");
-            
 
             // Atribuir Pilotos as Equipes
-            pilotos[0].EquipePiloto = equipes[0].NomeEquipe;
-            pilotos[0].StatusPiloto = "1º Piloto";
-            pilotos[0].ContratoPiloto = random.Next(1, 4);
-            pilotos[0].Cor1 = equipes[0].Cor1;
-            pilotos[0].Cor2 = equipes[0].Cor2;
-            pilotos[0].Categoria = equipes[0].Categoria;
-            pilotos[0].SalarioPiloto = random.Next(100000, 1000000);
 
+            pilotos[99].EquipePiloto = "";
+            pilotos[99].StatusPiloto = "";
+            pilotos[99].ContratoPiloto = 0;
+            pilotos[99].Cor1 = "";
+            pilotos[99].Cor2 = "";
+            pilotos[99].Categoria = "";
+            pilotos[99].SalarioPiloto = 0;
+
+            EscolherEquipeInicial();
+
+            /*
             equipes[0].PrimeiroPiloto = $"{pilotos[0].NomePiloto} {pilotos[0].SobrenomePiloto}";
             equipes[0].PrimeiroPilotoContrato = pilotos[0].ContratoPiloto;
             equipes[0].PrimeiroPilotoSalario = pilotos[0].SalarioPiloto;
+            */
 
 
-            for (int i = 1; i < (equipes.Length * 2); i++)
+            for (int i = 0; i < (equipes.Length * 2); i++)
             {
                 int equipeIndex = i / 2; // Equipe 0 para pilotos 0 e 1, equipe 1 para pilotos 2 e 3, etc.
 
@@ -171,11 +179,17 @@ namespace Pilot_Menager
                 {
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "1º Piloto";
-                    pilotos[i].ContratoPiloto = random.Next(1, 4);
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
-                    pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
+                    if (pilotos[i].ContratoPiloto == 0)
+                    {
+                        pilotos[i].ContratoPiloto = random.Next(1, 4);
+                    }
+                    if (pilotos[i].SalarioPiloto == 0)
+                    {
+                        pilotos[i].SalarioPiloto = DefinirSalario(pilotos[i].MediaPiloto, equipe.Categoria);
+                    }
                     equipe.PrimeiroPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
                     equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
                     equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
@@ -184,21 +198,28 @@ namespace Pilot_Menager
                 {
                     pilotos[i].EquipePiloto = equipe.NomeEquipe;
                     pilotos[i].StatusPiloto = "2º Piloto";
-                    pilotos[i].ContratoPiloto = random.Next(1, 4);
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
-                    pilotos[i].SalarioPiloto = random.Next(100000, 1000000);
+                    if (pilotos[i].ContratoPiloto == 0)
+                    {
+                        pilotos[i].ContratoPiloto = random.Next(1, 4);
+                    }
+                    if (pilotos[i].SalarioPiloto == 0)
+                    {
+                        pilotos[i].SalarioPiloto = DefinirSalario(pilotos[i].MediaPiloto, equipe.Categoria);
+                    }
                     equipe.SegundoPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
                     equipe.SegundoPilotoContrato = pilotos[i].ContratoPiloto;
                     equipe.SegundoPilotoSalario = pilotos[i].SalarioPiloto;
                 }
             }
-            dadosPistas();
+
+            DadosPistas();
             EmbaralharPistas();
             DefinirSemanasPistas();
 
-            principal.IdadeJogador = pilotos[0].IdadePiloto;
+            principal.IdadeJogador = pilotos[myIndex].IdadePiloto;
 
             principal.ProxGP = pistas[0].NomeGp;
             principal.ProxGPais = pistas[0].NomeCircuito;
@@ -206,11 +227,64 @@ namespace Pilot_Menager
             principal.ProxGPVoltas = pistas[0].NumerosDeVoltas;
 
         }
-        public void dadosPistas()
+        public double DefinirSalario( int medHab, string cat)
         {
-            pistas[0] = new Pistas("Austrália", "Melbourne", 58, 44, 56, 80000);
-            pistas[1] = new Pistas("Itália", "Monza", 53, 35, 65, 81000);
-            pistas[2] = new Pistas("Brasil", "Interlagos", 71, 42, 58, 70000);
+            if(cat == "F1")
+            {
+                int hab = medHab * 20;
+                int bases = random.Next(10000, 12001);
+                int bonus = random.Next(5000, 10001);
+                int sal = (((hab * bases) / 200) + bonus);
+                return sal;
+            } else if (cat == "F2")
+            {
+                int hab = medHab * 20;
+                int bases = random.Next(8000, 10001);
+                int bonus = random.Next(5000, 10001);
+                int sal = (((hab * bases) / 200) + bonus);
+                return sal;
+            } else if (cat == "F3")
+            {
+                int hab = medHab * 20;
+                int bases = random.Next(6000, 8001);
+                int bonus = random.Next(5000, 10001);
+                int sal = (((hab * bases) / 200) + bonus);
+                return sal;
+            } else { return 0; }
+        }
+        public void EscolherEquipeInicial()
+        {
+            TelaEscolherEquipe telaSettings = new TelaEscolherEquipe(principal, equipes, pilotos);
+            telaSettings.ShowDialog();
+        }
+        public void DadosPistas()
+        {
+            pistas[0] = new Pistas("Austrália", "Melbourne", 58, 44, 56, 76800);
+            pistas[1] = new Pistas("Itália", "Monza", 53, 35, 65, 70200);
+            pistas[2] = new Pistas("Brasil", "Interlagos", 71, 42, 58, 65400);
+            pistas[3] = new Pistas("Bahrein", "Sakhir", 57, 43, 57, 77400);
+            pistas[4] = new Pistas("Arábia Saudita", "Corniche Circuit", 50, 58, 42, 76200);
+            pistas[5] = new Pistas("Japão", "Suzuka", 53, 59, 41, 75420);
+            pistas[6] = new Pistas("China", "Shanghai", 56, 48, 52, 81000);
+            pistas[7] = new Pistas("Estados Unidos", "Miami", 57, 56, 44, 73200);
+            pistas[8] = new Pistas("Itália", "Imola", 63, 32, 62, 72600);
+            pistas[9] = new Pistas("Mônaco", "Monte Carlo", 78, 64, 36, 67800);
+            pistas[10] = new Pistas("Canadá", "Gilles Vileneuve", 70, 40, 60, 67200);
+            pistas[11] = new Pistas("Espanha", "Catalunha", 66, 40, 60, 69000);
+            pistas[12] = new Pistas("Áustri", "Red Bull Ring", 71, 25, 75, 63600);
+            pistas[13] = new Pistas("Reino Unido", "Silverstone", 52, 43, 57, 74400);
+            pistas[14] = new Pistas("Holanda", "Zandvoort", 72, 48, 52, 67200);
+            pistas[15] = new Pistas("Hungria", "Hungaroring", 70, 46, 54, 72000);
+            pistas[16] = new Pistas("Bélgica", "Spa-Francorchamps", 44, 47, 53, 88200);
+            pistas[17] = new Pistas("África do Sul", "Kyalami", 45, 55, 72, 70800);
+            pistas[18] = new Pistas("México", "Hermanos Rodríguez", 71, 38, 62, 67800);
+            pistas[19] = new Pistas("Azerbaijão", "Baku", 51, 59, 41, 88200);
+            pistas[20] = new Pistas("Cingapura", "Marina Bay", 62, 52, 48, 82200);
+            pistas[21] = new Pistas("Qatar", "Lusail Circuit", 57, 59, 41, 72480);
+            pistas[22] = new Pistas("Estados Unidos", "Las Vegas", 50, 70, 30, 81100);
+            pistas[23] = new Pistas("Emirados Árabes Unidos", "Yas Marina", 58, 39, 61, 74400);
+            pistas[24] = new Pistas("Alemanha", "Hockenheimring", 67, 42, 58, 68400);
+
         }
         public void EmbaralharPistas()
         {
@@ -229,33 +303,134 @@ namespace Pilot_Menager
         }
         public void DefinirSemanasPistas()
         {
-            pistas[0].SemanaDaProva = 3;
-            pistas[1].SemanaDaProva = 5;
+            pistas[0].SemanaDaProva = 5;
+            pistas[1].SemanaDaProva = 7;
             pistas[2].SemanaDaProva = 8;
+            pistas[3].SemanaDaProva = 10;
+            pistas[4].SemanaDaProva = 12;
+            pistas[5].SemanaDaProva = 15;
+            pistas[6].SemanaDaProva = 17;
+            pistas[7].SemanaDaProva = 19;
+            pistas[8].SemanaDaProva = 20;
+            pistas[9].SemanaDaProva = 22;
+            pistas[10].SemanaDaProva = 23;
+            pistas[11].SemanaDaProva = 25;
+            pistas[12].SemanaDaProva = 27;
+            pistas[13].SemanaDaProva = 28;
+            pistas[14].SemanaDaProva = 30;
+            pistas[15].SemanaDaProva = 32;
+            pistas[16].SemanaDaProva = 34;
+            pistas[17].SemanaDaProva = 36;
+            pistas[18].SemanaDaProva = 37;
+            pistas[19].SemanaDaProva = 39;
+            pistas[20].SemanaDaProva = 41;
+            pistas[21].SemanaDaProva = 42;
+            pistas[22].SemanaDaProva = 44;
+            pistas[23].SemanaDaProva = 46;
+            pistas[24].SemanaDaProva = 48;
+
         }
         public void AtualizaStatusProxCorrida(int contador)
         {
-
-            if (contador > 0 && contador <= 3)
+            if (contador > 0 && contador <= 5)
             {
-                principal.ProxGP = pistas[0].NomeGp;
-                principal.ProxGPais = pistas[0].NomeCircuito;
-                principal.ProxGPSemana = pistas[0].SemanaDaProva;
-                principal.ProxGPVoltas = pistas[0].NumerosDeVoltas;
+                FunctionParaStatusDaCorrida(0);
             }
-            else if (contador > 3 && contador <= 5)
+            else if (contador > 5 && contador <= 7)
             {
-                principal.ProxGP = pistas[1].NomeGp;
-                principal.ProxGPais = pistas[1].NomeCircuito;
-                principal.ProxGPSemana = pistas[1].SemanaDaProva;
-                principal.ProxGPVoltas = pistas[1].NumerosDeVoltas;
+                FunctionParaStatusDaCorrida(1);
             }
-            else if (contador > 5 && contador <= 8)
+            else if (contador > 7 && contador <= 8)
             {
-                principal.ProxGP = pistas[2].NomeGp;
-                principal.ProxGPais = pistas[2].NomeCircuito;
-                principal.ProxGPSemana = pistas[2].SemanaDaProva;
-                principal.ProxGPVoltas = pistas[2].NumerosDeVoltas;
+                FunctionParaStatusDaCorrida(2);
+            }
+            else if (contador > 8 && contador <= 10)
+            {
+                FunctionParaStatusDaCorrida(3);
+            }
+            else if (contador > 10 && contador <= 12)
+            {
+                FunctionParaStatusDaCorrida(4);
+            }
+            else if (contador > 12 && contador <= 15)
+            {
+                FunctionParaStatusDaCorrida(5);
+            }
+            else if (contador > 15 && contador <= 17)
+            {
+                FunctionParaStatusDaCorrida(6);
+            }
+            else if (contador > 17 && contador <= 19)
+            {
+                FunctionParaStatusDaCorrida(7);
+            }
+            else if (contador > 19 && contador <= 20)
+            {
+                FunctionParaStatusDaCorrida(8);
+            }
+            else if (contador > 20 && contador <= 22)
+            {
+                FunctionParaStatusDaCorrida(9);
+            }
+            else if (contador > 22 && contador <= 23)
+            {
+                FunctionParaStatusDaCorrida(10);
+            }
+            else if (contador > 23 && contador <= 25)
+            {
+                FunctionParaStatusDaCorrida(11);
+            }
+            else if (contador > 25 && contador <= 27)
+            {
+                FunctionParaStatusDaCorrida(12);
+            }
+            else if (contador > 27 && contador <= 28)
+            {
+                FunctionParaStatusDaCorrida(13);
+            }
+            else if (contador > 28 && contador <= 30)
+            {
+                FunctionParaStatusDaCorrida(14);
+            }
+            else if (contador > 30 && contador <= 32)
+            {
+                FunctionParaStatusDaCorrida(15);
+            }
+            else if (contador > 32 && contador <= 34)
+            {
+                FunctionParaStatusDaCorrida(16);
+            }
+            else if (contador > 34 && contador <= 36)
+            {
+                FunctionParaStatusDaCorrida(17);
+            }
+            else if (contador > 36 && contador <= 37)
+            {
+                FunctionParaStatusDaCorrida(18);
+            }
+            else if (contador > 37 && contador <= 39)
+            {
+                FunctionParaStatusDaCorrida(19);
+            }
+            else if (contador > 39 && contador <= 41)
+            {
+                FunctionParaStatusDaCorrida(20);
+            }
+            else if (contador > 41 && contador <= 42)
+            {
+                FunctionParaStatusDaCorrida(21);
+            }
+            else if (contador > 42 && contador <= 44)
+            {
+                FunctionParaStatusDaCorrida(22);
+            }
+            else if (contador > 44 && contador <= 46)
+            {
+                FunctionParaStatusDaCorrida(23);
+            }
+            else if (contador > 46 && contador <= 48)
+            {
+                FunctionParaStatusDaCorrida(24);
             }
             else
             {
@@ -264,7 +439,14 @@ namespace Pilot_Menager
                 principal.ProxGPSemana = 0;
                 principal.ProxGPVoltas = 0;
             }
+        }
 
+        public void FunctionParaStatusDaCorrida(int i)
+        {
+            principal.ProxGP = pistas[i].NomeGp;
+            principal.ProxGPais = pistas[i].NomeCircuito;
+            principal.ProxGPSemana = pistas[i].SemanaDaProva;
+            principal.ProxGPVoltas = pistas[i].NumerosDeVoltas;
         }
         public void AtualizarCores()
         {
@@ -422,22 +604,28 @@ namespace Pilot_Menager
         }
         public void AtualizarTabelaInicioDeTemporada()
         {
-            if (pilotos[0].Categoria == "F1")
+            if (pilotos[myIndex].Categoria == "F1")
             {
                 PreencherDataGridViewClassEquipes(0, 10);
                 PreencherDataGridViewClassPilotos(0, 10);
                 AtualizarTabelas();
             }
-            else if (pilotos[0].Categoria == "F2")
+            else if (pilotos[myIndex].Categoria == "F2")
             {
                 PreencherDataGridViewClassPilotos(10, 20);
                 PreencherDataGridViewClassEquipes(10, 20);
                 AtualizarTabelas();
             }
-            else if (pilotos[0].Categoria == "F3")
+            else if (pilotos[myIndex].Categoria == "F3")
             {
                 PreencherDataGridViewClassPilotos(20, 30);
                 PreencherDataGridViewClassEquipes(20, 30);
+                AtualizarTabelas();
+            }
+            else
+            {
+                PreencherDataGridViewClassEquipes(0, 10);
+                PreencherDataGridViewClassPilotos(0, 10);
                 AtualizarTabelas();
             }
         }
@@ -809,11 +997,13 @@ namespace Pilot_Menager
         }
         public void SalvarDadosDosArquivo()
         {
+            Principal princ = principal;
             Equipes[] saveEquipe = equipes;
             Pilotos[] savePiloto = pilotos;
             Pistas[] savePista = pistas;
             DadosCompletos dadosCompletos = new DadosCompletos
             {
+                Principal = princ,
                 Equipes = saveEquipe,
                 Pilotos = savePiloto,
                 Pistas = savePista,
@@ -853,6 +1043,7 @@ namespace Pilot_Menager
 
                 if (dadosCompletos != null)
                 {
+                    principal = dadosCompletos.Principal;
                     equipes = dadosCompletos.Equipes;
                     pilotos = dadosCompletos.Pilotos;
                     pistas = dadosCompletos.Pistas;
@@ -893,28 +1084,33 @@ namespace Pilot_Menager
         {
             if (principal.ContadorDeSemana == principal.ProxGPSemana)
             {
-                MessageBox.Show("Corrida");
                 TelaQualificacao telaQualificacao = new TelaQualificacao(principal, equipes, pilotos, pistas);
                 telaQualificacao.ShowDialog();
 
-                if (pilotos[0].Categoria == "F1")
+                if (pilotos[myIndex].Categoria == "F1")
                 {
                     PreencherDataGridViewClassEquipes(0, 10);
                     PreencherDataGridViewClassPilotos(0, 10);
                 }
-                else if (pilotos[0].Categoria == "F2")
+                else if (pilotos[myIndex].Categoria == "F2")
                 {
                     PreencherDataGridViewClassEquipes(10, 20);
                     PreencherDataGridViewClassPilotos(10, 20);
                 }
-                else if (pilotos[0].Categoria == "F3")
+                else if (pilotos[myIndex].Categoria == "F3")
                 {
                     PreencherDataGridViewClassEquipes(20, 30);
                     PreencherDataGridViewClassPilotos(20, 30);
                 }
+                else
+                {
+                    PreencherDataGridViewClassEquipes(0, 10);
+                    PreencherDataGridViewClassPilotos(0, 10);
+                }
 
                 AtualizarTabelas();
 
+                principal.XpTurnoSemanal(pilotos);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -948,7 +1144,7 @@ namespace Pilot_Menager
                         FinalDeTemporadaDataBaseCampeoes("F3");
                     }
                 }
-
+                principal.XpTurnoSemanal(pilotos);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -957,16 +1153,17 @@ namespace Pilot_Menager
 
                 FinalDeTemporadaLimpaTable();
 
-                principal.CorPrincipal = pilotos[0].Cor1;
-                principal.CorSecundaria = pilotos[0].Cor2;
+                principal.CorPrincipal = pilotos[myIndex].Cor1;
+                principal.CorSecundaria = pilotos[myIndex].Cor2;
                 corPrincipal = ColorTranslator.FromHtml(principal.CorPrincipal);
                 corSecundaria = ColorTranslator.FromHtml(principal.CorSecundaria);
-                principal.IdadeJogador = pilotos[0].IdadePiloto;
+                principal.IdadeJogador = pilotos[myIndex].IdadePiloto;
                 AtualizarNomes();
                 AtualizarTabelaInicioDeTemporada();
             }
             else
             {
+                principal.XpTurnoSemanal(pilotos);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -985,7 +1182,6 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(equipes[0].PrimeiroColocado.ToString() + " - " + equipes[0].PontosCampeonato.ToString());
             /*
             TelaSettings telaSettings = new TelaSettings(principal);
             telaSettings.ShowDialog();
@@ -1116,6 +1312,7 @@ namespace Pilot_Menager
     }
     class DadosCompletos
     {
+        public Principal Principal { get; set; }
         public Equipes[] Equipes { get; set; }
         public Pilotos[] Pilotos { get; set; }
         public Pistas[] Pistas { get; set; }

@@ -14,14 +14,17 @@ namespace Pilot_Menager
         private string nomePiloto = "";
         private string sobrenomePiloto = "";
         private string statusPiloto = "Disponivel";
-        private int salarioPiloto = 0;
+        private double salarioPiloto = 0;
         private int contratoPiloto = 0;
         private string equipePiloto = "";
         private string categoria = "";
         private int posicaoAtualCampeonato;
         private int idadePiloto;
         private int augePiloto;
+        private int visibilidadePiloto;
         private int aposentadoriaPiloto;
+        private double xpPiloto;
+        private double potencialPiloto;
         private string cor1;
         private string cor2;
         private Random random = new Random();
@@ -62,6 +65,9 @@ namespace Pilot_Menager
             nacionalidadePiloto = nacionalidad;
             nomePiloto = nome;
             sobrenomePiloto = sobrenome;
+            xpPiloto = 0;
+            potencialPiloto = random.Next(60, 81);
+            potencialPiloto = (potencialPiloto / 100);
 
             // Definir de forma aleatória a idade do piloto (18 até 21)
             idadePiloto = idade;
@@ -71,6 +77,9 @@ namespace Pilot_Menager
 
             // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
             aposentadoriaPiloto = aposentadoria;
+
+            // Definir a visibilidade do piloto para patrocinador (entre 0 a 50)
+            visibilidadePiloto = random.Next(0, 51);
 
             // Atribuindo de formas aleatória, a qualidade de cada atributos (10 a 30)
             largada = largad;
@@ -153,6 +162,10 @@ namespace Pilot_Menager
                 Console.WriteLine("Arquivo de nomes não encontrado para a nacionalidade: " + nacionalidade);
             }
 
+            xpPiloto = 0;
+            potencialPiloto = random.Next(60, 81);
+            potencialPiloto = (potencialPiloto / 100);
+
             // Definir de forma aleatória a idade do piloto (18 até 21)
             idadePiloto = random.Next(18, 22);
 
@@ -161,6 +174,9 @@ namespace Pilot_Menager
 
             // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
             aposentadoriaPiloto = random.Next(36, 42);
+
+            // Definir a visibilidade do piloto para patrocinador (entre 0 a 50)
+            visibilidadePiloto = random.Next(0, 51);
 
             // Atribuindo de formas aleatória, a qualidade de cada atributos (10 a 40)
             largada = random.Next(10, 40);
@@ -184,17 +200,24 @@ namespace Pilot_Menager
             nacionalidadePiloto = nac;
             nomePiloto = nn;
             sobrenomePiloto = sn;
+            xpPiloto = 0;
+            potencialPiloto = random.Next(60, 81);
+            potencialPiloto = (potencialPiloto / 100);
 
-            // Definir de forma aleatória a idade do piloto (18 até 21)
+            // Definir de forma aleatória a idade do piloto (18 até 20)
             idadePiloto = random.Next(18, 21);
 
-            // Definir de forma aleatória o auge do piloto (30 até 36)
+            // Definir de forma aleatória o auge do piloto (30 até 34)
             augePiloto = random.Next(30, 35);
 
-            // Definir de forma aleatória a aposentadoria do piloto (36 até 41)
-            aposentadoriaPiloto = random.Next(37, 42);
+            // Definir de forma aleatória a aposentadoria do piloto (36 até 42)
+            aposentadoriaPiloto = random.Next(36, 43);
+
+            // Definir a visibilidade do piloto para patrocinador (entre 0 a 50)
+            visibilidadePiloto = random.Next(0, 51);
 
             // Atribuindo de formas aleatória, a qualidade de cada atributos (10 a 30)
+            /*
             largada = random.Next(10, 30);
             concentracao = random.Next(10, 30);
             ultrapassagem = random.Next(10, 30);
@@ -203,6 +226,15 @@ namespace Pilot_Menager
             chuva = random.Next(10, 30);
             acertoDoCarro = random.Next(10, 30);
             fisico = random.Next(10, 30);
+            */
+            largada = 30;
+            concentracao = 27;
+            ultrapassagem = 28;
+            experiencia = 20;
+            rapidez = 28;
+            chuva = 30;
+            acertoDoCarro = 24;
+            fisico = 22;
 
             mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
         }
@@ -238,7 +270,7 @@ namespace Pilot_Menager
             get { return sobrenomePiloto; }
             set { sobrenomePiloto = value; }
         }
-        public int SalarioPiloto
+        public double SalarioPiloto
         {
             get { return salarioPiloto; }
             set { salarioPiloto = value; }
@@ -273,6 +305,16 @@ namespace Pilot_Menager
             get { return idadePiloto; }
             set { idadePiloto = value; }
         }
+        public double PotencialPiloto
+        {
+            get { return potencialPiloto; }
+            set { potencialPiloto = value; }
+        }
+        public double XpPiloto
+        {
+            get { return xpPiloto; }
+            set { xpPiloto = value; }
+        }
         public int AugePiloto
         {
             get { return augePiloto; }
@@ -282,6 +324,11 @@ namespace Pilot_Menager
         {
             get { return aposentadoriaPiloto; }
             set { aposentadoriaPiloto = value; }
+        }
+        public int VisibilidadePiloto
+        {
+            get { return visibilidadePiloto; }
+            set { visibilidadePiloto = value; }
         }
         public string Cor1
         {

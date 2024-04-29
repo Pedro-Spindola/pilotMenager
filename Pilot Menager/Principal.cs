@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Pilot_Menager
 {
     public class Principal
     {
         Historicos historico = new Historicos();
+        private Random random = new Random();
 
         private string corPrincipal = "";
         private string corSecundaria = "";
@@ -19,11 +21,12 @@ namespace Pilot_Menager
         private int idadeJogador = 18;              
         private string nacionalidadeJogador = "";
         private int habilidadeJogador = 32;
+        private int myIndex = 99;
 
         private int contadorDeSemana = 01;
         private int contadorDeAno = 2024;
         private string statusDaTemporada = "Pre-Temporada";
-        private int totalSemanas = 10;
+        private int totalSemanas = 52;
 
         private string proxGP = "";
         private string proxGPais = "";
@@ -40,27 +43,58 @@ namespace Pilot_Menager
         private int importaciaCarroTemporada = 50;
         private int importanciaPilotoTemporada = 50;
 
-        private int primeiroLugar = 25;
-        private int segundoLugar = 18;
-        private int terceiroLugar = 15;
-        private int quartoLugar = 12;
-        private int quintoLugar = 10;
-        private int sextoLugar = 8;
-        private int setimoLugar = 6;
-        private int oitavoLugar = 4;
-        private int nonoLugar = 2;
-        private int decimoLugar = 1;
-        private int pontoVoltaMaisRapida = 1;
+        private int primeiroLugar;
+        private int segundoLugar;
+        private int terceiroLugar;
+        private int quartoLugar;
+        private int quintoLugar;
+        private int sextoLugar;
+        private int setimoLugar;
+        private int oitavoLugar;
+        private int nonoLugar;
+        private int decimoLugar;
+        private int decimoPrimeiroLugar;
+        private int decimoSegundoLugar;
+        private int decimoTerceiroLugar;
+        private int decimoQuartoLugar;
+        private int decimoQuintoLugar;
+        private int decimoSextoLugar;
+        private int pontoVoltaMaisRapida;
+
+        public void ConfigurarFaixaDePontuacao(String caminhoArquivo)
+        {
+            using (StreamReader sr = new StreamReader(caminhoArquivo))
+            {
+                // Lê e atribui os valores das variáveis
+                primeiroLugar = int.Parse(sr.ReadLine());
+                segundoLugar = int.Parse(sr.ReadLine());
+                terceiroLugar = int.Parse(sr.ReadLine());
+                quartoLugar = int.Parse(sr.ReadLine());
+                quintoLugar = int.Parse(sr.ReadLine());
+                sextoLugar = int.Parse(sr.ReadLine());
+                setimoLugar = int.Parse(sr.ReadLine());
+                oitavoLugar = int.Parse(sr.ReadLine());
+                nonoLugar = int.Parse(sr.ReadLine());
+                decimoLugar = int.Parse(sr.ReadLine());
+                decimoPrimeiroLugar = int.Parse(sr.ReadLine());
+                decimoSegundoLugar = int.Parse(sr.ReadLine());
+                decimoTerceiroLugar = int.Parse(sr.ReadLine());
+                decimoQuartoLugar = int.Parse(sr.ReadLine());
+                decimoQuintoLugar = int.Parse(sr.ReadLine());
+                decimoSextoLugar = int.Parse(sr.ReadLine());
+                pontoVoltaMaisRapida = int.Parse(sr.ReadLine());
+            }
+        }
         public void ContinuarTurno()
         {
             if (totalSemanas > contadorDeSemana)
             {
                 contadorDeSemana++;
-                if (contadorDeSemana > 2 && contadorDeSemana <= 8)
+                if (contadorDeSemana > 4 && contadorDeSemana <= 48)
                 {
                     statusDaTemporada = "Andamento";
                 }
-                else if (contadorDeSemana > 8)
+                else if (contadorDeSemana > 48)
                 {
                     statusDaTemporada = "Fim-Temporada";
                 }
@@ -157,6 +191,189 @@ namespace Pilot_Menager
                 equipesCampeoesF3.Add(new Historicos.EquipeCampeao { Ano = ano, Sede = sede, C1 = cor1, Nome = nome, Pontos = pontos });
             }
         }
+
+        internal void Transferencia(Pilotos[] pilot, int indice1, int indice2)
+        {
+            Pilotos temp = pilot[indice1];
+            pilot[indice1] = pilot[indice2];
+            pilot[indice2] = temp;
+            myIndex = indice1;
+        }
+        List<string> atrinutosList = new List<string>()
+        {
+            "largada",
+            "concentracao",
+            "ultrapassagem",
+            "experiencia",
+            "rapidez",
+            "chuva",
+            "acertoDoCarro",
+            "fisico"
+        };
+        internal void XpTurnoSemanal(Pilotos[] pilotos)
+        {
+            foreach (Pilotos piloto in pilotos)
+            {   
+                double newXp = piloto.XpPiloto + piloto.PotencialPiloto;
+                piloto.XpPiloto = newXp;
+
+                
+                if(piloto.XpPiloto >= 1)
+                {
+                    if (piloto.IdadePiloto <= piloto.AugePiloto)
+                    {
+                        // Adicionar pontos para acrescentar.
+                        do
+                        {
+                            if (piloto.XpPiloto >= 1)
+                            {
+                                string atributoAleatorio = atrinutosList[random.Next(atrinutosList.Count)];
+                                switch (atributoAleatorio)
+                                {
+                                    case "largada":
+                                        if (piloto.Largada < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Largada++;
+                                        }
+                                        break;
+                                    case "concentracao":
+                                        if (piloto.Concentracao < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Concentracao++;
+                                        }
+                                        break;
+                                    case "ultrapassagem":
+                                        if (piloto.Ultrapassagem < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Ultrapassagem++;
+                                        }
+                                        break;
+                                    case "experiencia":
+                                        if (piloto.Experiencia < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Experiencia++;
+                                        }
+                                        break;
+                                    case "rapidez":
+                                        if (piloto.Rapidez < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Rapidez++;
+                                        }
+                                        break;
+                                    case "chuva":
+                                        if (piloto.Chuva < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Chuva++;
+                                        }
+                                        break;
+                                    case "acertoDoCarro":
+                                        if (piloto.AcertoDoCarro < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.AcertoDoCarro++;
+                                        }
+                                        break;
+                                    case "fisico":
+                                        if (piloto.Fisico < 100)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Fisico++;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        } while (true);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            if (piloto.XpPiloto >= 1)
+                            {
+                                string atributoAleatorio = atrinutosList[random.Next(atrinutosList.Count)];
+                                switch (atributoAleatorio)
+                                {
+                                    case "largada":
+                                        if (piloto.Largada > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Largada--;
+                                        }
+                                        break;
+                                    case "concentracao":
+                                        if (piloto.Concentracao > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Concentracao--;
+                                        }
+                                        break;
+                                    case "ultrapassagem":
+                                        if (piloto.Ultrapassagem > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Ultrapassagem--;
+                                        }
+                                        break;
+                                    case "experiencia":
+                                        if (piloto.Experiencia > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Experiencia--;
+                                        }
+                                        break;
+                                    case "rapidez":
+                                        if (piloto.Rapidez > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Rapidez--;
+                                        }
+                                        break;
+                                    case "chuva":
+                                        if (piloto.Chuva > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Chuva--;
+                                        }
+                                        break;
+                                    case "acertoDoCarro":
+                                        if (piloto.AcertoDoCarro > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.AcertoDoCarro--;
+                                        }
+                                        break;
+                                    case "fisico":
+                                        if (piloto.Fisico > 0)
+                                        {
+                                            piloto.XpPiloto--;
+                                            piloto.Fisico--;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        } while (true);
+                    }
+                }
+            }
+        }
         // Get e Set
         public string Categoria
         {
@@ -197,6 +414,11 @@ namespace Pilot_Menager
         {
             get { return nacionalidadeJogador; }
             set { nacionalidadeJogador = value; }
+        }
+        public int MyIndex
+        {
+            get { return myIndex; }
+            set { myIndex = value; }
         }
         public int HabilidadeJogador
         {
@@ -317,6 +539,36 @@ namespace Pilot_Menager
         {
             get { return decimoLugar; }
             set { decimoLugar = value; }
+        }
+        public int DecimoPrimeiroLugar
+        {
+            get { return decimoPrimeiroLugar; }
+            set { decimoPrimeiroLugar = value; }
+        }
+        public int DecimoSegundoLugar
+        {
+            get { return decimoSegundoLugar; }
+            set { decimoSegundoLugar = value; }
+        }
+        public int DecimoTerceiroLugar
+        {
+            get { return decimoTerceiroLugar; }
+            set { decimoTerceiroLugar = value; }
+        }
+        public int DecimoQuartoLugar
+        {
+            get { return decimoQuartoLugar; }
+            set { decimoQuartoLugar = value; }
+        }
+        public int DecimoQuintoLugar
+        {
+            get { return decimoQuintoLugar; }
+            set { decimoQuintoLugar = value; }
+        }
+        public int DecimoSextoLugar
+        {
+            get { return decimoSextoLugar; }
+            set { decimoSextoLugar = value; }
         }
         public int PontoVoltaMaisRapida
         {

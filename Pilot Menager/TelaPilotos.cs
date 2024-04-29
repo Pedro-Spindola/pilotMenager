@@ -56,7 +56,7 @@ namespace Pilot_Menager
 
                 TpSalarioPiloto.Text = string.Format("R$ {0:N2}", pilotos[i].SalarioPiloto);
                 TpStatusPiloto.Text = pilotos[i].StatusPiloto;
-                TpDuracaoPiloto.Text = string.Format("{0} Anos", pilotos[i].ContratoPiloto);
+                TpDuracaoPiloto.Text = string.Format("{0} Ano(s)", pilotos[i].ContratoPiloto);
 
                 PreencherDataGridViewHistoricoPilotos(pilotos[i].pilotosTemporadas, dgvTelaPilotoExibirHistoricoPiloto);
                 AtualizarTabelas(dgvTelaPilotoExibirHistoricoPiloto);
@@ -73,6 +73,11 @@ namespace Pilot_Menager
                 TpLabelCor2B.BackColor = corSecundaria;
                 TpLabelCor3A.BackColor = corPrincipal;
                 TpLabelCor3B.BackColor = corSecundaria;
+
+                //Teste
+
+                labelXP.Text = pilotos[i].XpPiloto.ToString();
+                labelPotencial.Text = pilotos[i].PotencialPiloto.ToString();
             }
         }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
