@@ -24,7 +24,7 @@ namespace Pilot_Menager
         Principal principal;
         private Equipes[] equipes = new Equipes[30];    // Criando array com a quantidade de equipes.
         private Pilotos[] pilotos = new Pilotos[100];    // Criando array com a quantidade de pilotos.
-        private Pistas[] pistas = new Pistas[25];        // Crinado array com a quantidade de pistas. 
+        private Pistas[] pistas = new Pistas[3]; //25        // Crinado array com a quantidade de pistas. 
         private Random random = new Random();
         private Financias financias = new Financias();
         Color corPrincipal;
@@ -262,6 +262,7 @@ namespace Pilot_Menager
             pistas[0] = new Pistas("Austrália", "Melbourne", 58, 44, 56, 76800);
             pistas[1] = new Pistas("Itália", "Monza", 53, 35, 65, 70200);
             pistas[2] = new Pistas("Brasil", "Interlagos", 71, 42, 58, 65400);
+            /*
             pistas[3] = new Pistas("Bahrein", "Sakhir", 57, 43, 57, 77400);
             pistas[4] = new Pistas("Arábia Saudita", "Corniche Circuit", 50, 58, 42, 76200);
             pistas[5] = new Pistas("Japão", "Suzuka", 53, 59, 41, 75420);
@@ -283,7 +284,7 @@ namespace Pilot_Menager
             pistas[21] = new Pistas("Qatar", "Lusail Circuit", 57, 59, 41, 72480);
             pistas[22] = new Pistas("Estados Unidos", "Las Vegas", 50, 70, 30, 81100);
             pistas[23] = new Pistas("Emirados Árabes Unidos", "Yas Marina", 58, 39, 61, 74400);
-            pistas[24] = new Pistas("Alemanha", "Hockenheimring", 67, 42, 58, 68400);
+            pistas[24] = new Pistas("Alemanha", "Hockenheimring", 67, 42, 58, 68400);*/
 
         }
         public void EmbaralharPistas()
@@ -306,6 +307,7 @@ namespace Pilot_Menager
             pistas[0].SemanaDaProva = 5;
             pistas[1].SemanaDaProva = 7;
             pistas[2].SemanaDaProva = 8;
+            /*
             pistas[3].SemanaDaProva = 10;
             pistas[4].SemanaDaProva = 12;
             pistas[5].SemanaDaProva = 15;
@@ -327,7 +329,7 @@ namespace Pilot_Menager
             pistas[21].SemanaDaProva = 42;
             pistas[22].SemanaDaProva = 44;
             pistas[23].SemanaDaProva = 46;
-            pistas[24].SemanaDaProva = 48;
+            pistas[24].SemanaDaProva = 48;*/
 
         }
         public void AtualizaStatusProxCorrida(int contador)
@@ -344,6 +346,7 @@ namespace Pilot_Menager
             {
                 FunctionParaStatusDaCorrida(2);
             }
+            /*
             else if (contador > 8 && contador <= 10)
             {
                 FunctionParaStatusDaCorrida(3);
@@ -431,7 +434,7 @@ namespace Pilot_Menager
             else if (contador > 46 && contador <= 48)
             {
                 FunctionParaStatusDaCorrida(24);
-            }
+            }*/
             else
             {
                 principal.ProxGP = "";

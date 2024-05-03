@@ -23,10 +23,10 @@ namespace Pilot_Menager
         private int habilidadeJogador = 32;
         private int myIndex = 99;
 
-        private int contadorDeSemana = 01;
+        private int contadorDeSemana = 1;
         private int contadorDeAno = 2024;
         private string statusDaTemporada = "Pre-Temporada";
-        private int totalSemanas = 52;
+        private int totalSemanas = 10;  // 52 semanas
 
         private string proxGP = "";
         private string proxGPais = "";
@@ -40,8 +40,8 @@ namespace Pilot_Menager
         private int configInicioGame = 0;                   // 1 = Novo Jogo, 2 = Continuar Game
         private int tempoRodada = 200;                       // Tempo que vai passar o gamer em milessegundos.
 
-        private int importaciaCarroTemporada = 50;
-        private int importanciaPilotoTemporada = 50;
+        private int importaciaCarroTemporada = 30;
+        private int importanciaPilotoTemporada = 70;
 
         private int primeiroLugar;
         private int segundoLugar;
@@ -90,11 +90,11 @@ namespace Pilot_Menager
             if (totalSemanas > contadorDeSemana)
             {
                 contadorDeSemana++;
-                if (contadorDeSemana > 4 && contadorDeSemana <= 48)
+                if (contadorDeSemana > 4 && contadorDeSemana <= 9) //(contadorDeSemana > 4 && contadorDeSemana <= 48)
                 {
                     statusDaTemporada = "Andamento";
                 }
-                else if (contadorDeSemana > 48)
+                else if (contadorDeSemana > 9) //(contadorDeSemana > 48)
                 {
                     statusDaTemporada = "Fim-Temporada";
                 }
@@ -225,7 +225,7 @@ namespace Pilot_Menager
                         // Adicionar pontos para acrescentar.
                         do
                         {
-                            if (piloto.XpPiloto >= 1)
+                            if (piloto.XpPiloto >= 1 && piloto.MediaPiloto < 100)
                             {
                                 string atributoAleatorio = atrinutosList[random.Next(atrinutosList.Count)];
                                 switch (atributoAleatorio)
@@ -235,6 +235,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Largada++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "concentracao":
@@ -242,6 +243,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Concentracao++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "ultrapassagem":
@@ -249,6 +251,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Ultrapassagem++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "experiencia":
@@ -256,6 +259,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Experiencia++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "rapidez":
@@ -263,6 +267,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Rapidez++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "chuva":
@@ -270,6 +275,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Chuva++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "acertoDoCarro":
@@ -277,6 +283,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.AcertoDoCarro++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "fisico":
@@ -284,11 +291,17 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Fisico++;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     default:
                                         break;
                                 }
+                            }
+                            else if (piloto.MediaPiloto == 100)
+                            {
+                                piloto.XpPiloto--;
+                                break;
                             }
                             else
                             {
@@ -300,7 +313,7 @@ namespace Pilot_Menager
                     {
                         do
                         {
-                            if (piloto.XpPiloto >= 1)
+                            if (piloto.XpPiloto >= 1 && piloto.MediaPiloto > 1)
                             {
                                 string atributoAleatorio = atrinutosList[random.Next(atrinutosList.Count)];
                                 switch (atributoAleatorio)
@@ -310,6 +323,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Largada--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "concentracao":
@@ -317,6 +331,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Concentracao--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "ultrapassagem":
@@ -324,6 +339,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Ultrapassagem--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "experiencia":
@@ -331,6 +347,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Experiencia--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "rapidez":
@@ -338,6 +355,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Rapidez--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "chuva":
@@ -345,6 +363,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Chuva--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "acertoDoCarro":
@@ -352,6 +371,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.AcertoDoCarro--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     case "fisico":
@@ -359,6 +379,7 @@ namespace Pilot_Menager
                                         {
                                             piloto.XpPiloto--;
                                             piloto.Fisico--;
+                                            piloto.AtualizarMedia();
                                         }
                                         break;
                                     default:

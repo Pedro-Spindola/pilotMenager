@@ -628,7 +628,8 @@ namespace Pilot_Menager
                             {
                                 if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
-                                    pilotos[j].TempoCorrida = i * 100;
+                                    pilotos[j].TempoCorrida = (pilotos[j].QualificacaoParaCorrida * 100);
+                                    MessageBox.Show(pilotos[j].TempoCorrida.ToString());
                                 }
                             }
                         }

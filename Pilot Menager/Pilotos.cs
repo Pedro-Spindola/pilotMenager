@@ -238,6 +238,12 @@ namespace Pilot_Menager
 
             mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
         }
+
+        public void AtualizarMedia()
+        {
+            mediaPiloto = ((largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoDoCarro + fisico) / 8);
+        }
+
         public List<Pilotos.PilotoTemporadas> pilotosTemporadas = new List<Pilotos.PilotoTemporadas>();
 
         // Método para adicionar um piloto campeão à lista
