@@ -57,8 +57,8 @@
             label8 = new Label();
             label6 = new Label();
             panel3 = new Panel();
-            TpContratoMotor = new Label();
-            label25 = new Label();
+            TpMedia = new Label();
+            label23 = new Label();
             TpMotor = new Label();
             label21 = new Label();
             label17 = new Label();
@@ -431,8 +431,8 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(230, 240, 240);
-            panel3.Controls.Add(TpContratoMotor);
-            panel3.Controls.Add(label25);
+            panel3.Controls.Add(TpMedia);
+            panel3.Controls.Add(label23);
             panel3.Controls.Add(TpMotor);
             panel3.Controls.Add(label21);
             panel3.Controls.Add(label17);
@@ -459,33 +459,34 @@
             panel3.Size = new Size(390, 400);
             panel3.TabIndex = 13;
             // 
-            // TpContratoMotor
+            // TpMedia
             // 
-            TpContratoMotor.Anchor = AnchorStyles.None;
-            TpContratoMotor.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpContratoMotor.Location = new Point(150, 325);
-            TpContratoMotor.Margin = new Padding(0);
-            TpContratoMotor.Name = "TpContratoMotor";
-            TpContratoMotor.Size = new Size(240, 25);
-            TpContratoMotor.TabIndex = 63;
-            TpContratoMotor.TextAlign = ContentAlignment.MiddleCenter;
+            TpMedia.Anchor = AnchorStyles.None;
+            TpMedia.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            TpMedia.Location = new Point(150, 270);
+            TpMedia.Margin = new Padding(0);
+            TpMedia.Name = "TpMedia";
+            TpMedia.Size = new Size(40, 30);
+            TpMedia.TabIndex = 65;
+            TpMedia.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label25
+            // label23
             // 
-            label25.Anchor = AnchorStyles.None;
-            label25.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label25.Location = new Point(10, 325);
-            label25.Margin = new Padding(0);
-            label25.Name = "label25";
-            label25.Size = new Size(140, 25);
-            label25.TabIndex = 62;
-            label25.TextAlign = ContentAlignment.MiddleRight;
+            label23.Anchor = AnchorStyles.None;
+            label23.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.Location = new Point(10, 270);
+            label23.Margin = new Padding(0);
+            label23.Name = "label23";
+            label23.Size = new Size(140, 30);
+            label23.TabIndex = 64;
+            label23.Text = "MÉDIA:";
+            label23.TextAlign = ContentAlignment.MiddleRight;
             // 
             // TpMotor
             // 
             TpMotor.Anchor = AnchorStyles.None;
             TpMotor.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpMotor.Location = new Point(150, 300);
+            TpMotor.Location = new Point(150, 340);
             TpMotor.Margin = new Padding(0);
             TpMotor.Name = "TpMotor";
             TpMotor.Size = new Size(240, 25);
@@ -496,7 +497,7 @@
             // 
             label21.Anchor = AnchorStyles.None;
             label21.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(10, 300);
+            label21.Location = new Point(10, 340);
             label21.Margin = new Padding(0);
             label21.Name = "label21";
             label21.Size = new Size(140, 25);
@@ -507,10 +508,10 @@
             // label17
             // 
             label17.Font = new Font("Comic Sans MS", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.Location = new Point(10, 270);
+            label17.Location = new Point(10, 310);
             label17.Margin = new Padding(0);
             label17.Name = "label17";
-            label17.Size = new Size(380, 25);
+            label17.Size = new Size(380, 30);
             label17.TabIndex = 59;
             label17.Text = "Fornecedor";
             label17.TextAlign = ContentAlignment.MiddleCenter;
@@ -519,10 +520,10 @@
             // 
             TpConfiabilidade.Anchor = AnchorStyles.None;
             TpConfiabilidade.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpConfiabilidade.Location = new Point(150, 224);
+            TpConfiabilidade.Location = new Point(150, 240);
             TpConfiabilidade.Margin = new Padding(0);
             TpConfiabilidade.Name = "TpConfiabilidade";
-            TpConfiabilidade.Size = new Size(40, 25);
+            TpConfiabilidade.Size = new Size(40, 30);
             TpConfiabilidade.TabIndex = 58;
             TpConfiabilidade.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -530,10 +531,10 @@
             // 
             label26.Anchor = AnchorStyles.None;
             label26.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label26.Location = new Point(10, 224);
+            label26.Location = new Point(10, 240);
             label26.Margin = new Padding(0);
             label26.Name = "label26";
-            label26.Size = new Size(140, 25);
+            label26.Size = new Size(140, 30);
             label26.TabIndex = 57;
             label26.Text = "CONFIABILIDADE:";
             label26.TextAlign = ContentAlignment.MiddleRight;
@@ -542,10 +543,10 @@
             // 
             TpDirecao.Anchor = AnchorStyles.None;
             TpDirecao.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpDirecao.Location = new Point(150, 197);
+            TpDirecao.Location = new Point(150, 210);
             TpDirecao.Margin = new Padding(0);
             TpDirecao.Name = "TpDirecao";
-            TpDirecao.Size = new Size(40, 25);
+            TpDirecao.Size = new Size(40, 30);
             TpDirecao.TabIndex = 56;
             TpDirecao.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -553,10 +554,10 @@
             // 
             label24.Anchor = AnchorStyles.None;
             label24.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label24.Location = new Point(10, 197);
+            label24.Location = new Point(10, 210);
             label24.Margin = new Padding(0);
             label24.Name = "label24";
-            label24.Size = new Size(140, 25);
+            label24.Size = new Size(140, 30);
             label24.TabIndex = 55;
             label24.Text = "DIREÇÃO:";
             label24.TextAlign = ContentAlignment.MiddleRight;
@@ -565,10 +566,10 @@
             // 
             TpEletrico.Anchor = AnchorStyles.None;
             TpEletrico.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpEletrico.Location = new Point(150, 170);
+            TpEletrico.Location = new Point(150, 180);
             TpEletrico.Margin = new Padding(0);
             TpEletrico.Name = "TpEletrico";
-            TpEletrico.Size = new Size(40, 25);
+            TpEletrico.Size = new Size(40, 30);
             TpEletrico.TabIndex = 54;
             TpEletrico.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -576,10 +577,10 @@
             // 
             label22.Anchor = AnchorStyles.None;
             label22.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.Location = new Point(10, 170);
+            label22.Location = new Point(10, 180);
             label22.Margin = new Padding(0);
             label22.Name = "label22";
-            label22.Size = new Size(140, 25);
+            label22.Size = new Size(140, 30);
             label22.TabIndex = 53;
             label22.Text = "ELÉTRICO:";
             label22.TextAlign = ContentAlignment.MiddleRight;
@@ -588,10 +589,10 @@
             // 
             TpCambio.Anchor = AnchorStyles.None;
             TpCambio.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpCambio.Location = new Point(150, 143);
+            TpCambio.Location = new Point(150, 150);
             TpCambio.Margin = new Padding(0);
             TpCambio.Name = "TpCambio";
-            TpCambio.Size = new Size(40, 25);
+            TpCambio.Size = new Size(40, 30);
             TpCambio.TabIndex = 52;
             TpCambio.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -599,10 +600,10 @@
             // 
             label20.Anchor = AnchorStyles.None;
             label20.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(10, 143);
+            label20.Location = new Point(10, 150);
             label20.Margin = new Padding(0);
             label20.Name = "label20";
-            label20.Size = new Size(140, 25);
+            label20.Size = new Size(140, 30);
             label20.TabIndex = 51;
             label20.Text = "CÂMBIO:";
             label20.TextAlign = ContentAlignment.MiddleRight;
@@ -611,10 +612,10 @@
             // 
             TpAsaTraseira.Anchor = AnchorStyles.None;
             TpAsaTraseira.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpAsaTraseira.Location = new Point(150, 116);
+            TpAsaTraseira.Location = new Point(150, 120);
             TpAsaTraseira.Margin = new Padding(0);
             TpAsaTraseira.Name = "TpAsaTraseira";
-            TpAsaTraseira.Size = new Size(40, 25);
+            TpAsaTraseira.Size = new Size(40, 30);
             TpAsaTraseira.TabIndex = 50;
             TpAsaTraseira.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -622,10 +623,10 @@
             // 
             label18.Anchor = AnchorStyles.None;
             label18.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.Location = new Point(10, 116);
+            label18.Location = new Point(10, 120);
             label18.Margin = new Padding(0);
             label18.Name = "label18";
-            label18.Size = new Size(140, 25);
+            label18.Size = new Size(140, 30);
             label18.TabIndex = 49;
             label18.Text = "ASA TRASEIRA:";
             label18.TextAlign = ContentAlignment.MiddleRight;
@@ -634,10 +635,10 @@
             // 
             TpAsaDianteira.Anchor = AnchorStyles.None;
             TpAsaDianteira.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpAsaDianteira.Location = new Point(150, 89);
+            TpAsaDianteira.Location = new Point(150, 90);
             TpAsaDianteira.Margin = new Padding(0);
             TpAsaDianteira.Name = "TpAsaDianteira";
-            TpAsaDianteira.Size = new Size(40, 25);
+            TpAsaDianteira.Size = new Size(40, 30);
             TpAsaDianteira.TabIndex = 48;
             TpAsaDianteira.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -645,10 +646,10 @@
             // 
             label16.Anchor = AnchorStyles.None;
             label16.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.Location = new Point(10, 89);
+            label16.Location = new Point(10, 90);
             label16.Margin = new Padding(0);
             label16.Name = "label16";
-            label16.Size = new Size(140, 25);
+            label16.Size = new Size(140, 30);
             label16.TabIndex = 47;
             label16.Text = "ASA DIANTEIRA:";
             label16.TextAlign = ContentAlignment.MiddleRight;
@@ -657,10 +658,10 @@
             // 
             TpFreio.Anchor = AnchorStyles.None;
             TpFreio.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpFreio.Location = new Point(150, 62);
+            TpFreio.Location = new Point(150, 60);
             TpFreio.Margin = new Padding(0);
             TpFreio.Name = "TpFreio";
-            TpFreio.Size = new Size(40, 25);
+            TpFreio.Size = new Size(40, 30);
             TpFreio.TabIndex = 46;
             TpFreio.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -668,10 +669,10 @@
             // 
             label14.Anchor = AnchorStyles.None;
             label14.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(10, 62);
+            label14.Location = new Point(10, 60);
             label14.Margin = new Padding(0);
             label14.Name = "label14";
-            label14.Size = new Size(140, 25);
+            label14.Size = new Size(140, 30);
             label14.TabIndex = 45;
             label14.Text = "FREIO:";
             label14.TextAlign = ContentAlignment.MiddleRight;
@@ -691,10 +692,10 @@
             // 
             TpAerodinamica.Anchor = AnchorStyles.None;
             TpAerodinamica.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TpAerodinamica.Location = new Point(150, 35);
+            TpAerodinamica.Location = new Point(150, 30);
             TpAerodinamica.Margin = new Padding(0);
             TpAerodinamica.Name = "TpAerodinamica";
-            TpAerodinamica.Size = new Size(40, 25);
+            TpAerodinamica.Size = new Size(40, 30);
             TpAerodinamica.TabIndex = 43;
             TpAerodinamica.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -702,10 +703,10 @@
             // 
             label15.Anchor = AnchorStyles.None;
             label15.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.Location = new Point(10, 35);
+            label15.Location = new Point(10, 30);
             label15.Margin = new Padding(0);
             label15.Name = "label15";
-            label15.Size = new Size(140, 25);
+            label15.Size = new Size(140, 30);
             label15.TabIndex = 42;
             label15.Text = "AERODINÂMICA:";
             label15.TextAlign = ContentAlignment.MiddleRight;
@@ -896,11 +897,11 @@
         private Label label15;
         private Label TpMotor;
         private Label label21;
-        private Label TpContratoMotor;
-        private Label label25;
         private Label label19;
         private Label TpPiloto1;
         private Label label27;
         private Label TpPiloto2;
+        private Label TpMedia;
+        private Label label23;
     }
 }

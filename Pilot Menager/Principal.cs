@@ -38,10 +38,10 @@ namespace Pilot_Menager
         public string categoria = "";
 
         private int configInicioGame = 0;                   // 1 = Novo Jogo, 2 = Continuar Game
-        private int tempoRodada = 200;                       // Tempo que vai passar o gamer em milessegundos.
+        private int tempoRodada = 200;                       // Tempo que vai passar o gamer em milessegundos. 200
 
-        private int importaciaCarroTemporada = 30;
-        private int importanciaPilotoTemporada = 70;
+        private int importaciaCarroTemporada = 50;
+        private int importanciaPilotoTemporada = 50;
 
         private int primeiroLugar;
         private int segundoLugar;
@@ -199,6 +199,7 @@ namespace Pilot_Menager
             pilot[indice2] = temp;
             myIndex = indice1;
         }
+
         List<string> atrinutosList = new List<string>()
         {
             "largada",
@@ -209,6 +210,17 @@ namespace Pilot_Menager
             "chuva",
             "acertoDoCarro",
             "fisico"
+        };
+        List<string> atributosListEquipes = new List<string>()
+        {
+            "aerodinamica",
+            "freio",
+            "asaDianteira",
+            "asaTraseira",
+            "cambio",
+            "eletrico",
+            "direcao",
+            "confiabilidade"
         };
         internal void XpTurnoSemanal(Pilotos[] pilotos)
         {
@@ -395,6 +407,341 @@ namespace Pilot_Menager
                 }
             }
         }
+        internal void XpEquipeSemanal(Equipes[] equipes)
+        {
+            foreach (Equipes equipe in equipes)
+            {
+                int newXp = random.Next(1, 4);   // Vai sortear entre 1 e 5 (1 = -1      2 = 0      3 = 1)
+
+                do
+                {
+                    if (equipe.MediaEquipe <= 100 && equipe.MediaEquipe >= 10 && newXp != 0)
+                    {
+                        string atributoAleatorio = atributosListEquipes[random.Next(atributosListEquipes.Count)];
+                        switch (atributoAleatorio)
+                        {
+                            case "aerodinamica":
+                                if (equipe.Aerodinamica <= 100 && equipe.Aerodinamica >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Aerodinamica <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Aerodinamica -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Aerodinamica >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Aerodinamica += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "freio":
+                                if (equipe.Freio <= 100 && equipe.Freio >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Freio <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Freio -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Freio >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Freio += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "asaDianteira":
+                                if (equipe.AsaDianteira <= 100 && equipe.AsaDianteira >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.AsaDianteira <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.AsaDianteira -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.AsaDianteira >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.AsaDianteira += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "asaTraseira":
+                                if (equipe.AsaTraseira <= 100 && equipe.AsaTraseira >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.AsaTraseira <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.AsaTraseira -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.AsaTraseira >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.AsaTraseira += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "cambio":
+                                if (equipe.Cambio <= 100 && equipe.Cambio >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Cambio <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Cambio -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Cambio >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Cambio += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "eletrico":
+                                if (equipe.Eletrico <= 100 && equipe.Eletrico >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Eletrico <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Eletrico -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Eletrico >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Eletrico += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "direcao":
+                                if (equipe.Direcao <= 100 && equipe.Direcao >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Direcao <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Direcao -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Direcao >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Direcao += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            case "confiabilidade":
+                                if (equipe.Confiabilidade <= 100 && equipe.Confiabilidade >= 10)
+                                {
+                                    switch (newXp)
+                                    {
+                                        case 1:
+                                            if (equipe.Confiabilidade <= 10)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Confiabilidade -= 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        case 2:
+                                            newXp = 0;
+                                            break;
+                                        case 3:
+                                            if (equipe.Confiabilidade >= 100)
+                                            {
+                                                newXp = 0;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                equipe.Confiabilidade += 1;
+                                                newXp = 0;
+                                                break;
+                                            }
+                                        default:
+                                            break;
+                                    }
+                                    equipe.AtualizarMedia();
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (equipe.MediaEquipe == 100 || equipe.MediaEquipe == 9)
+                    {
+                        newXp = 0;
+                        break;
+                    }
+                    else
+                    {
+                        newXp = 0;
+                        break;
+                    }
+                } while (true);
+            }
+        }
+        
         // Get e Set
         public string Categoria
         {

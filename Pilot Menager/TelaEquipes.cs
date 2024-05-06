@@ -51,6 +51,7 @@ namespace Pilot_Menager
                 TpEletrico.Text = equipes[i].Eletrico.ToString();
                 TpDirecao.Text = equipes[i].Direcao.ToString();
                 TpConfiabilidade.Text = equipes[i].Confiabilidade.ToString();
+                TpMedia.Text = equipes[i].MediaEquipe.ToString();
 
                 TpSalarioPiloto1.Text = string.Format("R$ {0:N2}", equipes[i].PrimeiroPilotoSalario);
                 TpContratoPiloto1.Text = string.Format("{0} Anos", equipes[i].PrimeiroPilotoContrato);
@@ -74,6 +75,14 @@ namespace Pilot_Menager
                 TpLabelCor1B.BackColor = corSecundaria;
                 TpLabelCor3A.BackColor = corPrincipal;
                 TpLabelCor3B.BackColor = corSecundaria;
+
+                MessageBox.Show(equipes[i].PaPrimeiroPiloto);
+                MessageBox.Show(equipes[i].PaPrimeiroPilotoContrato.ToString());
+                MessageBox.Show(equipes[i].PaPrimeiroPilotoSalario.ToString());
+
+                MessageBox.Show(equipes[i].PaSegundoPiloto);
+                MessageBox.Show(equipes[i].PaSegundoPilotoContrato.ToString());
+                MessageBox.Show(equipes[i].PaSegundoPilotoSalario.ToString());
             }
         }
         private void CriarDataGridViewClassEquipes(DataGridView dataGridViewEquipes)

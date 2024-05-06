@@ -79,10 +79,6 @@
             label12 = new Label();
             label6 = new Label();
             panel6 = new Panel();
-            labelPotencial = new Label();
-            label21 = new Label();
-            labelXP = new Label();
-            label17 = new Label();
             label1 = new Label();
             panel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgTelaPilotoExibirTodosPilotos).BeginInit();
@@ -92,7 +88,6 @@
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTelaPilotoExibirHistoricoPiloto).BeginInit();
             panel5.SuspendLayout();
-            panel6.SuspendLayout();
             SuspendLayout();
             // 
             // panel17
@@ -622,7 +617,6 @@
             TpStatusPiloto.Name = "TpStatusPiloto";
             TpStatusPiloto.Size = new Size(100, 25);
             TpStatusPiloto.TabIndex = 31;
-            TpStatusPiloto.Text = "1º Piloto";
             TpStatusPiloto.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TpDuracaoPiloto
@@ -634,7 +628,6 @@
             TpDuracaoPiloto.Name = "TpDuracaoPiloto";
             TpDuracaoPiloto.Size = new Size(100, 25);
             TpDuracaoPiloto.TabIndex = 30;
-            TpDuracaoPiloto.Text = "1 Ano";
             TpDuracaoPiloto.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TpSalarioPiloto
@@ -646,7 +639,6 @@
             TpSalarioPiloto.Name = "TpSalarioPiloto";
             TpSalarioPiloto.Size = new Size(100, 25);
             TpSalarioPiloto.TabIndex = 29;
-            TpSalarioPiloto.Text = "Equipe";
             TpSalarioPiloto.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -699,63 +691,11 @@
             // panel6
             // 
             panel6.BackColor = Color.FromArgb(230, 240, 240);
-            panel6.Controls.Add(labelPotencial);
-            panel6.Controls.Add(label21);
-            panel6.Controls.Add(labelXP);
-            panel6.Controls.Add(label17);
             panel6.Location = new Point(930, 130);
             panel6.Margin = new Padding(0);
             panel6.Name = "panel6";
             panel6.Size = new Size(390, 550);
             panel6.TabIndex = 18;
-            // 
-            // labelPotencial
-            // 
-            labelPotencial.Anchor = AnchorStyles.None;
-            labelPotencial.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPotencial.Location = new Point(110, 47);
-            labelPotencial.Margin = new Padding(0);
-            labelPotencial.Name = "labelPotencial";
-            labelPotencial.Size = new Size(157, 25);
-            labelPotencial.TabIndex = 35;
-            labelPotencial.Text = "1º Piloto";
-            labelPotencial.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label21
-            // 
-            label21.Anchor = AnchorStyles.None;
-            label21.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(10, 47);
-            label21.Margin = new Padding(0);
-            label21.Name = "label21";
-            label21.Size = new Size(100, 25);
-            label21.TabIndex = 34;
-            label21.Text = "POTENCIAL:";
-            label21.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // labelXP
-            // 
-            labelXP.Anchor = AnchorStyles.None;
-            labelXP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelXP.Location = new Point(110, 22);
-            labelXP.Margin = new Padding(0);
-            labelXP.Name = "labelXP";
-            labelXP.Size = new Size(157, 25);
-            labelXP.TabIndex = 33;
-            labelXP.Text = "1º Piloto";
-            labelXP.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // label17
-            // 
-            label17.Anchor = AnchorStyles.None;
-            label17.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.Location = new Point(10, 22);
-            label17.Margin = new Padding(0);
-            label17.Name = "label17";
-            label17.Size = new Size(100, 25);
-            label17.TabIndex = 32;
-            label17.Text = "XP:";
-            label17.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label1
             // 
@@ -797,7 +737,6 @@
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvTelaPilotoExibirHistoricoPiloto).EndInit();
             panel5.ResumeLayout(false);
-            panel6.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -855,9 +794,5 @@
         private Label TpLabelCor3B;
         private Label TpLabelCor2B;
         private Label TpLabelCor2A;
-        private Label labelPotencial;
-        private Label label21;
-        private Label labelXP;
-        private Label label17;
     }
 }

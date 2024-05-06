@@ -38,10 +38,18 @@ namespace Pilot_Menager
         private string primeiroPiloto;
         private int primeiroPilotoContrato;
         private double primeiroPilotoSalario;
+
         private string segundoPiloto;
         private int segundoPilotoContrato;
         private double segundoPilotoSalario;
 
+        private string paPrimeiroPiloto;
+        private int paPrimeiroPilotoContrato;
+        private double paPrimeiroPilotoSalario;
+
+        private string paSegundoPiloto;
+        private int paSegundoPilotoContrato;
+        private double paSegundoPilotoSalario;
         public Equipes()
         {
         }
@@ -99,6 +107,10 @@ namespace Pilot_Menager
             public int Segundo { get; set; }
             public int Terceiro { get; set; }
             public string CategoriaAtual { get; set; }
+        }
+        public void AtualizarMedia()
+        {
+            mediaEquipe = ((aerodinamica + freio + asaDianteira + asaTraseira + cambio + eletrico + direcao + confiabilidade) / 8);
         }
         // Get Set
         public string NomeEquipe
@@ -161,6 +173,38 @@ namespace Pilot_Menager
             get { return segundoPilotoSalario; }
             set { segundoPilotoSalario = value; }
         }
+        /**/
+        public string PaPrimeiroPiloto
+        {
+            get { return paPrimeiroPiloto; }
+            set { paPrimeiroPiloto = value; }
+        }
+        public string PaSegundoPiloto
+        {
+            get { return paSegundoPiloto; }
+            set { paSegundoPiloto = value; }
+        }
+        public int PaPrimeiroPilotoContrato
+        {
+            get { return paPrimeiroPilotoContrato; }
+            set { paPrimeiroPilotoContrato = value; }
+        }
+        public int PaSegundoPilotoContrato
+        {
+            get { return paSegundoPilotoContrato; }
+            set { paSegundoPilotoContrato = value; }
+        }
+        public double PaPrimeiroPilotoSalario
+        {
+            get { return paPrimeiroPilotoSalario; }
+            set { paPrimeiroPilotoSalario = value; }
+        }
+        public double PaSegundoPilotoSalario
+        {
+            get { return paSegundoPilotoSalario; }
+            set { paSegundoPilotoSalario = value; }
+        }
+        /**/
         public int PosicaoAtualCampeonato
         {
             get { return posicaoAtualCampeonato; }

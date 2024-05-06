@@ -16,6 +16,8 @@ using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using static Pilot_Menager.Pilotos;
+using static Pilot_Menager.Equipes;
 
 namespace Pilot_Menager
 {
@@ -76,7 +78,7 @@ namespace Pilot_Menager
         public void IniciarNovoGame()
         {
             // Gerando um array de Pilotos
-            for (int i = 20; i < pilotos.Length; i++)
+            for (int i = 0; i < pilotos.Length; i++)
             {
                 Pilotos piloto = new Pilotos();
                 if (i + 1 == pilotos.Length)
@@ -92,6 +94,7 @@ namespace Pilot_Menager
             }
             //
             // public void geraPiloto( int largad, int concent, int ultrapassag, int experience, int rapid, int chuv, int acerto, int fisic)
+            /*
             pilotos[0] = new Pilotos("Max", "Verstappen", "Holanda", 26, 32, 40, 100, 100, 100, 95, 100, 100, 95, 95);
             pilotos[1] = new Pilotos("Sergio", "Perez", "México", 34, 32, 38, 90, 90, 90, 95, 80, 90, 90, 90);
             pilotos[2] = new Pilotos("Lewis", "Hamilton", "Inglaterra", 39, 32, 40, 90, 90, 90, 100, 80, 90, 90, 80);
@@ -112,10 +115,11 @@ namespace Pilot_Menager
             pilotos[17] = new Pilotos("Guanyu", "Zhou", "China", 25, 33, 35, 80, 70, 80, 70, 75, 85, 75, 70);
             pilotos[18] = new Pilotos("Kevin", "Magnussen", "Dinamarca", 32, 33, 40, 80, 80, 85, 85, 85, 80, 80, 85);
             pilotos[19] = new Pilotos("Nico", "Hülkenberg", "Alemanha", 37, 33, 39, 80, 80, 80, 100, 85, 75, 75, 80);
+            */
 
             // Gerando as Equipes
 
-            equipes[0] = new Equipes("Red Bull", "#03183B", "#C70101", "#FFFFFF", "Austria", 95, 95, 95, 95, 95, 95, 95, 95, "Honda", "F1");
+            equipes[0] = new Equipes("Red Bull", "#03183B", "#C70101", "#FFFFFF", "Austria", 100, 100, 100, 100, 100, 100, 100, 100, "Honda", "F1");
             equipes[1] = new Equipes("Mercedes", "#C4C4C4", "#09BF81", "#000000", "Alemanha", 85, 85, 85, 85, 85, 85, 85, 85, "Mercedes", "F1");
             equipes[2] = new Equipes("Ferrari", "#FF0000", "#FFFFFF", "#000000", "Itália", 85, 85, 85, 85, 85, 85, 85, 85, "Ferrari", "F1");
             equipes[3] = new Equipes("Williams", "#112685", "#FFFFFF", "#FFFFFF", "Inglaterra", 75, 75, 75, 75, 75, 75, 75, 75, "TAG", "F1");
@@ -182,9 +186,16 @@ namespace Pilot_Menager
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
+                    if(pilotos[i].Categoria == "F1")
+                    {
+                        pilotos[i].XpPiloto = 400;
+                    }else if(pilotos[i].Categoria == "F2")
+                    {
+                        pilotos[i].XpPiloto = 200;
+                    }
                     if (pilotos[i].ContratoPiloto == 0)
                     {
-                        pilotos[i].ContratoPiloto = random.Next(1, 4);
+                        pilotos[i].ContratoPiloto = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
                     }
                     if (pilotos[i].SalarioPiloto == 0)
                     {
@@ -193,6 +204,29 @@ namespace Pilot_Menager
                     equipe.PrimeiroPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
                     equipe.PrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
                     equipe.PrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
+
+                    if(pilotos[i].ContratoPiloto == principal.ContadorDeAno)
+                    {
+                        pilotos[i].PaContratoPiloto = 0;
+                        pilotos[i].PaEquipePiloto = "";
+                        pilotos[i].PaSalarioPiloto = 0;
+                        pilotos[i].PaStatusPiloto = "";
+
+                        equipe.PaPrimeiroPiloto = "";
+                        equipe.PaPrimeiroPilotoContrato = 0;
+                        equipe.PaPrimeiroPilotoSalario = 0;
+                    }
+                    else if (pilotos[i].ContratoPiloto > principal.ContadorDeAno)
+                    {
+                        pilotos[i].PaContratoPiloto = pilotos[i].ContratoPiloto;
+                        pilotos[i].PaEquipePiloto = pilotos[i].EquipePiloto;
+                        pilotos[i].PaSalarioPiloto = pilotos[i].SalarioPiloto;
+                        pilotos[i].PaStatusPiloto = pilotos[i].StatusPiloto;
+
+                        equipe.PaPrimeiroPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
+                        equipe.PaPrimeiroPilotoContrato = pilotos[i].ContratoPiloto;
+                        equipe.PaPrimeiroPilotoSalario = pilotos[i].SalarioPiloto;
+                    }
                 }
                 else
                 {
@@ -201,9 +235,17 @@ namespace Pilot_Menager
                     pilotos[i].Cor1 = equipe.Cor1;
                     pilotos[i].Cor2 = equipe.Cor2;
                     pilotos[i].Categoria = equipe.Categoria;
+                    if (pilotos[i].Categoria == "F1")
+                    {
+                        pilotos[i].XpPiloto = 400;
+                    }
+                    else if (pilotos[i].Categoria == "F2")
+                    {
+                        pilotos[i].XpPiloto = 200;
+                    }
                     if (pilotos[i].ContratoPiloto == 0)
                     {
-                        pilotos[i].ContratoPiloto = random.Next(1, 4);
+                        pilotos[i].ContratoPiloto = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
                     }
                     if (pilotos[i].SalarioPiloto == 0)
                     {
@@ -212,9 +254,33 @@ namespace Pilot_Menager
                     equipe.SegundoPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
                     equipe.SegundoPilotoContrato = pilotos[i].ContratoPiloto;
                     equipe.SegundoPilotoSalario = pilotos[i].SalarioPiloto;
+
+                    if (pilotos[i].ContratoPiloto == principal.ContadorDeAno)
+                    {
+                        pilotos[i].PaContratoPiloto = 0;
+                        pilotos[i].PaEquipePiloto = "";
+                        pilotos[i].PaSalarioPiloto = 0;
+                        pilotos[i].PaStatusPiloto = "";
+
+                        equipe.PaSegundoPiloto = "";
+                        equipe.PaSegundoPilotoContrato = 0;
+                        equipe.PaSegundoPilotoSalario = 0;
+                    }
+                    else if (pilotos[i].ContratoPiloto > principal.ContadorDeAno)
+                    {
+                        pilotos[i].PaContratoPiloto = pilotos[i].ContratoPiloto;
+                        pilotos[i].PaEquipePiloto = pilotos[i].EquipePiloto;
+                        pilotos[i].PaSalarioPiloto = pilotos[i].SalarioPiloto;
+                        pilotos[i].PaStatusPiloto = pilotos[i].StatusPiloto;
+
+                        equipe.PaSegundoPiloto = $"{pilotos[i].NomePiloto} {pilotos[i].SobrenomePiloto}";
+                        equipe.PaSegundoPilotoContrato = pilotos[i].ContratoPiloto;
+                        equipe.PaSegundoPilotoSalario = pilotos[i].SalarioPiloto;
+                    }
                 }
             }
 
+            principal.XpTurnoSemanal(pilotos);
             DadosPistas();
             EmbaralharPistas();
             DefinirSemanasPistas();
@@ -443,7 +509,6 @@ namespace Pilot_Menager
                 principal.ProxGPVoltas = 0;
             }
         }
-
         public void FunctionParaStatusDaCorrida(int i)
         {
             principal.ProxGP = pistas[i].NomeGp;
@@ -946,7 +1011,6 @@ namespace Pilot_Menager
                 pilotos[i].PrimeiroColocado = 0;
                 pilotos[i].SegundoColocado = 0;
                 pilotos[i].TerceiroColocado = 0;
-                pilotos[i].IdadePiloto++;
             }
             for (int j = 0; j < equipes.Length; j++)
             {
@@ -998,6 +1062,245 @@ namespace Pilot_Menager
                 }
             }
         }
+        private void FinalDeTemporadaAtualizarDB()
+        {
+            for(int i = 0; i < pilotos.Length; i++)
+            {
+                pilotos[i].IdadePiloto++;
+                pilotos[i].ContratoPiloto = pilotos[i].PaContratoPiloto;
+                pilotos[i].EquipePiloto = pilotos[i].PaEquipePiloto;
+                pilotos[i].SalarioPiloto = pilotos[i].PaSalarioPiloto;
+                pilotos[i].StatusPiloto = pilotos[i].PaStatusPiloto;
+            }
+            for (int i = 0; i < equipes.Length; i++)
+            {
+                equipes[i].PrimeiroPiloto = equipes[i].PaPrimeiroPiloto;
+                equipes[i].PrimeiroPilotoContrato = equipes[i].PaPrimeiroPilotoContrato;
+                equipes[i].PrimeiroPilotoSalario = equipes[i].PaPrimeiroPilotoSalario;
+
+                equipes[i].SegundoPiloto = equipes[i].PaSegundoPiloto;
+                equipes[i].SegundoPilotoContrato = equipes[i].PaSegundoPilotoContrato;
+                equipes[i].SegundoPilotoSalario = equipes[i].PaSegundoPilotoSalario;
+            }
+            for (int i = 0; i < equipes.Length; i++)
+            {
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    if (pilotos[j].EquipePiloto == equipes[i].NomeEquipe)
+                    {
+                        pilotos[j].Cor1 = equipes[i].Cor1;
+                        pilotos[j].Cor2 = equipes[i].Cor2;
+                        pilotos[j].Categoria = equipes[i].Categoria;
+                    } else if(pilotos[j].EquipePiloto == "")
+                    {
+                        pilotos[j].Cor1 = "";
+                        pilotos[j].Cor2 = "";
+                        pilotos[j].Categoria = "";
+                    }
+                }
+            }
+        }
+        private void OfertaDeContrato()
+        {
+            List<int> indicesAleatorios = new List<int>();
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                indicesAleatorios.Add(i);
+            }
+            foreach (Equipes equipe in equipes)
+            {
+                if (equipe.PaPrimeiroPiloto == "")
+                {
+                    int opcaoDeOferta = random.Next(1, 6);  //20% de chance de fazer uma oferta na semana. (1 a 5, sendo 3 oferta concedida.)
+                    if (opcaoDeOferta == 3)
+                    {
+                        Shuffle(indicesAleatorios);
+                        int decicaoDeRenovação = random.Next(1, 3); // Vai decidir se a oferta vai ser de renovação ou de um novo piloto.
+                        int mediaMin;
+                        switch (equipe.Categoria)
+                        {
+                            case "F1":
+                                mediaMin = 70;
+                                break;
+                            case "F2":
+                                mediaMin = 40;
+                                break;
+                            default:
+                                mediaMin = 10;
+                                break;
+                        }
+                        if (decicaoDeRenovação == 1)
+                        {
+                            foreach (int indice in indicesAleatorios)
+                            {
+                                if (pilotos[indice].EquipePiloto == equipe.NomeEquipe && pilotos[indice].PaEquipePiloto == "")
+                                {
+                                    double ofertaDeSalario = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+                                    if (pilotos[indice].SalarioPiloto < ofertaDeSalario)
+                                    {
+                                        pilotos[indice].PaContratoPiloto = (random.Next(1, 4) + principal.ContadorDeAno);
+                                        pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                                        pilotos[indice].PaSalarioPiloto = ofertaDeSalario;
+                                        pilotos[indice].PaStatusPiloto = "1º Piloto";
+
+                                        equipe.PaPrimeiroPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                                        equipe.PaPrimeiroPilotoContrato = pilotos[indice].PaContratoPiloto;
+                                        equipe.PaPrimeiroPilotoSalario = pilotos[indice].PaSalarioPiloto;
+
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (int indice in indicesAleatorios)
+                            {
+                                if (pilotos[indice].MediaPiloto >= mediaMin && pilotos[indice].PaEquipePiloto == "")
+                                {
+                                    pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                                    pilotos[indice].PaStatusPiloto = "1º Piloto";
+                                    pilotos[indice].PaContratoPiloto = (random.Next(1, 4) + principal.ContadorDeAno);
+                                    pilotos[indice].PaSalarioPiloto = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+
+                                    equipe.PaPrimeiroPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                                    equipe.PaPrimeiroPilotoContrato = pilotos[indice].PaContratoPiloto;
+                                    equipe.PaPrimeiroPilotoSalario = pilotos[indice].PaSalarioPiloto;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (equipe.PaSegundoPiloto == "")
+                {
+                    int opcaoDeOferta = random.Next(1, 6);  //20% de chance de fazer uma oferta na semana. (1 a 5, sendo 3 oferta concedida.)
+                    if (opcaoDeOferta == 3)
+                    {
+                        Shuffle(indicesAleatorios);
+                        int decicaoDeRenovação = random.Next(1, 3); // Vai decidir se a oferta vai ser de renovação ou de um novo piloto.
+                        int mediaMin;
+                        switch (equipe.Categoria)
+                        {
+                            case "F1":
+                                mediaMin = 70;
+                                break;
+                            case "F2":
+                                mediaMin = 40;
+                                break;
+                            default:
+                                mediaMin = 10;
+                                break;
+                        }
+                        if (decicaoDeRenovação == 1)
+                        {
+                            foreach (int indice in indicesAleatorios)
+                            {
+                                if (pilotos[indice].EquipePiloto == equipe.NomeEquipe && pilotos[indice].PaEquipePiloto == "")
+                                {
+                                    double ofertaDeSalario = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+                                    if (pilotos[indice].SalarioPiloto < ofertaDeSalario)
+                                    {
+                                        pilotos[indice].PaContratoPiloto = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
+                                        pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                                        pilotos[indice].PaSalarioPiloto = ofertaDeSalario;
+                                        pilotos[indice].PaStatusPiloto = "1º Piloto";
+
+                                        equipe.PaSegundoPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                                        equipe.PaSegundoPilotoContrato = pilotos[indice].PaContratoPiloto;
+                                        equipe.PaSegundoPilotoSalario = pilotos[indice].PaSalarioPiloto;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (int indice in indicesAleatorios)
+                            {
+                                if (pilotos[indice].MediaPiloto >= mediaMin && pilotos[indice].PaEquipePiloto == "")
+                                {
+                                    pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                                    pilotos[indice].PaStatusPiloto = "1º Piloto";
+                                    pilotos[indice].PaContratoPiloto = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
+                                    pilotos[indice].PaSalarioPiloto = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+
+                                    equipe.PaSegundoPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                                    equipe.PaSegundoPilotoContrato = pilotos[indice].PaContratoPiloto;
+                                    equipe.PaSegundoPilotoSalario = pilotos[indice].PaSalarioPiloto;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void OfertaDeContratoFimDeAno()
+        {
+            List<int> indicesAleatorios = new List<int>();
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                indicesAleatorios.Add(i);
+            }
+            indicesAleatorios.Sort((x, y) => pilotos[y].MediaPiloto.CompareTo(pilotos[x].MediaPiloto));
+
+            foreach (Equipes equipe in equipes)
+            {
+                if (equipe.PaPrimeiroPiloto == "")
+                {
+
+                    foreach (int indice in indicesAleatorios)
+                    {
+                        if (pilotos[indice].PaEquipePiloto == "")
+                        {
+                            pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                            pilotos[indice].PaStatusPiloto = "1º Piloto";
+                            pilotos[indice].PaContratoPiloto = (random.Next(1, 4) + principal.ContadorDeAno);
+                            pilotos[indice].PaSalarioPiloto = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+
+                            equipe.PaPrimeiroPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                            equipe.PaPrimeiroPilotoContrato = pilotos[indice].PaContratoPiloto;
+                            equipe.PaPrimeiroPilotoSalario = pilotos[indice].PaSalarioPiloto;
+                            break;
+                        }
+                    }
+                }
+                if (equipe.PaSegundoPiloto == "")
+                {
+                    foreach (int indice in indicesAleatorios)
+                    {
+                        if (pilotos[indice].PaEquipePiloto == "")
+                        {
+                            pilotos[indice].PaEquipePiloto = equipe.NomeEquipe;
+                            pilotos[indice].PaStatusPiloto = "1º Piloto";
+                            pilotos[indice].PaContratoPiloto = (random.Next(1, 4) + principal.ContadorDeAno);
+                            pilotos[indice].PaSalarioPiloto = DefinirSalario(pilotos[indice].MediaPiloto, equipe.Categoria);
+
+                            equipe.PaPrimeiroPiloto = $"{pilotos[indice].NomePiloto} {pilotos[indice].SobrenomePiloto}";
+                            equipe.PaPrimeiroPilotoContrato = pilotos[indice].PaContratoPiloto;
+                            equipe.PaPrimeiroPilotoSalario = pilotos[indice].PaSalarioPiloto;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+        public static void Shuffle<T>(IList<T> list)
+        {
+            Random rng = new Random();
+
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
         public void SalvarDadosDosArquivo()
         {
             Principal princ = principal;
@@ -1030,7 +1333,19 @@ namespace Pilot_Menager
                 EtapaAtual = principal.EtapaAtual,
                 MySaldoJogador = financias.MySaldoJogador,
                 MySaldoJogadorSemanal = financias.MySaldoJogadorSemanal,
+                PilotosTemporadas = new List<PilotoTemporadas>[pilotos.Length],
+                EquipeTemporadas = new List<EquipeTemporadas>[equipes.Length],
             };
+
+            for (int i = 0; i < pilotos.Length; i++)
+            {
+                dadosCompletos.PilotosTemporadas[i] = pilotos[i].pilotosTemporadas;
+            }
+
+            for (int i = 0; i < equipes.Length; i++)
+            {
+                dadosCompletos.EquipeTemporadas[i] = equipes[i].equipeTemporadas;
+            }
 
             string json = JsonSerializer.Serialize(dadosCompletos);
             File.WriteAllText("dados_completos.json", json);
@@ -1071,6 +1386,14 @@ namespace Pilot_Menager
                     financias.MySaldoJogador = dadosCompletos.MySaldoJogador;
                     financias.MySaldoJogadorSemanal = dadosCompletos.MySaldoJogadorSemanal;
 
+                    for (int i = 0; i < pilotos.Length; i++)
+                    {
+                        pilotos[i].pilotosTemporadas = dadosCompletos.PilotosTemporadas[i];
+                    }
+                    for (int i = 0; i < equipes.Length; i++)
+                    {
+                        equipes[i].equipeTemporadas = dadosCompletos.EquipeTemporadas[i];
+                    }
                     MessageBox.Show("Dados das equipes e pilotos carregados com sucesso.");
                 }
                 else
@@ -1112,8 +1435,9 @@ namespace Pilot_Menager
                 }
 
                 AtualizarTabelas();
-
+                OfertaDeContrato();
                 principal.XpTurnoSemanal(pilotos);
+                principal.XpEquipeSemanal(equipes);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -1147,12 +1471,17 @@ namespace Pilot_Menager
                         FinalDeTemporadaDataBaseCampeoes("F3");
                     }
                 }
+                OfertaDeContrato();
                 principal.XpTurnoSemanal(pilotos);
+                principal.XpEquipeSemanal(equipes);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
                 AtualizarFinancias();
                 AtualizarDate();
+                // PREENCHER TODOS OS CONTRATOS
+                OfertaDeContratoFimDeAno();
+                FinalDeTemporadaAtualizarDB();
 
                 FinalDeTemporadaLimpaTable();
 
@@ -1166,7 +1495,9 @@ namespace Pilot_Menager
             }
             else
             {
+                OfertaDeContrato();
                 principal.XpTurnoSemanal(pilotos);
+                principal.XpEquipeSemanal(equipes);
                 principal.ContinuarTurno();
                 AtualizaStatusProxCorrida(principal.ContadorDeSemana);
                 AtualizarFinanciasSemanal();
@@ -1185,6 +1516,7 @@ namespace Pilot_Menager
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(pilotos[myIndex].Categoria);
             /*
             TelaSettings telaSettings = new TelaSettings(principal);
             telaSettings.ShowDialog();
@@ -1325,6 +1657,8 @@ namespace Pilot_Menager
         public List<Historicos.EquipeCampeao> EquipesCampeoesF1 { get; set; }
         public List<Historicos.EquipeCampeao> EquipesCampeoesF2 { get; set; }
         public List<Historicos.EquipeCampeao> EquipesCampeoesF3 { get; set; }
+        public List<PilotoTemporadas>[] PilotosTemporadas { get; set; }
+        public List<EquipeTemporadas>[] EquipeTemporadas { get; set; }
         public string NomeJogador { get; set; }
         public string SobrenomeJogador { get; set; }
         public string NacionalidadeJogador { get; set; }

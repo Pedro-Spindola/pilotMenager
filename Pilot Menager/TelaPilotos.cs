@@ -35,7 +35,6 @@ namespace Pilot_Menager
         }
         private void DataGridViewPilotos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
             // Verifica se o clique duplo foi feito em uma célula válida
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
@@ -56,7 +55,7 @@ namespace Pilot_Menager
 
                 TpSalarioPiloto.Text = string.Format("R$ {0:N2}", pilotos[i].SalarioPiloto);
                 TpStatusPiloto.Text = pilotos[i].StatusPiloto;
-                TpDuracaoPiloto.Text = string.Format("{0} Ano(s)", pilotos[i].ContratoPiloto);
+                TpDuracaoPiloto.Text = pilotos[i].ContratoPiloto.ToString();
 
                 PreencherDataGridViewHistoricoPilotos(pilotos[i].pilotosTemporadas, dgvTelaPilotoExibirHistoricoPiloto);
                 AtualizarTabelas(dgvTelaPilotoExibirHistoricoPiloto);
@@ -73,11 +72,6 @@ namespace Pilot_Menager
                 TpLabelCor2B.BackColor = corSecundaria;
                 TpLabelCor3A.BackColor = corPrincipal;
                 TpLabelCor3B.BackColor = corSecundaria;
-
-                //Teste
-
-                labelXP.Text = pilotos[i].XpPiloto.ToString();
-                labelPotencial.Text = pilotos[i].PotencialPiloto.ToString();
             }
         }
         private void CriarDataGridViewClassPilotos(DataGridView dataGridViewPilotos)
@@ -171,16 +165,33 @@ namespace Pilot_Menager
             {
                 DataRow row = classPilotos.NewRow();
 
-                row["#"] = i + 1;
+                //row["#"] = i + 1;
                 row["Nome"] = (pilotos[i].NomePiloto + " " + pilotos[i].SobrenomePiloto);
                 row["Idade"] = pilotos[i].IdadePiloto + " Anos";
                 row["Equipe"] = pilotos[i].EquipePiloto;
-                row["Contrato"] = pilotos[i].ContratoPiloto;
+                if(pilotos[i].ContratoPiloto == 0)
+                {
+                    row["Contrato"] = "Disponível";
+                }
+                else
+                {
+                    row["Contrato"] = pilotos[i].ContratoPiloto;
+                }
                 row["Path"] = Path.Combine("Paises", pilotos[i].NacionalidadePiloto + ".png");
                 row["Index"] = i;
 
                 classPilotos.Rows.Add(row);
             }
+
+            // Ordenar pela terceira coluna (índice 2, pois os índices começam em 0)
+            dataGridViewPilotos.Sort(dataGridViewPilotos.Columns[2], ListSortDirection.Ascending);
+
+            // Atualizar a coluna "#" após a ordenação
+            for (int i = 0; i < dataGridViewPilotos.Rows.Count; i++)
+            {
+                dataGridViewPilotos.Rows[i].Cells["#"].Value = i + 1;
+            }
+
             // Percorra as linhas da tabela classF1
             foreach (DataRow row in classPilotos.Rows)
             {

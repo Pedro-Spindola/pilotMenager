@@ -67,10 +67,51 @@ namespace Pilot_Menager
             }
             else
             {
+                /*
                 CriarDataGridViewQualificacaoEquipesF1(dvgTableF1);
                 PreencherDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
                 AtualizarDataGridViewQualificacaoEquipesF1(0, 10, dvgTableF1);
                 AtualizarTabelasQualificacaoVoltas(dvgTableF1);
+                */
+                // Obtém a lista de categorias
+                List<Principal> categorias = Principal.ObterListaCategoria();
+                string fCategoria = pilotos[myIndex].Categoria;
+
+                // Itera sobre cada categoria na lista
+                foreach (var categoria in categorias)
+                {
+                    if (categoria.categoria != fCategoria && categoria.categoria == "F1")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(0, 10, "F1");
+                    }
+                    else if (categoria.categoria != fCategoria && categoria.categoria == "F2")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(10, 20, "F2");
+                    }
+                    else if (categoria.categoria != fCategoria && categoria.categoria == "F3")
+                    {
+                        FuncaoParaRealizarSemanaDeCorridaCPU(20, 30, "F3");
+                    }
+                }
+                for (int j = 0; j < pilotos.Length; j++)
+                {
+                    pilotos[j].TempoDeVoltaQualificacao = 0;
+                    pilotos[j].TempoCorrida = 0;
+                    pilotos[j].TempoDeVoltaCorrida = 0;
+                    pilotos[j].QualificacaoParaCorrida = 0;
+                    pilotos[j].TempoDeVoltaMaisRapidaCorrida = 0;
+                    pilotos[j].PosicaoNaVoltaMaisRapida = 0;
+                    pilotos[j].PosicaoNaCorrida = 0;
+                    pilotos[j].DiferancaAnt = 0;
+                    pilotos[j].DiferancaPri = 0;
+                }
+                MetodoParaQualificarEquipes(0, 10);
+                MetodoParaQualificarEquipes(10, 20);
+                MetodoParaQualificarEquipes(20, 30);
+                MetodoParaQualificarPilotos("F1");
+                MetodoParaQualificarPilotos("F2");
+                MetodoParaQualificarPilotos("F3");
+                this.Close();
             }
             labelTreinoCorrida.Text = "Treino";
         }
@@ -629,7 +670,6 @@ namespace Pilot_Menager
                                 if (equipes[k].NomeEquipe == pilotos[j].EquipePiloto && pilotos[j].Categoria == fCategoria)
                                 {
                                     pilotos[j].TempoCorrida = (pilotos[j].QualificacaoParaCorrida * 100);
-                                    MessageBox.Show(pilotos[j].TempoCorrida.ToString());
                                 }
                             }
                         }
@@ -1265,24 +1305,28 @@ namespace Pilot_Menager
             int t = 5000; //valorPadraoTempo
             int c = 1; //valorPadraoCarro
             int p = 1; //valorPadraoPiloto
-
+            /*
             int medCarro = (r.Next(c, aerodinamica + 1) + r.Next(c, freio + 1) + r.Next(c, asaDianteira + 1) + r.Next(c, asaTraseira + 1) + r.Next(c, cambio + 1) + r.Next(c, eletrico + 1) + r.Next(c, direcao + 1) + r.Next(c, confiabilidade + 1)) / 8;
-            int medPiloto = (r.Next(p, largada + 1) + r.Next(p, concentracao + 1) + r.Next(p, ultrapassagem + 1) + r.Next(p, experiencia + 1) + r.Next(p, rapidez + 1) + r.Next(p, chuva + 1) + r.Next(p, acertoCarro + 1) + r.Next(p, fisico + 1)) / 8;
+            int medPiloto = (r.Next(p, largada + 1) + r.Next(p, concentracao + 1) + r.Next(p, ultrapassagem + 1) + r.Next(p, experiencia + 1) + r.Next(p, rapidez + 1) + r.Next(p, chuva + 1) + r.Next(p, acertoCarro + 1) + r.Next(p, fisico + 1)) / 8;*/
+            int medCarro = ((aerodinamica + freio + asaDianteira + asaTraseira + cambio + eletrico + direcao + confiabilidade) / 8);
+            int medPiloto = (largada + concentracao + ultrapassagem + experiencia + rapidez + chuva + acertoCarro + fisico) / 8;
             int medCarroVel = (r.Next(c, aerodinamica + 1) + r.Next(c, asaDianteira + 1) + r.Next(c, asaTraseira + 1) + r.Next(c, freio + 1)) / 4;
             int medCarroQual = (r.Next(c, cambio + 1) + r.Next(c, confiabilidade + 1) + r.Next(c, direcao + 1) + r.Next(c, eletrico + 1)) / 4;
             int medPilotVel = (r.Next(p, ultrapassagem + 1) + r.Next(p, experiencia + 1) + r.Next(p, rapidez + 1)) / 3;
             int medPilotFis = (r.Next(p, concentracao + 1) + r.Next(p, acertoCarro + 1) + r.Next(p, fisico + 1)) / 3;
 
-            int atributo01 = (motor + medCarro);
-            int atributo02 = (medCarroVel + medPiloto + retas);
-            int atributo03 = (medCarroQual + medPiloto + curvas);
+            int atributo01 = ((motor + medCarro) + (r.Next(c, medCarro)));
+            int atributo02 = (medCarroVel + medPiloto + medPilotVel) * ((retas / 100) + 1);
+            int atributo03 = (medCarroQual + medPiloto + medPilotFis) * ((curvas / 100) + 1);
             int atributo04 = (medCarroVel + medPilotVel);
             int atributo05 = (medCarroQual + medPilotFis);
-            int m3 = ((atributo01 + atributo02 + atributo03) / 3);
-            int atributo06 = (m3 + importanciPiloto);
-            int atributo07 = (m3 + importanciaCarro);
+            int atributo06 = ((medPiloto + motor) + (r.Next(c, medPiloto)));
+            int atributo07 = (medPilotVel + medPilotFis) * ((importanciPiloto / 100) + 1);
+            int atributo08 = (medCarroVel + medCarroQual) * ((importanciaCarro / 100) + 1);
+            int atributo09 = (medPilotVel + medPilotFis) * ((retas / 100) + 1);
+            int atributo10 = (medCarroVel + medCarroQual) * ((curvas / 100) + 1);
 
-            int somaDosAtributos = (((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07) * 10) + r.Next(0, 10));
+            int somaDosAtributos = (((atributo01 + atributo02 + atributo03 + atributo04 + atributo05 + atributo06 + atributo07 + atributo08 + atributo09 + atributo10) * 7) + r.Next(0, 10));
 
             int volta = ((tempoBase + t) - somaDosAtributos);
 

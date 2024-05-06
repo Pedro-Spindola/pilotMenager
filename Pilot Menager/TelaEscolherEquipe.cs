@@ -58,7 +58,6 @@ namespace Pilot_Menager
         private void labelAssinar3_Click(object sender, EventArgs e)
         {
             pilotos[99].SalarioPiloto = c;
-            pilotos[99].ContratoPiloto = f;
             pilotos[99].Categoria = equipes[29].Categoria;
             principal.Transferencia(pilotos, 59, 99);
             this.Close();
@@ -66,13 +65,12 @@ namespace Pilot_Menager
 
         public void PreencherPropostas()
         {
-
             panelCorP1.BackColor = ColorTranslator.FromHtml(equipes[27].Cor1);
             panelCorS1.BackColor = ColorTranslator.FromHtml(equipes[27].Cor2);
             labelNomeEquipe1.Text = equipes[27].NomeEquipe;
             a = DefinirSalario(pilotos[99].MediaPiloto, equipes[27].Categoria);
             labelSalario1.Text = "Salário: " + string.Format("R$ {0:N2}", a);
-            d = random.Next(1, 4);
+            d = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
             labelContrato1.Text = "Contrato: " + d + " ano(s)";
             labelStatus1.Text = "Status: 2º Piloto";
             labelAssinar1.ForeColor = ColorTranslator.FromHtml(equipes[27].Cor2);
@@ -84,7 +82,7 @@ namespace Pilot_Menager
             labelNomeEquipe2.Text = equipes[28].NomeEquipe;
             b = DefinirSalario(pilotos[99].MediaPiloto, equipes[28].Categoria);
             labelSalario2.Text = "Salário: " + string.Format("R$ {0:N2}", b);
-            ee = random.Next(1, 4);
+            ee = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
             labelContrato2.Text = "Contrato: " + ee + " ano(s)";
             labelStatus2.Text = "Status: 2º Piloto";
             labelAssinar2.ForeColor = ColorTranslator.FromHtml(equipes[28].Cor1);
@@ -96,7 +94,7 @@ namespace Pilot_Menager
             labelNomeEquipe3.Text = equipes[29].NomeEquipe;
             c = DefinirSalario(pilotos[99].MediaPiloto, equipes[29].Categoria);
             labelSalario3.Text = "Salário: " + string.Format("R$ {0:N2}", c);
-            f = random.Next(1, 4);
+            f = ((random.Next(1, 4) + principal.ContadorDeAno) - 1);
             labelContrato3.Text = "Contrato: " + f + " ano(s)";
             labelStatus3.Text = "Status: 2º Piloto";
             labelAssinar3.ForeColor = ColorTranslator.FromHtml(equipes[29].Cor2);

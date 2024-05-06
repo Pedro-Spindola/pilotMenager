@@ -17,6 +17,10 @@ namespace Pilot_Menager
         private double salarioPiloto = 0;
         private int contratoPiloto = 0;
         private string equipePiloto = "";
+        private string paStatusPiloto = "Disponivel";
+        private double paSalarioPiloto = 0;
+        private int paContratoPiloto = 0;
+        private string paEquipePiloto = "";
         private string categoria = "";
         private int posicaoAtualCampeonato;
         private int idadePiloto;
@@ -301,6 +305,28 @@ namespace Pilot_Menager
             get { return categoria; }
             set { categoria = value; }
         }
+        /**/
+        public double PaSalarioPiloto
+        {
+            get { return paSalarioPiloto; }
+            set { paSalarioPiloto = value; }
+        }
+        public string PaStatusPiloto
+        {
+            get { return paStatusPiloto; }
+            set { paStatusPiloto = value; }
+        }
+        public int PaContratoPiloto
+        {
+            get { return paContratoPiloto; }
+            set { paContratoPiloto = value; }
+        }
+        public string PaEquipePiloto
+        {
+            get { return paEquipePiloto; }
+            set { paEquipePiloto = value; }
+        }
+        /**/
         public int PosicaoAtualCampeonato
         {
             get { return posicaoAtualCampeonato; }
